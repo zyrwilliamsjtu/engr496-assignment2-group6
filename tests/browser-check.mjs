@@ -603,6 +603,29 @@ async function runChecks(page, ctx) {
         ) && ok;
     } else ok = record("T group6 claims view", true) && ok;
 
+    const wPeBefore = ctx.pageErrors.length;
+    await page.emulateMedia({ media: "print" });
+    const printVis = await page.evaluate(() => {
+      const show = (el) => el && getComputedStyle(el).display !== "none";
+      return {
+        record: show(document.getElementById("record")),
+        claims: show(document.getElementById("claims")),
+      };
+    });
+    await page.emulateMedia({ media: "screen" });
+    const wOk =
+      printVis.record &&
+      printVis.claims &&
+      ctx.pageErrors.length === wPeBefore;
+    if (!wOk) {
+      ok =
+        record(
+          "W print media record and claims visible",
+          false,
+          JSON.stringify(printVis)
+        ) && ok;
+    } else ok = record("W print media record and claims visible", true) && ok;
+
     const peBefore = ctx.pageErrors.length;
     await page.locator('#nav button[data-pagejump="8"]').click();
     await page.locator("#reflectAnswer").click();

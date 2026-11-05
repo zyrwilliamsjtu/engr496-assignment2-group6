@@ -17,7 +17,6 @@ Numbered script; only UI that exists in the current build.
 
 **Do not open during this demo (and why):**
 
-- **Start / sources (source editor)** after load — adds noise; sources are already in the loaded project.
 - **Define case (page 2)** — long prose fields duplicate what we show structurally on Case record.
 - **Stakeholders and duties (page 3)** — editable cards are not part of this case narrative; the loaded stakeholders are read-only for our demo path except that the app still allows adding/removing stakeholders in general.
 - **Visualization (page 8)** — keep it for Q&A: it shows per-actor verdicts in the three responsibility modes, which answers “how did you compare the frameworks?”
@@ -50,11 +49,15 @@ That is the excluded branch **E9-a**, kept in the record and marked **ALTERNATIV
 
 ### Q6 — “Which part did AI write?”
 
-The **case dossier and analysis content** were drafted by a language model from our specifications and course readings; **we page-checked every quotation** against the PDFs. The **code** was built with an AI coding assistant under our specs and a **46-check** automated suite (`npm run verify`). **All responsibility judgments** in the fixture and in our written answers are ours.
+The case dossier and analysis content were drafted by a language model working from our specifications and the course readings. Every quotation was checked against the supplied PDFs; one could not be located in the text layer and we dropped it rather than use it. The code was built with an AI coding assistant under our specifications and a 47-check automated suite (`npm run verify`). All responsibility judgments are ours.
 
 ### Q7 — “What about the map?”
 
 The **Visualization** page records our per-actor verdicts across causal, legal and forward-looking responsibility. We keep it out of the three-minute path because reading a 12-actor map takes longer than the time we have, but it is the page to open if you want to see how the three models differ for one actor.
+
+### Q8 — “Where are your sources?”
+
+Page 1 lists all ten readings with topic tags and page ranges; the exported analysis prints them in full. One source (van de Poel & Royakkers) we only held as Chapter 1, so we did not use it for the hierarchy or forward-looking models and say so in the notes.
 
 ---
 
@@ -72,6 +75,8 @@ The **Visualization** page records our per-actor verdicts across causal, legal a
 ---
 
 ## Reflection question drafts (for written submission)
+
+*This file is a draft for the presentation team; you may rewrite any section freely.*
 
 ### (1) How the program improved the quality of our analysis
 

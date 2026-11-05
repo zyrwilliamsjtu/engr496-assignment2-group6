@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "preset": 0,
+  "fields": {
+    "title": "Autonomous vehicle collision",
+    "description": "An autonomous vehicle fails to recognize an obstacle and injures a pedestrian. A human supervisor does not intervene. The vehicle was licensed to operate on public roads under specified conditions and had recently received a software update. It is unclear whether the update required additional safety assessment, whether the vehicle remained within its approved operating conditions, and whether the supervisor had enough time and information to prevent the collision.",
+    "facts": "",
+    "missing": "",
+    "comparison": "",
+    "gapVerdict": "Not yet assessed",
+    "gapType": "Not specified",
+    "gapReason": "",
+    "repair": "",
+    "conclusion": "",
+    "references": "",
+    "answer1": "",
+    "answer4": "",
+    "answer5": "",
+    "gapTask": "",
+    "gapStage": "Not specified",
+    "gapMechanism": "Not specified",
+    "gapPeople": "",
+    "gapCheck": ""
+  },
+  "actors": [],
+  "links": [],
+  "models": {
+    "causal": "",
+    "hierarchical": "",
+    "future": ""
+  },
+  "modelEvidence": {
+    "causal": "",
+    "hierarchical": "",
+    "future": ""
+  },
+  "sources": [],
+  "caseSourceIds": [],
+  "modelSourceIds": {
+    "causal": [],
+    "hierarchical": [],
+    "future": []
+  }
+}

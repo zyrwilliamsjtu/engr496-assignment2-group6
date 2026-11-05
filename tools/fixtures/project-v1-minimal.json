@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "preset": 0,
+  "fields": {
+    "title": "Autonomous vehicle collision",
+    "description": "An autonomous vehicle fails to recognize an obstacle and injures a pedestrian.",
+    "facts": "",
+    "missing": "",
+    "comparison": "",
+    "gapVerdict": "Not yet assessed",
+    "gapType": "Not specified",
+    "gapReason": "",
+    "repair": "",
+    "conclusion": "",
+    "references": "",
+    "answer1": "",
+    "answer4": "",
+    "answer5": "",
+    "gapTask": "",
+    "gapStage": "Not specified",
+    "gapMechanism": "Not specified",
+    "gapPeople": "",
+    "gapCheck": ""
+  },
+  "actors": [],
+  "links": [],
+  "models": {
+    "causal": "",
+    "hierarchical": "",
+    "future": ""
+  },
+  "modelEvidence": {
+    "causal": "",
+    "hierarchical": "",
+    "future": ""
+  },
+  "sources": [],
+  "caseSourceIds": [],
+  "modelSourceIds": {
+    "causal": [],
+    "hierarchical": [],
+    "future": []
+  }
+}

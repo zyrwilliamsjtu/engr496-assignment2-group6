@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
 const root = path.join(__dirname, "..");
 const srcDir = path.join(root, "src");
@@ -30,6 +31,31 @@ if (!scriptRe.test(html)) throw new Error("app.js script tag not found in index.
 html = html.replace(linkRe, "<style>" + cssInline + "</style>");
 html = html.replace(scriptRe, "<script>" + jsInline + "</script>");
 
+const stamp = new Date().toISOString();
+let hash = "";
+try {
+  hash = execSync("git rev-parse --short HEAD", {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "ignore"],
+  }).trim();
+  const porcelain = execSync("git status --porcelain", {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "ignore"],
+  }).trim();
+  if (porcelain) hash += "-dirty";
+} catch (_) {
+  hash = "";
+}
+const buildContent = hash ? stamp + " " + hash : stamp;
+const buildMeta = '<meta name="build" content="' + buildContent + '">';
+if (/<meta\s+name="build"/i.test(html)) {
+  html = html.replace(/<meta\s+name="build"[^>]*>/i, buildMeta);
+} else {
+  html = html.replace(/<head>/i, "<head>" + buildMeta);
+}
+
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
 fs.writeFileSync(outPath, html, "utf8");
 
@@ -37,3 +63,4 @@ const size = fs.statSync(outPath).size;
 console.log("Wrote " + outPath);
 console.log("Output size: " + size + " bytes");
 console.log("Inlined blocks: 2 (style.css, app.js)");
+console.log("Build stamp: " + buildContent);

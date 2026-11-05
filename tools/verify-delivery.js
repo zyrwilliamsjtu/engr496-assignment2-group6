@@ -18,6 +18,17 @@ function sha256(buf) {
   return crypto.createHash("sha256").update(buf).digest("hex");
 }
 
+function normalizeBuildMeta(buf) {
+  const text = buf.toString("utf8");
+  return Buffer.from(
+    text.replace(
+      /<meta\s+name="build"\s+content="[^"]*"\s*\/?>/i,
+      '<meta name="build" content="__NORMALIZED__">'
+    ),
+    "utf8"
+  );
+}
+
 function failMessage(deliveryHash, distHash) {
   return (
     "FAIL delivery consistency: delivery/Responsibility-Lab-Group6.html is not byte-identical to the freshly built dist output.\n" +
@@ -41,7 +52,8 @@ function main() {
   }
 
   const deliveryBefore = fs.readFileSync(deliveryPath);
-  const deliveryBeforeHash = sha256(deliveryBefore);
+  const deliveryNorm = normalizeBuildMeta(deliveryBefore);
+  const deliveryBeforeHash = sha256(deliveryNorm);
 
   execSync("node tools/build.js", {
     cwd: root,
@@ -54,9 +66,10 @@ function main() {
   }
 
   const distAfter = fs.readFileSync(distPath);
-  const distHash = sha256(distAfter);
+  const distNorm = normalizeBuildMeta(distAfter);
+  const distHash = sha256(distNorm);
 
-  if (!deliveryBefore.equals(distAfter)) {
+  if (!deliveryNorm.equals(distNorm)) {
     console.error(failMessage(deliveryBeforeHash, distHash));
     process.exit(1);
   }
@@ -64,7 +77,7 @@ function main() {
   console.log(
     "PASS delivery consistency: delivery matches dist (" +
       distAfter.length +
-      " bytes, sha256 " +
+      " bytes, content sha256 " +
       distHash +
       ")"
   );

@@ -96,10 +96,33 @@ if (Buffer.byteLength(html, "utf8") > MAX_DIST_BYTES) {
   process.exit(1);
 }
 
-fs.mkdirSync(path.dirname(outPath), { recursive: true });
-fs.writeFileSync(outPath, html, "utf8");
-fs.mkdirSync(path.dirname(deliveryPath), { recursive: true });
-fs.writeFileSync(deliveryPath, html, "utf8");
+function normalizeBuildMeta(buf) {
+  const text = buf.toString("utf8");
+  return Buffer.from(
+    text.replace(
+      /<meta\s+name="build"\s+content="[^"]*"\s*\/?>/i,
+      '<meta name="build" content="__NORMALIZED__">'
+    ),
+    "utf8"
+  );
+}
+
+const htmlBuf = Buffer.from(html, "utf8");
+const htmlNorm = normalizeBuildMeta(htmlBuf);
+
+function bundleNeedsWrite(filePath) {
+  if (!fs.existsSync(filePath)) return true;
+  return !normalizeBuildMeta(fs.readFileSync(filePath)).equals(htmlNorm);
+}
+
+const bundleChanged =
+  bundleNeedsWrite(outPath) || bundleNeedsWrite(deliveryPath);
+if (bundleChanged) {
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
+  fs.mkdirSync(path.dirname(deliveryPath), { recursive: true });
+  fs.writeFileSync(outPath, htmlBuf);
+  fs.writeFileSync(deliveryPath, htmlBuf);
+}
 
 const distBytes = fs.readFileSync(outPath);
 const deliveryBytes = fs.readFileSync(deliveryPath);
@@ -122,8 +145,13 @@ if (distSha256 !== deliverySha256 || !distBytes.equals(deliveryBytes)) {
 
 const size = distBytes.length;
 const sha256 = distSha256;
-console.log("Wrote " + outPath);
-console.log("Wrote " + deliveryPath);
+if (bundleChanged) {
+  console.log("Wrote " + outPath);
+  console.log("Wrote " + deliveryPath);
+} else {
+  console.log("Unchanged " + outPath);
+  console.log("Unchanged " + deliveryPath);
+}
 console.log("Output size before: " + sizeBefore + " bytes");
 console.log("Output size after: " + size + " bytes");
 console.log("sha256: " + sha256);

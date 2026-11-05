@@ -336,6 +336,23 @@ async function runChecks(page, ctx) {
     if (!g6Text.includes("S10:")) {
       ok = record("N group6 export S10 source", false) && ok;
     } else ok = record("N group6 export S10 source", true) && ok;
+    if (Array.isArray(g6.claims) && g6.claims.length > 0) {
+      const ans4Head = (g6.fields?.answer4 || "").slice(0, 40);
+      const firstClaim = g6.claims[0];
+      const oOk =
+        g6Text.includes("CLAIMS") &&
+        g6Text.includes(`actor=${firstClaim.actor}`) &&
+        ans4Head.length > 0 &&
+        g6Text.includes(ans4Head);
+      if (!oOk) {
+        ok =
+          record(
+            "O group6 claims and legal answer export",
+            false,
+            `claims=${g6.claims.length} ans4Head=${JSON.stringify(ans4Head)}`
+          ) && ok;
+      } else ok = record("O group6 claims and legal answer export", true) && ok;
+    }
   } else {
     ok =
       record(

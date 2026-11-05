@@ -6,21 +6,21 @@
     "description": "A hospital uses a machine-learning system to recommend treatments. A doctor follows its recommendation, and the patient suffers serious harm. The system was approved for clinical use, but its model was subsequently updated through retraining on new patient data. The patient’s condition was poorly represented in those data, and the harmful recommendation cannot be fully explained. The doctor could reject it but received no clear warning about the system’s limitations.",
     "facts": "",
     "missing": "",
-    "comparison": "",
-    "gapVerdict": "",
-    "gapType": "",
-    "gapReason": "",
-    "repair": "",
-    "conclusion": "",
+    "comparison": "Causal identifies two contributions (C1, C2) and one contested one (C3), but cannot say why no agent's contribution was decisive. Hierarchical answers that: the decisive condition is an unassigned task at three handovers (C6, C7, C8), which is why a search for a culpable node returns either the nearest human (S1) or nobody (S6 p. 1066). It adds the location of the omission and the authority-access split (C9, C10); it does not add a culpable party. Forward-looking adds what both lack: an owner per task, the authority to perform it, and a marker that can be audited (C11-C15). Its limit is stated in C12 and C13: two of the duties are not performable on the current contract and interface, so the gap cannot be closed by exhortation.",
+    "gapVerdict": "A gap may exist",
+    "gapType": "Forward-looking duty allocation",
+    "gapReason": "The gap is in S6's fourth category, active responsibility, not in culpability: the supplier knew (E4, E12, E19) and the physician did not (E6), which is the pattern S6 p. 1059 describes for agents who are not sufficiently aware, capable and motivated. Mechanism: the missing act sits inside no single role but is split across three handovers, so it has no named owner. First, the contractual handover, where the deployment contract assigns pre-deployment acceptance to the hospital and assigns post-deployment performance verification to no party (E17). Second, the internal handover, where the subgroup alert was logged and closed inside the supplier's ML team and transmitted to no one outside it (E12). Third, the disclosure handover, where the version notice went to the technical contact rather than to clinical staff (E13). Because none of the three handovers carries the duty, the gap is classified as a duty with no named owner rather than as a knowledge or competence deficit in one actor. Stage is recorded as testing and validation, the omitted act being post-deployment re-validation of subgroup performance. Counter-argument that no gap exists, and the response: S8 argues that a technology-specific responsibility gap is a prevailing assumption rather than a finding, that responsibility is a flexible practice, and that every element here is ascribable, which by itself shows there is no gap; S4's founding argument is also narrower than the case, since it turns on unpredictability that learning creates. The response is that this counter is correct about culpability and does not reach the gap claimed here. The gap is not that nobody can be blamed, but that the task which would have prevented the harm was assigned to nobody (E17), so no agent departed from any standard and each can point to a rule it followed (E19, E22, E9-b). That is S6's many hands point at p. 1066 rather than an unpredictability claim, and it survives S8's objection because it is an allocation finding, not a blame finding.",
+    "repair": "Contract amendment naming an owner for post-deployment subgroup verification and granting the hospital access to subgroup performance data; a standing requirement that no version goes live without a minuted subgroup re-validation; supplier reporting of subgroup performance per version to a named clinical lead with documented receipt; a subgroup criterion added to the change-assessment rules (E22); interface change displaying training-sample size and a low-sample warning for the patient's category.",
+    "conclusion": "The case is not one of a rogue algorithm or a negligent physician. A cleared device was updated under a rule that measured only overall accuracy, monitoring detected the subgroup decline and did not pass it on, the version notice did not reach clinicians, and no party was contractually assigned post-deployment verification. The accountable party is identifiable, the compensation obligation most plausibly falls on the supplier, and the responsibility gap lies in forward-looking duty allocation rather than in culpability.",
     "references": "",
-    "answer1": "",
-    "answer4": "",
-    "answer5": "",
-    "gapTask": "",
-    "gapStage": "",
-    "gapMechanism": "",
-    "gapPeople": "",
-    "gapCheck": ""
+    "answer1": "The injury traces to four documented conditions rather than to one act: a retrained model validated against overall accuracy only (E8, E19); an interface that displayed a population-level score with no subgroup field and no warning banner (E11); a subgroup decline recorded internally and closed without transmission (E12); and a version change that reached clinical staff only after five months and twelve days (E13). The recommendation's first-ranked option was, per the post-event review, not clinically indicated (E21), within the approved indication (E18, E7). Responsibility is distributed by function: epistemic and disclosure authority with the supplier (A9, A10), deployment and suspension authority with the hospital (A5, A8, A7), decision authority with the physician (A2, E16), and rule authority with the regulator (A11, E22). No party was assigned post-deployment verification (E17).",
+    "answer4": "Jurisdiction is not given in the case materials, so no national statute, code or article is applied here and no provision number is cited or implied. The analysis below runs on a hypothetical rule assumed for this exercise only: a supplier of a clinical decision-support device owes the patient a duty not to place a defective product on the market, covering design, information and warnings; a clinician owes a duty of care measured by the ordinary standard of the profession; the employing institution owes a duty for the system it operates; and contracting parties owe each other only what their contract states. Layer 1, parties and legal bases. A9 system supplier is the strongest candidate, under the defective-product and failure-to-warn limb: the shipped interface carried a population-level score with no subgroup field and no warning banner (E11), and the version notice reported overall accuracy with no subgroup performance and went to a technical contact rather than to clinicians (E13), which are the facts a warning-defect argument would rest on. A5 hospital is a candidate under the institutional limb, as the operator that deployed the system (E1), held suspension authority (E16) and signed a contract in which post-deployment verification was assigned to neither party (E17). A2 treating physician is a candidate under the professional-negligence limb: E21 records that the first-ranked option was not the clinically indicated choice, which supplies the wrongfulness element, while E6 and E11 record that no subgroup reliability information was available, which bears on breach and foreseeability rather than on causation. A10 supplier ML team has no independent path, since any duty runs through the employer (A9). A11 regulatory authority has no path on these facts, because clearance covered v1.0 (E7) and the change fell inside the framework as written (E9-b, E22). A3, A4, A6, A7 and A8 have no independent path; their conduct would be attributed to A5. Layer 2, what the facts support and what is missing. Supported: the use fell inside the cleared indication (E18, E7), so an off-label argument is unavailable; subgroup information was absent at two separate points, in the assessment metric and in the interface (E19, E22, E11); an internal signal existed and did not reach the hospital (E12); the recommendation was clinically inappropriate on the review record (E21). Missing: the terms of the contract, including any limitation-of-liability or indemnity clause, since E17 records only the allocation of tasks; whether the physician's reliance on the display counts as an intervening act; expert evidence on the applicable standard of care and on what an adequate warning would have contained; the causal weight of the recommendation against the patient's underlying condition; and the quantum of injury, which no fact records. These are factual gaps and cannot be closed by re-reading E1 to E22. Layer 3, degree of uncertainty. A9 is the party most likely to bear a compensation obligation under the assumed rule, because knowledge, control and the disclosure channel all sit with it (E4, E12, E13, E19); that assessment is Contested rather than Supported only because the classification of a learned model under a defective-product rule is itself the contested step, not because the facts are thin. A5 is Contested, since suspension authority is documented but no norm requiring a verification clause appears in the facts. A2 is Contested on breach and Not established on causation. No liability attaches to A12, which holds no duty and no capacity to pay. S2 is used only to keep three questions apart, namely who must explain, who is blameworthy, and who must compensate (section Sorting Out Responsibility; the page numeral is not recoverable from the supplied file, so no page is given). One cross-reference: the unresolved allocation described here is the same condition recorded in gapReason as a duty with no named owner, but the legal question and the responsibility-gap question are separate, and the gap conclusion does not by itself establish liability.",
+    "answer5": "Repair the allocation, not the technology. Three assignments, each with an owner, the authority to perform it, and a checkable marker: (1) supplier subgroup performance reporting per version to a named clinical lead, marker a report with documented receipt; (2) hospital re-validation of subgroup performance before each version goes live, marker a quality-committee minute, with data access secured by contract amendment; (3) a subgroup criterion in the change-assessment rules, marker a published criterion against which any assessment can be checked. Add one interface change: display training-sample size and a low-sample warning for the patient's category, which is what makes the physician's forward duty performable at all.",
+    "gapTask": "Assign and perform post-deployment subgroup performance verification and disclosure after every model version change, and make the resulting evidence available at the point of clinical decision.",
+    "gapStage": "Testing / validation",
+    "gapMechanism": "Duty has no named owner",
+    "gapPeople": "A9 system supplier; A10 supplier ML team; A5 hospital; A7 hospital IT/quality unit; A11 regulatory authority",
+    "gapCheck": "Verification of the repair: (a) contract text naming the owner and a reporting cadence; (b) a quality-committee minute per version, dated before go-live; (c) a subgroup report per version with a receipt record naming the clinical lead; (d) a published subgroup criterion in the change-assessment framework; (e) an audit showing no version entered clinical use without items (b) and (c). Absence of any one of these is a checkable failure of the repair, which is what distinguishes the repair from an aspiration."
   },
   "actors": [
     {
@@ -29,15 +29,15 @@
       "kind": "Affected stakeholder",
       "role": "Recipient of care; holds the rights at issue. Source of others obligations: duty of care and informed consent.",
       "connections": "A1 -> A2 Treating physician: presents as adult inpatient with the condition (E18); A2 -> A1: administers the recommended treatment (E3); A5 Hospital -> A1: owes care in operating the system (E1).",
-      "cause": "",
+      "cause": "None. The patient is the harmed party and made no causal contribution.",
       "knowledge": "Own condition and the treatment received; not the recommendation, its population-level score, or its reliability for this category.",
       "control": "Insufficient",
       "controlReason": "No decision right over the recommendation, the interface, or the treatment choice.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
+      "legal": "Not established",
+      "legalReason": "No duty was held or breached; the patient is the bearer of the claim, not a candidate for liability.",
+      "payment": "Not applicable: the patient is the claimant, not a payer.",
+      "next": "A patient holds no forward-looking duty of the kind assessed here; the field is left Unassessed because no duty exists to evaluate. The previous value Insufficient is not a legal dropdown value for the next field, since it was borrowed from the control scale and describes capacity rather than the presence of a duty.",
+      "causeVerdict": "Not established",
       "nextVerdict": "Unassessed"
     },
     {
@@ -46,16 +46,16 @@
       "kind": "Person",
       "role": "Attending clinician; final treatment authority and right of refusal. Source: professional duty of care and role responsibility.",
       "connections": "A12 Model -> A2: displays ranked options and population-level score with no subgroup field (E1, E11); A12 -> A2: issues recommendation without subgroup caveat (E3, E6); A2 -> A12: adopts the recommendation (E3); A2 -> A1: administers treatment (E3); A3 -> A2: may review case on request (E16); A5 -> A2: deploys system and sets authority policy (E1, E16); A2 -> A6: adverse event reported (E20).",
-      "cause": "",
+      "cause": "Adopted the recommendation and administered the treatment (E3, E21).",
       "knowledge": "Recommendation and numeric score; absence of any subgroup field or warning banner on screen (E11); no subgroup reliability information (E6); not on the release-note distribution list (E13).",
       "control": "Limited",
       "controlReason": "Holds the refusal right (E5) but no access to subgroup performance, no role in acceptance testing, and no notice of the version change (E13).",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Contested",
+      "legalReason": "Causal contribution is present, but foreseeability is not satisfied on the facts: no subgroup field on screen (E11) and no reliability information received (E6, E13). S9 p. 12 sets the standard; whether a documented query was reasonably available is not recorded.",
+      "payment": "No compensation obligation established on the facts. S2 separates liability, the obligation to compensate, from accountability and blameworthiness, so payment would attach to the organisation unless a professional standard breach is proven.",
+      "next": "A forward duty to verify the basis of a recommendation is real but not dischargeable on the current interface; the marker would be a logged query or refusal.",
+      "causeVerdict": "Contested",
+      "nextVerdict": "Contested"
     },
     {
       "id": "A3",
@@ -63,16 +63,16 @@
       "kind": "Person",
       "role": "Clinical line supervisor of the department. Source: supervisory role responsibility.",
       "connections": "A4 -> A3: oral reports of inconsistent recommendations on 2023-05-08 (E14); A3 -> A2: case review on request (E16); A3 -> A6: no escalation of the oral reports (E14).",
-      "cause": "",
+      "cause": "Received two oral reports of inconsistent recommendations (E14) and initiated no formal investigation.",
       "knowledge": "Two oral reports of inconsistent recommendations for atypical presentations; no written record (E14).",
       "control": "Limited",
       "controlReason": "Supervisory review on request only; no authority over the model, the contract, or the reporting system.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Contested",
+      "legalReason": "A five-month gap separates the reports from the injury (T8, T9), so a preventive path existed in principle; but the reports described inconsistency, not subgroup unreliability, and no written record was made.",
+      "payment": "Not established: payment would fall on the institution rather than on a supervisory role.",
+      "next": "A forward duty to convert clinical concerns into a written escalation; authority held is review on request (E16); marker is a dated written referral to the quality committee.",
+      "causeVerdict": "Contested",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A4",
@@ -80,16 +80,16 @@
       "kind": "Person",
       "role": "Ward clinicians who observed atypical behaviour. Source: professional duty and internal reporting expectations.",
       "connections": "A4 -> A3: oral report of inconsistent recommendations (E14); A4 -> A6: no formal investigation initiated (E14).",
-      "cause": "",
+      "cause": "Observed atypical behaviour and reported orally only (E14).",
       "knowledge": "Their own cases and the perceived inconsistency for atypical presentations (E14); not the monitoring metrics held by A10 (E12).",
       "control": "Limited",
       "controlReason": "Can report, but hold no authority to suspend use or to demand subgroup data.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Not established",
+      "legalReason": "Reporting a concern is consistent with professional duty; no norm violation is recorded.",
+      "payment": "Not applicable.",
+      "next": "A forward duty to record concerns in writing exists; no authority to suspend use was held; marker is a written concern entry with date.",
+      "causeVerdict": "Not established",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A5",
@@ -97,16 +97,16 @@
       "kind": "Organization",
       "role": "Deploying healthcare provider; operator of the record and reporting system. Source: duty of care, licence conditions, internal reporting policy.",
       "connections": "A5 -> A9: contracts for system and updates (E17); A9 -> A5: delivers updates and release notes (E8, E13); A5 -> A2: deploys system, sets authority and reporting policy (E1, E15, E16); A5 -> A6: enters event and refers it for review (E20); A5 -> A11: notifies authority (E20); A5 -> A1: owes care (E1, E3).",
-      "cause": "",
+      "cause": "Operated the system, held the reporting chain, and received neither validation report nor monitoring alert (E10, E12).",
       "knowledge": "System cleared (E2); v2.1 released (E13); received no validation report (E10), no monitoring alert (E12), no written incident report (E14).",
       "control": "Limited",
       "controlReason": "Holds the system and the reporting chain, but no access to training data, monitoring metrics, or the internal change assessment.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Contested",
+      "legalReason": "The contract assigns post-deployment verification to no party (E17), which supports the hospital's position; against that, it held suspension authority (E16) and had received release information (E13). S2 treats the liable party as usually the organisation in which the mishap occurred.",
+      "payment": "Contested: primary candidate for a compensation obligation under S2's liability notion, contested by the absence of an assigned verification duty.",
+      "next": "Forward duty to re-validate subgroup performance per version and to secure data access by contract; marker is a minuted re-validation before go-live.",
+      "causeVerdict": "Contested",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A6",
@@ -114,16 +114,16 @@
       "kind": "Organization",
       "role": "Internal oversight of system-level use and post-event review. Source: institutional governance mandate.",
       "connections": "A8 -> A6: refers system-level use for review (E16); A5 -> A6: refers the adverse event (E20); A6 -> A11: contributes to the notification (E20); A6 -> A4: receives no formal investigation request (E14).",
-      "cause": "",
+      "cause": "Reviewed the event only after it occurred (E20, E21); no causal role before it.",
       "knowledge": "Event and circumstances from 2023-09-20; the post-event case review finding on the first-ranked option (E21); no earlier validation report, monitoring alert, or written incident report (E10, E12, E14).",
       "control": "Limited",
       "controlReason": "Reviews after the event and at system level; no authority over the supplier, the contract, or the model.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Not established",
+      "legalReason": "Post-event review was performed on the facts recorded; no prior report reached the committee (E10, E12, E14).",
+      "payment": "Not established.",
+      "next": "Forward duty to require subgroup evidence as a condition of continued system use; authority is system-level review (E16); marker is a standing pre-condition minuted per version.",
+      "causeVerdict": "Not established",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A7",
@@ -131,16 +131,16 @@
       "kind": "Organization",
       "role": "Pre-deployment acceptance testing; technical contact for releases. Source: contract allocation and internal quality function.",
       "connections": "A9 -> A7: releases the v2.1 note on 2023-03-15 (E13); A7 -> A9: performs pre-deployment acceptance testing (E17); A7 -> A2: no forwarding of the release note to clinical staff recorded (E13); A7 -> A5: acts on the hospital's behalf (E17).",
-      "cause": "",
+      "cause": "Performed acceptance testing at go-live (E17) and received the v2.1 notice without forwarding it (E13).",
       "knowledge": "Release-note content, including the absence of subgroup data (E13); no validation report and no monitoring alert (E10, E12).",
       "control": "Limited",
       "controlReason": "Gatekeeper of deployment artefacts but not of model performance, and holds no clinical authority.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Contested",
+      "legalReason": "The unit acted within its technical remit, and the notice contained no subgroup data to forward; against that, a version change on a live clinical device went unreported to users for five months and twelve days (E13).",
+      "payment": "Not established: no contracting capacity, so payment would attach to the institution.",
+      "next": "Forward duty to route version changes to clinical leads as well as to systems; authority over the distribution list is shared with A9; marker is a forwarding log with clinical acknowledgement.",
+      "causeVerdict": "Contested",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A8",
@@ -148,16 +148,16 @@
       "kind": "Organization",
       "role": "Holds the deployment contract and suspension authority. Source: contractual and executive authority.",
       "connections": "A8 -> A9: signs and administers the contract (E17); A8 -> A6: refers system-level use (E16); A11 -> A8: grants clearance (E2, E7); A8 -> A5: acts on the hospital's behalf (E17).",
-      "cause": "",
+      "cause": "Held contracting and suspension authority and signed a contract with no verification clause (E17).",
       "knowledge": "Contract terms, including the absence of any post-deployment verification clause (E17); the clearance and its indication (E2, E7).",
       "control": "Limited",
       "controlReason": "Can contract and suspend, but holds no technical means to detect subgroup degradation and received no report.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Contested",
+      "legalReason": "Signature of the contract is a documented act, but no norm requiring a verification clause is recorded in the facts; the omission is shared with A9, which also signed.",
+      "payment": "Contested: liable as the contracting party for the institution, subject to product-liability allocation against A9.",
+      "next": "Forward duty to allocate post-deployment verification in the contract and to exercise suspension leverage; marker is an executed contract amendment naming an owner and a reporting cadence.",
+      "causeVerdict": "Not established",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A9",
@@ -165,16 +165,16 @@
       "kind": "Organization",
       "role": "Vendor of the decision-support system; supplies updates and documentation; applied for clearance.",
       "connections": "A9 -> A5: supplies system, updates and the release note (E8, E13, E17); A9 -> A11: files the clearance application for v1.0 (E2, E7); A10 -> A9: reports validation results and closes the monitoring alert (E10, E12); A9 -> A12: ships v2.1 to production (E8); A11 -> A9: framework governing whether resubmission is required (E9-b).",
-      "cause": "",
+      "cause": "Retrained and shipped v2.1 validated on overall accuracy only (E8, E19), closed a subgroup alert (E12), and issued a notice with no subgroup data to a technical contact (E13).",
       "knowledge": "Training-corpus composition (E4, E8); the change assessment basis (E19); the 2023-02-10 alert (E12); the content and distribution list of its own release note (E13).",
       "control": "Sufficient",
       "controlReason": "Owns the model, the training data, the change assessment and the monitoring channel, and decides who receives which document.",
       "legal": "Contested",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legalReason": "The supplier held knowledge (E4, E12, E19), the monitoring channel and the distribution list, and the shipped interface withheld subgroup reliability (E11). S2's liability notion, the obligation to compensate for harm done, points to this party; the page for that definition is not verifiable from the text layer. Contested rather than Supported: knowledge, control and the disclosure channel sit with this party, but classifying a learned model under a defective-product rule is itself the contested step (see answer4, Layer 3).",
+      "payment": "Supported: the party with the strongest claim to a compensation obligation, subject to contract terms and product-liability rules.",
+      "next": "Forward duty to report subgroup performance per version to a named clinical lead; marker is a report with documented receipt; authority held is sufficient (E12, E13).",
+      "causeVerdict": "Supported",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A10",
@@ -182,16 +182,16 @@
       "kind": "Organization",
       "role": "Trains, validates and monitors the model. Source: assigned engineering function and professional duty.",
       "connections": "A10 -> A12: retrains to v2.1 (E8); A12 -> A10: emits agreement metrics (E12); A10 -> A9: reports internal validation (E10); A10 -> A9: logs and closes the alert (E12); A10 -> A5: transmits no report (E10, E12).",
-      "cause": "",
+      "cause": "Recorded the subgroup decline on 2023-02-10 and closed the alert without escalation (E12); ran the assessment on overall accuracy (E19).",
       "knowledge": "Subgroup underrepresentation (E4, E8), the assessment basis used (E19), and the 2023-02-10 agreement drop (E12).",
       "control": "Sufficient",
       "controlReason": "Technical authority over data, validation and monitoring; no formal authority over clinical deployment or customer disclosure.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Not established",
+      "legalReason": "The team holds no contracting capacity and no obligation to the patient directly; liability would attach to the employer (A9), while the team's exposure is professional rather than legal.",
+      "payment": "Not established: no capacity to pay, and no direct duty to the injured party is recorded.",
+      "next": "Forward duty to escalate any subgroup metric below protocol threshold; authority over monitoring is sufficient; marker is an escalation ticket with a named recipient outside the team.",
+      "causeVerdict": "Supported",
+      "nextVerdict": "Supported"
     },
     {
       "id": "A11",
@@ -199,16 +199,16 @@
       "kind": "Organization",
       "role": "Granted clearance for v1.0; receives adverse-event notifications; administers the change-assessment framework. Source: statutory market-authorisation mandate.",
       "connections": "A11 -> A8: clearance dated 2021-11-15 with stated indication (E2, E7); A9 -> A11: clearance application (E2); A11 -> A9: change-assessment framework (E9-b); A5 -> A11: notification on 2023-10-05 (E20).",
-      "cause": "",
+      "cause": "Administered a framework whose threshold is overall accuracy with no subgroup criterion (E22); no knowledge of v2.1 is recorded under the adopted branch (E9-b).",
       "knowledge": "The v1.0 clearance file and its indication (E7); the change-assessment rules it administers (E22); no knowledge of v2.1 recorded, consistent with the adopted branch E9-b.",
       "control": "Limited",
       "controlReason": "Rules on submissions it receives, but holds no monitoring data and no inspection power recorded in these facts.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Not established",
+      "legalReason": "No act or omission touching this patient is recorded; the clearance covered v1.0 (E7) and the change fell within the framework as written (E9-b, E22).",
+      "payment": "Not established: no liability path is recorded in the facts.",
+      "next": "A forward duty to add a subgroup criterion is arguable, but S10 distributes it across connected agents and S3 warns against concentrating responsibility on one institution.",
+      "causeVerdict": "Not established",
+      "nextVerdict": "Contested"
     },
     {
       "id": "A12",
@@ -216,16 +216,16 @@
       "kind": "Technical system",
       "role": "The artefact that generates recommendations; performs no obligation and holds no authority.",
       "connections": "A12 -> A2: displays ranked options with population-level score, no subgroup field, no warning banner (E11); A12 -> A2: issues the recommendation without subgroup caveat (E3, E6); A12 -> A2: ranks first an option the review record states was not clinically indicated (E21); A10 -> A12: retrains to v2.1 (E8); A12 -> A10: emits monitoring metrics (E12); A2 -> A12: adopts the recommendation (E3).",
-      "cause": "",
+      "cause": "Produced a recommendation whose first-ranked option the review record states was not clinically indicated (E21), through an interface with no subgroup field or warning banner (E11).",
       "knowledge": "Not applicable: the system stores the recommendation and its score, not knowledge that can be attributed.",
       "control": "Unassessed",
       "controlReason": "A technical system holds no authority, so control is neither sufficient nor deficient; it is assessed only for the human actors in G2.",
-      "legal": "Unassessed",
-      "legalReason": "",
-      "payment": "",
-      "next": "",
-      "causeVerdict": "Unassessed",
-      "nextVerdict": "Unassessed"
+      "legal": "Not established",
+      "legalReason": "A technical system holds no duty, capacity or liability; its conduct is attributed to the humans who designed, validated and deployed it.",
+      "payment": "Not applicable.",
+      "next": "No forward-looking duty can attach to an artefact; the assignable duties are those of A9, A10, A5, A7 and A11.",
+      "causeVerdict": "Supported",
+      "nextVerdict": "Not established"
     }
   ],
   "links": [
@@ -925,14 +925,14 @@
     }
   ],
   "models": {
-    "causal": "",
-    "hierarchical": "",
-    "future": ""
+    "causal": "Two causal contributions are demonstrable: a retrained model validated on overall accuracy only (E8, E19) and shipped to an interface that withheld subgroup reliability for an underrepresented category (E4, E11), and the closing of a subgroup-degradation signal without transmission to the hospital (E12). The treating physician's adoption is a causal contribution (E3, E21) but the foreseeability condition is not met on the facts, so blame for the adoption decision alone is contested.",
+    "hierarchical": "What this perspective says that the causal one cannot: the decisive contribution in this case is an unassigned task, not an act. No agent omitted post-deployment verification, because the contract assigns it to no party (E17); the monitoring signal stopped inside the supplier (E12) while the version notice stopped at the technical contact (E13); clinical authority sat with the physician (E16) while the information needed to exercise it sat with the supplier. The causal chain therefore does not identify a culpable node, and it cannot, because the omissions sit at three role handovers rather than inside any single role.",
+    "future": "Forward-looking, three duties are assignable and checkable, and one is not. Assignable: supplier subgroup performance reporting to a named clinical lead (duty A9, authority E12/E13, marker = subgroup report with documented receipt); hospital re-validation before each version goes live (duty A5/A7, authority E17/E16, marker = minuted re-validation by the quality committee); regulator's subgroup criterion in the change-assessment rules (duty A11, authority E22/E9-b, marker = published criterion). Not assignable on current facts: the physician's duty to verify the basis of a recommendation, because the interface supplies no subgroup information (E11, E6) and the duty would therefore be unperformable."
   },
   "modelEvidence": {
-    "causal": "",
-    "hierarchical": "",
-    "future": ""
+    "causal": "S9 sets the test for blameworthiness as wrong-doing, causal contribution, foreseeability and freedom, and holds that foreseeability requires that agents do everything reasonably possible to learn the consequences: [VERIFIED-QUOTE] van de Poel & Royakkers (2011), p. 12: \"A person who is held responsible for something must have been able to know the consequences of his or her actions.\" S4 grounds the control condition that the operator's responsibility shrinks as control shrinks. S1 supplies the warning that causal complexity produces misattribution: [VERBATIM-PAGE-UNVERIFIED] Elish (2019), Abstract: \"responsibility for an action may be misattributed to a human actor who had limited control over the behavior of an automated or autonomous system\". S6 adds that causation is the wrong level at which to stop: [VERIFIED-QUOTE] Santoni de Sio & Mecacci (2021), p. 1065: \"the capacity of the different agents, including the users, to make sense of the \\\"logic\\\" of the systems' behaviour may be weakened and sometimes lost\".",
+    "hierarchical": "[VERIFIED-QUOTE] Santoni de Sio & Mecacci (2021), p. 1066: \"the introduction of AI makes the \\\"problem of many hands\\\" more acute\". [VERIFIED-QUOTE] Johnson (2020), p. 118: \"rotten apples and rotten barrels tend to go together\". [VERIFIED-QUOTE] Luegenbiehl & Clancy (2017), p. 84: \"it is difficult and, perhaps, unfair to place all the responsibility on individual actors or institutions\". S1 documents the resulting pattern, in which the nearest human operator becomes the visible node while control sits elsewhere.",
+    "future": "S6 defines active responsibility as the forward-looking form and locates the gap in agents who are not sufficiently aware, capable and motivated: [VERIFIED-QUOTE] Santoni de Sio & Mecacci (2021), p. 1059: \"may not be sufficiently aware, capable, and motivated to see and act according to their moral obligations\". S7 requires that control be real, through tracking and tracing conditions, not nominal: [VERBATIM-PAGE-UNVERIFIED] Santoni de Sio & van den Hoven (2018), Abstract: \"the system should be able to respond to both the relevant moral reasons of the humans designing and deploying the system\". S5 holds that responsibility presupposes capacity and institutional support: [VERIFIED-QUOTE] Reijers et al. (2025), p. 85: \"without institutional support, individuals can be blind and lost\". S10 supplies the shared, forward-looking dimension."
   },
   "modelSourceIds": {
     "causal": [],
@@ -940,7 +940,315 @@
     "future": []
   },
   "caseSourceIds": [],
-  "claims": [],
+  "claims": [
+    {
+      "id": "C1",
+      "actor": "A9",
+      "model": "causal",
+      "claim": "The v2.1 update causally contributed to the injury: it was validated against overall accuracy only and shipped to a population-level interface for a category underrepresented in the training data, and the option it ranked first was not the clinically indicated choice.",
+      "task": "Retrain, validate and ship the model together with its interface configuration.",
+      "facts": [
+        "E4",
+        "E8",
+        "E11",
+        "E18",
+        "E19",
+        "E21"
+      ],
+      "sources": [
+        "S9",
+        "S4",
+        "S6"
+      ],
+      "counter": "S8 holds that a technology-specific responsibility gap is an assumption rather than a finding, and that ascription to the supplier is unproblematic, so no special causal difficulty exists; the supplier can also argue the physician held the final decision (E5, E16).",
+      "verdict": "Supported",
+      "reason": "Causal contribution rests on E8 (retraining), E19 (assessment basis), E11 (interface) and E21 (ranked option not indicated); the counter addresses ascription, not causation."
+    },
+    {
+      "id": "C2",
+      "actor": "A10",
+      "model": "causal",
+      "claim": "Closing the 2023-02-10 subgroup alert without transmitting it is an omission that causally contributed to the physician's non-knowledge at the point of decision.",
+      "task": "Monitor post-deployment performance and escalate alerts.",
+      "facts": [
+        "E12",
+        "E10"
+      ],
+      "sources": [
+        "S9",
+        "S6"
+      ],
+      "counter": "The team held no clinical authority and no channel to clinicians (E17); S4 would add that learning behaviour limits predictability, so the omission is organisational rather than individual.",
+      "verdict": "Supported",
+      "reason": "Failure to act counts as causal contribution in S9's account of passive responsibility; the counter redistributes the contribution, it does not remove it."
+    },
+    {
+      "id": "C3",
+      "actor": "A2",
+      "model": "causal",
+      "claim": "The adoption of the recommendation is a causal contribution, but the foreseeability condition is not satisfied: the interface carried no subgroup field and no warning (E11), and no reliability information reached the physician (E6, E13).",
+      "task": "Accept or reject the recommendation and order treatment.",
+      "facts": [
+        "E3",
+        "E5",
+        "E6",
+        "E11",
+        "E21"
+      ],
+      "sources": [
+        "S9",
+        "S1",
+        "S4"
+      ],
+      "counter": "S1 predicts that the nearest operator will absorb blame regardless of control, which is exactly the misattribution to avoid; conversely the physician held a refusal right (E5) and could have asked for the basis of the score, so reasonable effort may have been available.",
+      "verdict": "Contested",
+      "reason": "The fact set records no request for data and no refusal, so the competing readings cannot be separated; the completion marker for the counter-argument (a documented query) does not exist in E1-E22."
+    },
+    {
+      "id": "C4",
+      "actor": "A11",
+      "model": "causal",
+      "claim": "The change-assessment rules define the threshold on overall accuracy and specify no subgroup criterion (E22), which is a contributing condition to an unmonitored subgroup decline.",
+      "task": "Set the evidence standard a change assessment must meet.",
+      "facts": [
+        "E9-b",
+        "E19",
+        "E22"
+      ],
+      "sources": [
+        "S6",
+        "S3"
+      ],
+      "counter": "Rule content is a legitimate policy choice, and a critic can say the regulator performed no act and no omission in this episode; S3 warns against placing responsibility on institutions for a diffuse causal background.",
+      "verdict": "Not established",
+      "reason": "E22 documents the content of a rule, not conduct in this episode; causation of this injury by the regulator cannot be derived from the facts, and S6's own account warns against legal solutionism."
+    },
+    {
+      "id": "C5",
+      "actor": "A7",
+      "model": "causal",
+      "claim": "The IT and quality unit received the v2.1 release note (E13) and had performed acceptance testing at go-live (E17), and no forwarding to clinicians is recorded.",
+      "task": "Technical acceptance of releases and their internal distribution.",
+      "facts": [
+        "E10",
+        "E13",
+        "E17"
+      ],
+      "sources": [
+        "S9",
+        "S2"
+      ],
+      "counter": "The unit's remit is technical acceptance, not clinical communication (E17), and the note contained no subgroup data in the first place (E13), so causation runs back to A9 rather than through the unit.",
+      "verdict": "Contested",
+      "reason": "A causal chain from the unit to the injury requires a duty to forward clinical content that E17 does not record; the better-supported path is the absence of subgroup content upstream."
+    },
+    {
+      "id": "C6",
+      "actor": "A8",
+      "model": "hierarchical",
+      "claim": "The contract assigns installation, updates and pre-deployment acceptance, and assigns post-deployment performance verification to no party (E17); the decisive condition is therefore an unassigned task rather than an individual omission.",
+      "task": "Allocate post-deployment verification when the system is procured.",
+      "facts": [
+        "E1",
+        "E10",
+        "E12",
+        "E13",
+        "E17"
+      ],
+      "sources": [
+        "S6",
+        "S2",
+        "S3"
+      ],
+      "counter": "S8 would answer that a missing contractual clause is a repairable contractual defect, not a responsibility gap, and that the hospital could have inserted the clause; so this is an ordinary procurement failure.",
+      "verdict": "Supported",
+      "reason": "S6 p. 1066 supports the structural reading and E17 records the omission in the document itself; what the hierarchical reading adds is that no agent can be said to have skipped a task that was never theirs."
+    },
+    {
+      "id": "C7",
+      "actor": "A5",
+      "model": "hierarchical",
+      "claim": "Authority to decide is concentrated at the individual level (E16) while the information needed to exercise it is held at the organisational level (E6, E11); the department head received two oral reports and no formal investigation followed (E14).",
+      "task": "Match decision authority with the information required to use it.",
+      "facts": [
+        "E6",
+        "E11",
+        "E14",
+        "E16"
+      ],
+      "sources": [
+        "S1",
+        "S6",
+        "S3"
+      ],
+      "counter": "S1's crumple-zone thesis predicts this pattern, but the physician's refusal right (E5) is genuine control, so the mismatch is weaker than in Elish's aviation and nuclear cases; the head's reliance on oral reports is normal practice.",
+      "verdict": "Supported",
+      "reason": "The mismatch is recorded in the facts rather than inferred: E16 allocates final authority to A2, E11 records the missing interface fields, E6 records non-knowledge."
+    },
+    {
+      "id": "C8",
+      "actor": "A9",
+      "model": "hierarchical",
+      "claim": "The version notice was routed to the technical contact rather than to clinical staff (E13), while the clearance named a clinical indication (E7, E2); the disclosure channel and the clinical decision channel are separated structurally.",
+      "task": "Define who receives which document after a version change.",
+      "facts": [
+        "E2",
+        "E7",
+        "E13"
+      ],
+      "sources": [
+        "S6",
+        "S2"
+      ],
+      "counter": "Distribution to a technical contact discharges a contractual notification duty, and S2 notes that accountability routinely sits with leadership while information sits elsewhere, so separation is normal rather than defective.",
+      "verdict": "Supported",
+      "reason": "E13 records both the content and the distribution list, so the separation is a documented fact; the counter explains why it persists, not why it is harmless for a decision-support device."
+    },
+    {
+      "id": "C9",
+      "actor": "A8",
+      "model": "hierarchical",
+      "claim": "Hospital administration holds contracting and suspension authority (E16, E17) yet has no technical means to detect subgroup degradation and received no report (E10, E12); formal authority and epistemic access are held by different parties.",
+      "task": "Exercise contractual leverage to obtain performance evidence.",
+      "facts": [
+        "E2",
+        "E10",
+        "E12",
+        "E16",
+        "E17"
+      ],
+      "sources": [
+        "S3",
+        "S6"
+      ],
+      "counter": "A critic, and S8, will say that formal authority to suspend plus a contractual right to demand data is sufficient control and that the hospital simply did not exercise it; S3 adds that concentrating fault on one institution is unfair where causes converge.",
+      "verdict": "Contested",
+      "reason": "The fact set records no request for performance data and no refusal, so the counter cannot be excluded; the claim survives only as a description of the authority-access split, not as a finding of failure."
+    },
+    {
+      "id": "C10",
+      "actor": "A11",
+      "model": "hierarchical",
+      "claim": "Because the change threshold is defined on overall accuracy (E22), a compliant assessment can record v2.1 as acceptable (E9-b, E19) while a subgroup decline remains invisible; the blind spot is written into the rule, not only into the supplier's conduct.",
+      "task": "Specify subgroup criteria in the change-assessment framework.",
+      "facts": [
+        "E7",
+        "E9-b",
+        "E19",
+        "E22"
+      ],
+      "sources": [
+        "S6",
+        "S3"
+      ],
+      "counter": "S6 insists that legal and regulatory tools are necessary but not sufficient, and that technical solutionism is a distortion; a critic can add that a rule cannot anticipate every subgroup.",
+      "verdict": "Supported",
+      "reason": "E22 and E19 together show that the same metric governed both the rule and the assessment, which is why no actor departed from the standard and the harm still occurred."
+    },
+    {
+      "id": "C11",
+      "actor": "A9",
+      "model": "future",
+      "claim": "The supplier should carry a forward-looking duty to report subgroup performance to a named clinical lead after every version change; it alone holds the monitoring channel and the distribution list.",
+      "task": "Subgroup performance reporting after each version change; responsible party A9; authority and resources: owns monitoring output and decides recipients (E12, E13); verifiable completion marker: a subgroup performance report per version with documented receipt by a named clinical lead.",
+      "facts": [
+        "E4",
+        "E12",
+        "E13",
+        "E18",
+        "E19"
+      ],
+      "sources": [
+        "S6",
+        "S7",
+        "S5"
+      ],
+      "counter": "S8 would say this is a disclosure rule that can simply be imposed, not evidence of a responsibility gap; S7's tracing condition is already met because the model is traceable to the ML team, so nothing new is needed.",
+      "verdict": "Supported",
+      "reason": "The duty, the authority and the marker are all anchored in facts; the counter shows the repair is feasible, which is consistent with the claim rather than against it."
+    },
+    {
+      "id": "C12",
+      "actor": "A5",
+      "model": "future",
+      "claim": "The hospital should carry a forward-looking duty to re-validate subgroup performance before each version change goes live; it holds acceptance testing and suspension authority and the internal reporting chain.",
+      "task": "Re-validate subgroup performance per version; responsible party A5 with A7 executing; authority and resources: acceptance testing (E17), suspension authority (E16), reporting chain (E15, E20); verifiable completion marker: subgroup re-validation minuted by the quality committee before go-live.",
+      "facts": [
+        "E10",
+        "E14",
+        "E15",
+        "E17",
+        "E20"
+      ],
+      "sources": [
+        "S6",
+        "S5",
+        "S7"
+      ],
+      "counter": "Without data access the duty cannot be discharged, so the hospital can plead impossibility; S8 would say the true defect is the absent data-sharing clause, which is a contract term and not a responsibility concept.",
+      "verdict": "Contested",
+      "reason": "The duty is real as a forward-looking assignment but not performable on the current contract (E17); a Contested verdict records that impossibility is a genuine defence and that the repair must include data access."
+    },
+    {
+      "id": "C13",
+      "actor": "A2",
+      "model": "future",
+      "claim": "The physician's forward-looking duty to verify the basis of a recommendation exists but cannot be discharged on the current interface.",
+      "task": "Verify the basis of a recommendation before acting; responsible party A2; authority and resources: refusal right only (E5), no subgroup information on screen (E11), no reliability notice received (E6, E13); verifiable completion marker: a documented query or refusal logged in the case record where subgroup reliability is unavailable.",
+      "facts": [
+        "E5",
+        "E6",
+        "E11"
+      ],
+      "sources": [
+        "S7",
+        "S1"
+      ],
+      "counter": "S7 requires that control be meaningful rather than nominal, which supports the claim; but S9 requires only reasonable effort, and a documented query was within the physician's power, so the defence is incomplete.",
+      "verdict": "Contested",
+      "reason": "The duty is unperformable as specified, yet an alternative low-cost action existed and is not recorded; the claim is therefore partly supported and partly open."
+    },
+    {
+      "id": "C14",
+      "actor": "A11",
+      "model": "future",
+      "claim": "The regulator should carry a forward-looking duty to include a subgroup criterion in the change-assessment rules.",
+      "task": "Add a subgroup criterion to the change-assessment framework; responsible party A11; authority and resources: rule-making authority over the framework applied to v2.1 (E22, E9-b); verifiable completion marker: a published subgroup criterion against which any change assessment can be checked.",
+      "facts": [
+        "E7",
+        "E9-b",
+        "E22"
+      ],
+      "sources": [
+        "S6",
+        "S10",
+        "S5"
+      ],
+      "counter": "S10 distributes such duties across all connected agents, so singling out the regulator over-weights one node; S3 adds that concentrating responsibility on a single institution is unfair where causes converge.",
+      "verdict": "Contested",
+      "reason": "The duty and the authority are documented, but the burden-sharing between regulator, supplier and hospital is not settled by the facts, so the allocation is contested rather than supported."
+    },
+    {
+      "id": "C15",
+      "actor": "A5",
+      "model": "future",
+      "claim": "The condition that produced the harm is structural and its repair is shared: supplier, hospital, technical unit and regulator all participate in a process that left one subgroup unmonitored, and discharge requires collective action.",
+      "task": "Joint post-deployment review of subgroup performance across the four organisations.",
+      "facts": [
+        "E12",
+        "E14",
+        "E16",
+        "E17"
+      ],
+      "sources": [
+        "S10",
+        "S5"
+      ],
+      "counter": "S10's model was built for global structural injustice and expressly declines to isolate perpetrators; a defendant will say it therefore cannot ground concrete enforceable duties for a licensed device, and S8 will add that no gap has been shown at all.",
+      "verdict": "Supported",
+      "reason": "E17 and E12 show the diffusion directly; the counter limits what the claim can do (it grounds a joint review, not a damages allocation), which is why the claim is stated at that level only."
+    }
+  ],
   "sources": [
     {
       "id": "S0",

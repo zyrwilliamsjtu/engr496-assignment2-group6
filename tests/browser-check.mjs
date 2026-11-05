@@ -174,6 +174,57 @@ async function runChecks(page, ctx) {
     } else ok = record("E save empty facts/timeline", true) && ok;
   }
 
+  if (fs.existsSync(group6Fixture)) {
+    const g6ForU = JSON.parse(fs.readFileSync(group6Fixture, "utf8"));
+    const uFacts = g6ForU.facts.length;
+    const uGiven = g6ForU.facts.filter((f) => f.kind === "given").length;
+    const uAssumed = g6ForU.facts.filter((f) => f.kind === "assumed").length;
+    const uTimeline = g6ForU.timeline.length;
+    const uExpectedRecord = `${uFacts} facts recorded · ${uGiven} given · ${uAssumed} assumed · ${uTimeline} timeline entries`;
+    const uClaimCount = (g6ForU.claims || []).length;
+    const uPeBefore = ctx.pageErrors.length;
+    await page.locator('#nav button[data-pagejump="0"]').click();
+    const hasBuiltin = await page.evaluate(
+      () => typeof BUILTIN_CASE !== "undefined" && BUILTIN_CASE != null
+    );
+    if (!hasBuiltin) {
+      await page.locator("#loadGroup6Case").click();
+      const statusText =
+        (await page.locator("#status").textContent())?.trim() || "";
+      const devOk =
+        statusText.includes("not embedded") &&
+        statusText.includes("build.js");
+      if (!devOk) {
+        ok =
+          record(
+            "U group6 one-click load",
+            false,
+            `dev fallback status="${statusText}"`
+          ) && ok;
+      } else ok = record("U group6 one-click load (dev fallback)", true) && ok;
+    } else {
+      await page.locator("#loadGroup6Case").click();
+      await page.waitForTimeout(300);
+      await page.locator('#nav button[data-pagejump="3"]').click();
+      const recordSummary =
+        (await page.locator("#recordSummary").textContent())?.trim() || "";
+      await page.locator('#nav button[data-pagejump="5"]').click();
+      const claimCards = await page.locator(".claim-card").count();
+      const uOk =
+        recordSummary === uExpectedRecord &&
+        claimCards === uClaimCount &&
+        ctx.pageErrors.length === uPeBefore;
+      if (!uOk) {
+        ok =
+          record(
+            "U group6 one-click load",
+            false,
+            `summary="${recordSummary}" cards=${claimCards}/${uClaimCount}`
+          ) && ok;
+      } else ok = record("U group6 one-click load", true) && ok;
+    }
+  }
+
   await page.locator("#load").setInputFiles(v1Fixture);
   await page.waitForTimeout(300);
   const statusAfterV1 = (await page.locator("#status").textContent())?.trim() || "";

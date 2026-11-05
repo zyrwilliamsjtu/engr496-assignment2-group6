@@ -241,6 +241,22 @@ function buildSyntheticState() {
       future: ["S1"],
     },
     legacyNotes: {},
+    claims: [
+      {
+        id: "C-golden",
+        actor: "actor-003",
+        model: "causal",
+        claim:
+          "Synthetic fixture claim for export regression only; not referenced in student fields.",
+        task: "Regression harness task label.",
+        facts: ["E3"],
+        sources: ["S1"],
+        counter: "Synthetic counter for export coverage.",
+        verdict: "Not established",
+        reason:
+          "Golden export must always print this reason line verbatim.",
+      },
+    ],
   };
 }
 
@@ -323,6 +339,27 @@ function assertSyntheticGroupedRelationships(reportText, state) {
   return true;
 }
 
+function assertSyntheticClaimReasonExport(reportText, state) {
+  const claim = (state.claims || [])[0];
+  if (!claim?.reason) {
+    console.log("FAIL claim export: synthetic state has no claim reason");
+    return false;
+  }
+  const start = reportText.indexOf("CLAIMS");
+  const end = reportText.indexOf("\n\nMODEL COMPARISON");
+  const block =
+    start >= 0 && end > start
+      ? reportText.slice(start, end)
+      : reportText.slice(start);
+  const needle = "reason: " + claim.reason;
+  if (!block.includes(needle)) {
+    console.log("FAIL claim export: missing reason line", { needle, excerpt: block.slice(0, 400) });
+    return false;
+  }
+  console.log("PASS synthetic claim reason export");
+  return true;
+}
+
 function compareGolden(actual, expected) {
   let ok = true;
   if (actual.evaluateAnalysis.total !== expected.evaluateAnalysis.total) {
@@ -380,6 +417,9 @@ function main() {
     if (!assertSyntheticGroupedRelationships(actual.report, state)) {
       process.exit(1);
     }
+    if (!assertSyntheticClaimReasonExport(actual.report, state)) {
+      process.exit(1);
+    }
     fs.writeFileSync(goldenPath, JSON.stringify(actual, null, 2) + "\n", "utf8");
     console.log(`Wrote ${goldenPath}`);
     return;
@@ -394,6 +434,9 @@ function main() {
   const expected = JSON.parse(fs.readFileSync(goldenPath, "utf8"));
   let engineOk = compareGolden(actual, expected);
   if (!assertSyntheticGroupedRelationships(actual.report, state)) {
+    engineOk = false;
+  }
+  if (!assertSyntheticClaimReasonExport(actual.report, state)) {
     engineOk = false;
   }
   if (engineOk) {

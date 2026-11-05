@@ -8,7 +8,7 @@ const crypto = require("crypto");
 const {
   loadJson,
   verifyRelayIntegrity,
-  applyCasePatches,
+  assertDossierPatchesPresent,
   printCountAssertion,
   readActorAndSourceEnums,
   collectReferentialViolations,
@@ -24,7 +24,6 @@ const inPath =
 const outPath =
   process.argv[3] ||
   path.join(__dirname, "fixtures", "project-group6.json");
-const sourcesPath = path.join(__dirname, "dossier", "group6-sources.json");
 const htmlPath = path.join(root, "src", "index.html");
 
 function buildBaseState() {
@@ -77,7 +76,7 @@ function runOnce() {
     console.error("HARD STOP: relay integrity check failed");
     process.exit(1);
   }
-  applyCasePatches(dossier, sourcesPath);
+  assertDossierPatchesPresent(dossier);
   printCountAssertion(dossier);
   const enums = readActorAndSourceEnums(htmlPath);
   const violations = collectReferentialViolations(dossier, enums);

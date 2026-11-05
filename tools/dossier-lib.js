@@ -92,91 +92,42 @@ function verifyRelayIntegrity(dossier) {
   return ok;
 }
 
-function applyCasePatches(dossier, sourcesAppendPath) {
-  const reports = [];
-
+function assertDossierPatchesPresent(dossier) {
+  const failures = [];
   const t5 = dossier.timeline.find((t) => t.id === "T5");
-  if (!t5) {
-    reports.push({ patch: "P1", status: "not-found", detail: "T5 missing" });
+  const p1Need =
+    "no new submission was required under the threshold rule and none was filed.";
+  if (!t5?.event?.includes(p1Need)) {
+    failures.push(`P1: T5.event must contain patched submission wording`);
   } else {
-    const old =
-      "no new submission filed.";
-    const neu =
-      "no new submission was required under the threshold rule and none was filed.";
-    if (t5.event.includes(neu)) {
-      reports.push({ patch: "P1", status: "already-applied" });
-    } else if (t5.event.includes(old)) {
-      t5.event = t5.event.replace(old, neu);
-      reports.push({ patch: "P1", status: "applied" });
-    } else {
-      reports.push({
-        patch: "P1",
-        status: "not-found",
-        detail: "T5.event missing expected substring",
-      });
-    }
+    console.log("ASSERT P1: present");
   }
 
-  const p2Link = {
-    from: "A12",
-    to: "A2",
-    action:
-      "ranks first an option the review record states was not clinically indicated",
-    reason: "post-event case review finding (E21)",
-    factIds: ["E21"],
-  };
+  const p2Action =
+    "ranks first an option the review record states was not clinically indicated";
   const hasP2 = dossier.links.some(
     (l) =>
       l.from === "A12" &&
       l.to === "A2" &&
-      l.action === p2Link.action &&
+      l.action === p2Action &&
       (l.factIds || []).includes("E21")
   );
-  if (hasP2) {
-    reports.push({ patch: "P2", status: "already-applied" });
-  } else {
-    dossier.links.push(p2Link);
-    reports.push({ patch: "P2", status: "applied" });
-  }
+  if (!hasP2) failures.push("P2: A12→A2 link with E21 not found");
+  else console.log("ASSERT P2: present");
 
-  const extraSources = JSON.parse(fs.readFileSync(sourcesAppendPath, "utf8"));
-  if (!Array.isArray(extraSources)) throw new Error("SOURCES file must be array");
-  const hasS10 = dossier.sources.some((s) => s.id === "S10");
-  if (hasS10) {
-    reports.push({ patch: "P3", status: "already-applied" });
-  } else {
-    const ids = new Set(dossier.sources.map((s) => s.id));
-    for (const src of extraSources) {
-      if (ids.has(src.id)) continue;
-      dossier.sources.push(src);
-      ids.add(src.id);
-    }
-    if (!dossier.sources.some((s) => s.id === "S10")) {
-      reports.push({ patch: "P3", status: "not-found", detail: "S10 missing after append" });
-    } else {
-      reports.push({ patch: "P3", status: "applied" });
-    }
-  }
+  if (!dossier.sources.some((s) => s.id === "S10")) {
+    failures.push("P3: sources must include S10 (S0..S10)");
+  } else console.log("ASSERT P3: present");
 
   const a9 = dossier.actors.find((a) => a.id === "A9");
-  if (!a9) {
-    reports.push({ patch: "P4", status: "not-found", detail: "A9 missing" });
-  } else if (a9.legal === "Contested") {
-    reports.push({ patch: "P4", status: "already-applied" });
-  } else {
-    a9.legal = "Contested";
-    reports.push({ patch: "P4", status: "applied" });
-  }
+  if (a9?.legal !== "Contested") {
+    failures.push(`P4: actors[A9].legal must be "Contested"`);
+  } else console.log("ASSERT P4: present");
 
-  for (const r of reports) {
-    console.log(
-      `${r.patch}: ${r.status}${r.detail ? " — " + r.detail : ""}`
-    );
-    if (r.status === "not-found") {
-      throw new Error(`Patch ${r.patch} not found`);
-    }
+  if (failures.length) {
+    failures.forEach((f) => console.error("FAIL", f));
+    process.exit(1);
   }
-  return dossier;
 }
 
 function printCountAssertion(dossier) {
@@ -358,7 +309,7 @@ module.exports = {
   P4_LEGAL_REASON_APPEND,
   loadJson,
   verifyRelayIntegrity,
-  applyCasePatches,
+  assertDossierPatchesPresent,
   printCountAssertion,
   readActorAndSourceEnums,
   collectReferentialViolations,

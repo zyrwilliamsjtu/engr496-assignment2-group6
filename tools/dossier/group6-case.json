@@ -1,85 +1,911 @@
 {
   "sources": [
-    {"id":"S0","reference":"ENGR4960J Assignment 2 brief - AI medical recommendation case (instructor-provided)","url":"","pages":"","topic":"General","note":"Source of all given facts. S1-S10 are added at G2; no literature is cited at G1."}
+    {
+      "id": "S0",
+      "reference": "ENGR4960J Assignment 2 brief - AI medical recommendation case (instructor-provided)",
+      "url": "",
+      "pages": "",
+      "topic": "General",
+      "note": "Source of all given facts. S1-S10 are added at G2; no literature is cited at G1."
+    },
+    {
+      "id": "S1",
+      "reference": "Elish, M. C. (2019). Moral crumple zones: Cautionary tales in human-robot interaction. Engaging Science, Technology, and Society, 5, 40-60.",
+      "url": "https://doi.org/10.17351/ests2019.260",
+      "pages": "section-anchored",
+      "topic": "Causal",
+      "note": "Supports the claim that responsibility migrates to the nearest human operator who had limited control, quoted from the Abstract and the Introduction; limitation: a qualitative comparative case study that diagnoses misattribution but supplies no normative rule for correct allocation, and the supplied PDF text layer carries no page numerals, so it is cited by section only."
+    },
+    {
+      "id": "S2",
+      "reference": "Johnson, D. G. (2020). Engineering ethics: Contemporary and enduring debates. Yale University Press.",
+      "url": "https://doi.org/10.12987/9780300252798",
+      "pages": "117-136",
+      "topic": "Hierarchy and organization",
+      "note": "Supports the rotten-apples-and-rotten-barrels reading of mishaps and the separation of accountability, blameworthiness and liability, quoted at p. 118 and from the section Sorting Out Responsibility; limitation: only the page numerals 118 and 119 survive in the supplied file, so the later passages are section-anchored, and the chapter is a case synthesis rather than an argument about AI."
+    },
+    {
+      "id": "S3",
+      "reference": "Luegenbiehl, H. C., & Clancy, R. F. (2017). Global engineering ethics. Butterworth-Heinemann.",
+      "url": "https://doi.org/10.1016/C2016-0-01056-2",
+      "pages": "84-87",
+      "topic": "Hierarchy and organization",
+      "note": "Supports the anti-scapegoating thesis, that converging causal conditions make it unfair to place all responsibility on single actors, quoted at pp. 84, 86 and 87; limitation: the available pages concern Hurricane Katrina rather than AI or medicine, and the thesis can immunise organisations against accountability if read too strongly."
+    },
+    {
+      "id": "S4",
+      "reference": "Matthias, A. (2004). The responsibility gap: Ascribing responsibility for the actions of learning automata. Ethics and Information Technology, 6(3), 175-183.",
+      "url": "https://doi.org/10.1007/s10676-004-3422-1",
+      "pages": "section-anchored",
+      "topic": "Responsibility gaps",
+      "note": "Supports the founding claim that learning automata make future behaviour unpredictable and that reduced control reduces responsibility, quoted from the Abstract and the Introduction; limitation: the supplied PDF has no page numerals so it is cited by section, S6 holds that it covers only the culpability gap, and its own lung-cancer example concedes that blame is possible where limitations were known beforehand."
+    },
+    {
+      "id": "S5",
+      "reference": "Reijers, W., Young, M. T., & Coeckelbergh, M. (2025). Introduction to the ethics of emerging technologies. Palgrave Macmillan.",
+      "url": "https://doi.org/10.1007/978-3-031-85887-1",
+      "pages": "84-86",
+      "topic": "Forward-looking",
+      "note": "Supports the claim that responsibility presupposes capacity and institutional support and that innovation outruns regulation, quoted at pp. 85 and 86; limitation: an introductory chapter that asserts the gap at the level of innovation governance and offers no operational criterion for who must verify post-deployment performance."
+    },
+    {
+      "id": "S6",
+      "reference": "Santoni de Sio, F., & Mecacci, G. (2021). Four responsibility gaps with artificial intelligence: Why they matter and how to address them. Philosophy & Technology, 34, 1057-1084.",
+      "url": "https://doi.org/10.1007/s13347-021-00450-x",
+      "pages": "1057-1084",
+      "topic": "Responsibility gaps",
+      "note": "Supports the four-way taxonomy of culpability, moral accountability, public accountability and active responsibility, and the many-hands point, quoted at pp. 1059, 1065, 1066, 1073 and 1077; limitation: a conceptual framework that assumes the gap it taxonomises and presents meaningful human control as programmatic future work, which is exactly what S8 rejects."
+    },
+    {
+      "id": "S7",
+      "reference": "Santoni de Sio, F., & van den Hoven, J. (2018). Meaningful human control over autonomous systems: A philosophical account. Frontiers in Robotics and AI, 5, Article 15.",
+      "url": "https://doi.org/10.3389/frobt.2018.00015",
+      "pages": "section-anchored",
+      "topic": "Forward-looking",
+      "note": "Supports the requirement that supervision be real rather than nominal, through the tracking and tracing conditions, quoted from the Abstract and the section Meaningful Human Control: Tracking and Tracing; limitation: the journal uses article locators and the PDF has no page numerals, the account originates in lethal autonomous weapons and is extended to civil systems only programmatically, and traceability to a human does not by itself establish that the human could act."
+    },
+    {
+      "id": "S8",
+      "reference": "Tigard, D. W. (2021). There is no techno-responsibility gap. Philosophy & Technology, 34, 589-607.",
+      "url": "https://doi.org/10.1007/s13347-020-00414-7",
+      "pages": "section-anchored",
+      "topic": "Responsibility gaps",
+      "note": "Supports the counter-argument that a technology-specific responsibility gap is a prevailing assumption rather than a demonstrated fact, quoted from the Abstract and section 1 Introduction; limitation: the supplied file retains only the page numeral 590 so it is cited by section, the author sets legal liability aside, and he analyses ascription to agents without offering a design or institutional criterion, so he does not reach active-responsibility or public-accountability gaps."
+    },
+    {
+      "id": "S9",
+      "reference": "van de Poel, I., & Royakkers, L. (2011). Ethics, technology, and engineering: An introduction. Wiley-Blackwell.",
+      "url": "",
+      "pages": "6-30",
+      "topic": "Causal",
+      "note": "Supports the four conditions of blameworthiness, the demanding foreseeability standard and the treatment of a failure to act as causal contribution, quoted at pp. 9 and 12; limitation: the supplied PDF contains chapter 1 only, so the whitelist pages 252-267 are absent and this source is not used for the hierarchy and organization or forward-looking models, and the book is an introductory text oriented to individual agents."
+    },
+    {
+      "id": "S10",
+      "reference": "Young, I. M. (2006). Responsibility and global justice: A social connection model. Social Philosophy and Policy, 23(1), 102-130.",
+      "url": "https://doi.org/10.1017/S0265052506060043",
+      "pages": "102-130",
+      "topic": "Forward-looking",
+      "note": "Supports the shared and forward-looking social connection model and the five features that distinguish it from the liability model, quoted at p. 103; limitation: the model was built for global labour justice, it supplements rather than replaces the liability model, and it deliberately declines to isolate perpetrators, which limits what it can ground for a licensed medical device."
+    }
   ],
   "facts": [
-    {"id":"E1","text":"The hospital operates a machine-learning-assisted clinical decision-support system that generates treatment-plan recommendations for physicians.","kind":"given","timeId":"T4","knownBy":["A2","A5"],"sourceIds":["S0"],"note":"Given F1. KnownBy is an assumption, not part of the given text: the brief states the system is in use, and use entails that the operator and its clinicians are aware of its existence. No claim about performance."},
-    {"id":"E2","text":"The system had passed regulatory approval and was cleared for clinical use.","kind":"given","timeId":"T2","knownBy":["A11","A9","A8"],"sourceIds":["S0"],"note":"Given F2. KnownBy is an assumption: clearance is a decision the granting body issues, the applicant holds, and the adopting institution relies on. Clinical staff are not listed, consistent with E6 and E13."},
-    {"id":"E3","text":"A treating physician adopted the system's recommendation and administered the treatment; the patient sustained severe personal injury.","kind":"given","timeId":"T9","knownBy":["A2","A1"],"sourceIds":["S0"],"note":"Given F3. KnownBy is an assumption: the administering clinician and the patient who received the treatment are the two parties the event itself places in the know. The quality committee is not listed; it learns at T9 and E20. The patient knew of the injury but not that it followed a system recommendation; knowledge of the two facts is held separately."},
-    {"id":"E4","text":"The patient's condition type is represented by very few samples in the training data and is underrepresented relative to other condition types; the model has stated limitations for such cases.","kind":"given","timeId":"T1","knownBy":["A10","A9"],"sourceIds":["S0"],"note":"Given F4 and F5 merged. KnownBy is an assumption and is narrower than the fact: the corpus composition is documented in the model dossier at T1, which the training team and its employer hold. The hospital and the physician are not listed."},
-    {"id":"E5","text":"The physician held the authority to reject the system's recommendation.","kind":"given","timeId":"T4","knownBy":["A2","A5","A3","A8"],"sourceIds":["S0"],"note":"Given F6. KnownBy is an assumption: a right that exists only on paper is not a right, so the holder is listed together with the bodies that set and supervise the clinical workflow (E16)."},
-    {"id":"E6","text":"The system did not clearly alert the physician to the limitation, and the physician did not know in advance that predictive reliability was poor for this type of patient.","kind":"given","timeId":"T9","knownBy":[],"sourceIds":["S0"],"note":"Given F7. knownBy is deliberately empty because the given fact states non-knowledge, so no actor can be listed as knowing. This is the factual core that G2 must test against E12, E13 and E19."},
-    {"id":"E7","text":"Regulatory clearance is dated 2021-11-15 and covers the locked model version v1.0 for the indication adult inpatients, general medical wards; the certificate states no subgroup-performance conditions.","kind":"assumed","timeId":"T2","knownBy":["A11","A9"],"sourceIds":["S0"],"note":"Assumed 1, approval scope and date. Without scope and date the ordering of approval against retraining in E8 cannot be checked."},
-    {"id":"E8","text":"The production model was retrained in September 2022 to v2.1 by the supplier's ML team using the original development corpus plus de-identified records exported from the hospital under the data-sharing clause; hospital staff did not review the training-data composition.","kind":"assumed","timeId":"T5","knownBy":["A10","A9"],"sourceIds":["S0"],"note":"Assumed 2, who retrained on which data. Placed in the silence between go-live and the incident; conflicts with no given fact."},
-    {"id":"E9-a","text":"The applicable approval framework required a new submission for any retrained model version placed into clinical use; no submission was filed for v2.1.","kind":"assumed","timeId":"T5","knownBy":["A9","A10"],"sourceIds":["S0"],"note":"ALTERNATIVE BRANCH - excluded from this analysis; retained to document the decision. Assumed 1, mutually exclusive with E9-b."},
-    {"id":"E9-b","text":"The approval framework permitted deployment of a retrained version without a new submission where a defined performance-change threshold was not exceeded; the supplier's change assessment recorded v2.1 as below that threshold.","kind":"assumed","timeId":"T5","knownBy":["A9","A10"],"sourceIds":["S0"],"note":"Assumed 1, adopted branch. The regulator is not listed as knowing, consistent with no submission being made."},
-    {"id":"E10","text":"Validation of v2.1 was performed internally by the supplier's ML team; the hospital's quality department received no validation report and ran no independent acceptance test after the update.","kind":"assumed","timeId":"T5","knownBy":["A10","A9"],"sourceIds":["S0"],"note":"Assumed 2, who accepted the retrained model. Stated as non-receipt of a report, not as a refusal to provide one."},
-    {"id":"E11","text":"The physician interface displays a ranked list of treatment options with a numeric score computed on the full training population and not stratified by condition subtype; it contains no field showing the training-sample size for the patient's condition category and no warning banner for low-sample categories.","kind":"assumed","timeId":"T4","knownBy":["A9","A12","A7","A2"],"sourceIds":["S0"],"note":"Assumed 3, screen content only. The physician is listed because the displayed fields, and the absence of a subgroup field, are visibly on the screen used daily; the hidden reliability is governed by E6."},
-    {"id":"E12","text":"On 2023-02-10 the supplier's internal monitoring recorded that model-physician agreement for rare-subtype cases had fallen below the threshold set in its own monitoring protocol; the alert was logged and closed by the ML team and was not sent to the hospital.","kind":"assumed","timeId":"T6","knownBy":["A10"],"sourceIds":["S0"],"note":"Assumed 4, pre-incident signal. Supplies the signal that any foreseeability test requires; the brief records none."},
-    {"id":"E13","text":"The release note issued on 2023-03-15 announced v2.1 and an improvement in overall accuracy; it reported no subgroup performance for rare condition types and was distributed to the hospital's IT contact rather than to clinical staff; v2.1 had entered clinical use on 2022-10-03, so five months and twelve days elapsed between clinical deployment and the first version notification, and no notification of the version change reached clinical staff before 2023-03-15.","kind":"assumed","timeId":"T7","knownBy":["A9","A7"],"sourceIds":["S0"],"note":"Assumed 4. Revised per ruling B, option (ii): the deployment-to-notification interval is written out as fact so that it cannot read as a typing error."},
-    {"id":"E14","text":"Two physicians in the same department reported orally to the department head on 2023-05-08 that recommendations for atypical presentations appeared inconsistent; no written incident report was filed and no formal investigation was initiated.","kind":"assumed","timeId":"T8","knownBy":["A4","A3"],"sourceIds":["S0"],"note":"Assumed 4. Revised earlier wording referred to the adverse-event system, which is a category error for a concern report; the fact now states the absence of any formal investigation. Kept at department level so the knowledge boundary stays explicit."},
-    {"id":"E15","text":"Hospital policy requires entry of an adverse event in the internal reporting system within 24 hours and notification of the regulatory authority within 10 working days.","kind":"assumed","timeId":"T4","knownBy":["A5","A2","A6"],"sourceIds":["S0"],"note":"Assumed 5. This row holds the rule only. The observed timing is E20. Policy in force from T4, which is why the timeId is T4."},
-    {"id":"E16","text":"Under hospital policy the treating physician holds final authority over the treatment decision; the department head may review individual cases on request; the ethics and quality committee reviews system-level use and receives reports after the event; hospital administration holds contracting and suspension authority.","kind":"assumed","timeId":"T4","knownBy":["A2","A3","A6","A8"],"sourceIds":["S0"],"note":"Assumed 6, authority hierarchy. Needed because E5 gives a refusal right but not its rank relative to department and institution."},
-    {"id":"E17","text":"The deployment contract assigns installation, uptime and software updates to the supplier and pre-deployment acceptance testing to the hospital's IT and quality unit; it contains no clause assigning post-deployment performance verification or subgroup performance monitoring to either party.","kind":"assumed","timeId":"T3","knownBy":["A8","A9"],"sourceIds":["S0"],"note":"Assumed 7, contract division of labour. Written as an omission in the document, not as a failure by either party."},
-    {"id":"E18","text":"The patient was an adult inpatient admitted to a general medical ward, and the recommendation at issue was generated during that inpatient episode; the care setting therefore fell inside the indication named in the clearance recorded in E7.","kind":"assumed","timeId":"T9","knownBy":["A2","A5","A1"],"sourceIds":["S0"],"note":"Assumed, required: stated affirmatively, so this is not an off-label use. The within-scope subgroup failure, not a scope breach, carries the analysis in G2."},
-    {"id":"E19","text":"The supplier's change assessment for v2.1 records overall accuracy on the combined validation set as its performance criterion and contains no subgroup breakdown by condition type.","kind":"assumed","timeId":"T5","knownBy":["A10","A9"],"sourceIds":["S0"],"note":"Assumed, added: records document content only; adequacy of that basis is a G2 judgement. Interacts with E9-b, which relies on the same assessment."},
-    {"id":"E20","text":"The adverse event was entered in the internal reporting system on 2023-09-20, within the 24-hour period stated in E15, the injury having been sustained on 2023-09-19; the ethics and quality committee reviewed the entry on 2023-10-03 and the regulatory authority was notified on 2023-10-05.","kind":"assumed","timeId":"T9","knownBy":["A5","A6","A11","A2"],"sourceIds":["S0"],"note":"Assumed 5. Revised per ruling C: entry date 2023-09-20, stated as within the 24-hour period; the 10-working-day compliance assertion is deleted so that only dates are stated, because the start of that period is ambiguous on the facts."},
-    {"id":"E21","text":"The treatment option ranked first in the recommendation was, according to the post-event case review record, not the clinically indicated first-line choice for this patient's presentation; the review record documents this assessment.","kind":"assumed","timeId":"T9","knownBy":["A6","A5","A2"],"sourceIds":["S0"],"note":"Assumed, required: establishes that the recommendation was clinically inappropriate for this presentation, which the causal model needs. Written as what the review record states, not as a claim that the system was wrong."},
-    {"id":"E22","text":"The approval framework's change-assessment rules define the performance-change threshold in terms of overall accuracy on the combined validation set and specify no subgroup-level criterion by condition type.","kind":"assumed","timeId":"T5","knownBy":["A11","A9"],"sourceIds":["S0"],"note":"Assumed, added: locates part of the difficulty in the rule itself, not only in an omitted action. Written as what the framework specifies."}
+    {
+      "id": "E1",
+      "text": "The hospital operates a machine-learning-assisted clinical decision-support system that generates treatment-plan recommendations for physicians.",
+      "kind": "given",
+      "timeId": "T4",
+      "knownBy": [
+        "A2",
+        "A5"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Given F1. KnownBy is an assumption, not part of the given text: the brief states the system is in use, and use entails that the operator and its clinicians are aware of its existence. No claim about performance."
+    },
+    {
+      "id": "E2",
+      "text": "The system had passed regulatory approval and was cleared for clinical use.",
+      "kind": "given",
+      "timeId": "T2",
+      "knownBy": [
+        "A11",
+        "A9",
+        "A8"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Given F2. KnownBy is an assumption: clearance is a decision the granting body issues, the applicant holds, and the adopting institution relies on. Clinical staff are not listed, consistent with E6 and E13."
+    },
+    {
+      "id": "E3",
+      "text": "A treating physician adopted the system's recommendation and administered the treatment; the patient sustained severe personal injury.",
+      "kind": "given",
+      "timeId": "T9",
+      "knownBy": [
+        "A2",
+        "A1"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Given F3. KnownBy is an assumption: the administering clinician and the patient who received the treatment are the two parties the event itself places in the know. The quality committee is not listed; it learns at T9 and E20. The patient knew of the injury but not that it followed a system recommendation; knowledge of the two facts is held separately."
+    },
+    {
+      "id": "E4",
+      "text": "The patient's condition type is represented by very few samples in the training data and is underrepresented relative to other condition types; the model has stated limitations for such cases.",
+      "kind": "given",
+      "timeId": "T1",
+      "knownBy": [
+        "A10",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Given F4 and F5 merged. KnownBy is an assumption and is narrower than the fact: the corpus composition is documented in the model dossier at T1, which the training team and its employer hold. The hospital and the physician are not listed."
+    },
+    {
+      "id": "E5",
+      "text": "The physician held the authority to reject the system's recommendation.",
+      "kind": "given",
+      "timeId": "T4",
+      "knownBy": [
+        "A2",
+        "A5",
+        "A3",
+        "A8"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Given F6. KnownBy is an assumption: a right that exists only on paper is not a right, so the holder is listed together with the bodies that set and supervise the clinical workflow (E16)."
+    },
+    {
+      "id": "E6",
+      "text": "The system did not clearly alert the physician to the limitation, and the physician did not know in advance that predictive reliability was poor for this type of patient.",
+      "kind": "given",
+      "timeId": "T9",
+      "knownBy": [],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Given F7. knownBy is deliberately empty because the given fact states non-knowledge, so no actor can be listed as knowing. This is the factual core that G2 must test against E12, E13 and E19."
+    },
+    {
+      "id": "E7",
+      "text": "Regulatory clearance is dated 2021-11-15 and covers the locked model version v1.0 for the indication adult inpatients, general medical wards; the certificate states no subgroup-performance conditions.",
+      "kind": "assumed",
+      "timeId": "T2",
+      "knownBy": [
+        "A11",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 1, approval scope and date. Without scope and date the ordering of approval against retraining in E8 cannot be checked."
+    },
+    {
+      "id": "E8",
+      "text": "The production model was retrained in September 2022 to v2.1 by the supplier's ML team using the original development corpus plus de-identified records exported from the hospital under the data-sharing clause; hospital staff did not review the training-data composition.",
+      "kind": "assumed",
+      "timeId": "T5",
+      "knownBy": [
+        "A10",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 2, who retrained on which data. Placed in the silence between go-live and the incident; conflicts with no given fact."
+    },
+    {
+      "id": "E9-a",
+      "text": "The applicable approval framework required a new submission for any retrained model version placed into clinical use; no submission was filed for v2.1.",
+      "kind": "assumed",
+      "timeId": "T5",
+      "knownBy": [
+        "A9",
+        "A10"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "ALTERNATIVE BRANCH - excluded from this analysis; retained to document the decision. Assumed 1, mutually exclusive with E9-b."
+    },
+    {
+      "id": "E9-b",
+      "text": "The approval framework permitted deployment of a retrained version without a new submission where a defined performance-change threshold was not exceeded; the supplier's change assessment recorded v2.1 as below that threshold.",
+      "kind": "assumed",
+      "timeId": "T5",
+      "knownBy": [
+        "A9",
+        "A10"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 1, adopted branch. The regulator is not listed as knowing, consistent with no submission being made."
+    },
+    {
+      "id": "E10",
+      "text": "Validation of v2.1 was performed internally by the supplier's ML team; the hospital's quality department received no validation report and ran no independent acceptance test after the update.",
+      "kind": "assumed",
+      "timeId": "T5",
+      "knownBy": [
+        "A10",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 2, who accepted the retrained model. Stated as non-receipt of a report, not as a refusal to provide one."
+    },
+    {
+      "id": "E11",
+      "text": "The physician interface displays a ranked list of treatment options with a numeric score computed on the full training population and not stratified by condition subtype; it contains no field showing the training-sample size for the patient's condition category and no warning banner for low-sample categories.",
+      "kind": "assumed",
+      "timeId": "T4",
+      "knownBy": [
+        "A9",
+        "A12",
+        "A7",
+        "A2"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 3, screen content only. The physician is listed because the displayed fields, and the absence of a subgroup field, are visibly on the screen used daily; the hidden reliability is governed by E6."
+    },
+    {
+      "id": "E12",
+      "text": "On 2023-02-10 the supplier's internal monitoring recorded that model-physician agreement for rare-subtype cases had fallen below the threshold set in its own monitoring protocol; the alert was logged and closed by the ML team and was not sent to the hospital.",
+      "kind": "assumed",
+      "timeId": "T6",
+      "knownBy": [
+        "A10"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 4, pre-incident signal. Supplies the signal that any foreseeability test requires; the brief records none."
+    },
+    {
+      "id": "E13",
+      "text": "The release note issued on 2023-03-15 announced v2.1 and an improvement in overall accuracy; it reported no subgroup performance for rare condition types and was distributed to the hospital's IT contact rather than to clinical staff; v2.1 had entered clinical use on 2022-10-03, so five months and twelve days elapsed between clinical deployment and the first version notification, and no notification of the version change reached clinical staff before 2023-03-15.",
+      "kind": "assumed",
+      "timeId": "T7",
+      "knownBy": [
+        "A9",
+        "A7"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 4. Revised per ruling B, option (ii): the deployment-to-notification interval is written out as fact so that it cannot read as a typing error."
+    },
+    {
+      "id": "E14",
+      "text": "Two physicians in the same department reported orally to the department head on 2023-05-08 that recommendations for atypical presentations appeared inconsistent; no written incident report was filed and no formal investigation was initiated.",
+      "kind": "assumed",
+      "timeId": "T8",
+      "knownBy": [
+        "A4",
+        "A3"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 4. Revised earlier wording referred to the adverse-event system, which is a category error for a concern report; the fact now states the absence of any formal investigation. Kept at department level so the knowledge boundary stays explicit."
+    },
+    {
+      "id": "E15",
+      "text": "Hospital policy requires entry of an adverse event in the internal reporting system within 24 hours and notification of the regulatory authority within 10 working days.",
+      "kind": "assumed",
+      "timeId": "T4",
+      "knownBy": [
+        "A5",
+        "A2",
+        "A6"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 5. This row holds the rule only. The observed timing is E20. Policy in force from T4, which is why the timeId is T4."
+    },
+    {
+      "id": "E16",
+      "text": "Under hospital policy the treating physician holds final authority over the treatment decision; the department head may review individual cases on request; the ethics and quality committee reviews system-level use and receives reports after the event; hospital administration holds contracting and suspension authority.",
+      "kind": "assumed",
+      "timeId": "T4",
+      "knownBy": [
+        "A2",
+        "A3",
+        "A6",
+        "A8"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 6, authority hierarchy. Needed because E5 gives a refusal right but not its rank relative to department and institution."
+    },
+    {
+      "id": "E17",
+      "text": "The deployment contract assigns installation, uptime and software updates to the supplier and pre-deployment acceptance testing to the hospital's IT and quality unit; it contains no clause assigning post-deployment performance verification or subgroup performance monitoring to either party.",
+      "kind": "assumed",
+      "timeId": "T3",
+      "knownBy": [
+        "A8",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 7, contract division of labour. Written as an omission in the document, not as a failure by either party."
+    },
+    {
+      "id": "E18",
+      "text": "The patient was an adult inpatient admitted to a general medical ward, and the recommendation at issue was generated during that inpatient episode; the care setting therefore fell inside the indication named in the clearance recorded in E7.",
+      "kind": "assumed",
+      "timeId": "T9",
+      "knownBy": [
+        "A2",
+        "A5",
+        "A1"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed, required: stated affirmatively, so this is not an off-label use. The within-scope subgroup failure, not a scope breach, carries the analysis in G2."
+    },
+    {
+      "id": "E19",
+      "text": "The supplier's change assessment for v2.1 records overall accuracy on the combined validation set as its performance criterion and contains no subgroup breakdown by condition type.",
+      "kind": "assumed",
+      "timeId": "T5",
+      "knownBy": [
+        "A10",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed, added: records document content only; adequacy of that basis is a G2 judgement. Interacts with E9-b, which relies on the same assessment."
+    },
+    {
+      "id": "E20",
+      "text": "The adverse event was entered in the internal reporting system on 2023-09-20, within the 24-hour period stated in E15, the injury having been sustained on 2023-09-19; the ethics and quality committee reviewed the entry on 2023-10-03 and the regulatory authority was notified on 2023-10-05.",
+      "kind": "assumed",
+      "timeId": "T9",
+      "knownBy": [
+        "A5",
+        "A6",
+        "A11",
+        "A2"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed 5. Revised per ruling C: entry date 2023-09-20, stated as within the 24-hour period; the 10-working-day compliance assertion is deleted so that only dates are stated, because the start of that period is ambiguous on the facts."
+    },
+    {
+      "id": "E21",
+      "text": "The treatment option ranked first in the recommendation was, according to the post-event case review record, not the clinically indicated first-line choice for this patient's presentation; the review record documents this assessment.",
+      "kind": "assumed",
+      "timeId": "T9",
+      "knownBy": [
+        "A6",
+        "A5",
+        "A2"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed, required: establishes that the recommendation was clinically inappropriate for this presentation, which the causal model needs. Written as what the review record states, not as a claim that the system was wrong."
+    },
+    {
+      "id": "E22",
+      "text": "The approval framework's change-assessment rules define the performance-change threshold in terms of overall accuracy on the combined validation set and specify no subgroup-level criterion by condition type.",
+      "kind": "assumed",
+      "timeId": "T5",
+      "knownBy": [
+        "A11",
+        "A9"
+      ],
+      "sourceIds": [
+        "S0"
+      ],
+      "note": "Assumed, added: locates part of the difficulty in the rule itself, not only in an omitted action. Written as what the framework specifies."
+    }
   ],
   "timeline": [
-    {"id":"T1","date":"2021-03","event":"Model v1.0 trained; composition of the training corpus documented in the model dossier, in which the patient's condition category is represented by very few samples.","knownBy":["A10"]},
-    {"id":"T2","date":"2021-11-15","event":"Regulatory clearance granted for the locked v1.0 model, indication limited to adult inpatients on general medical wards.","knownBy":["A11","A9","A8"]},
-    {"id":"T3","date":"2022-01-10","event":"Deployment contract signed; post-deployment performance verification not assigned to either party. Go-live follows on 2022-02-01.","knownBy":["A8","A9"]},
-    {"id":"T4","date":"2022-02-01","event":"System goes live on the wards; interface as configured: ranked options with a population-level score, no subgroup field, no warning banner for low-sample categories. Reporting policy and authority hierarchy in force.","knownBy":["A2","A5","A9"]},
-    {"id":"T5","date":"2022-09, deployed 2022-10-03","event":"Model retrained to v2.1 on the original corpus plus hospital-exported records; change assessment and validation performed internally by the supplier's ML team, assessment based on overall accuracy only; no new submission filed.","knownBy":["A10","A9"]},
-    {"id":"T6","date":"2023-02-10","event":"Internal monitoring shows model-physician agreement for rare-subtype cases below the protocol threshold; alert logged and closed by the ML team, not sent to the hospital.","knownBy":["A10"]},
-    {"id":"T7","date":"2023-03-15","event":"Release note announcing v2.1 and improved overall accuracy issued to the hospital's IT contact; no subgroup performance reported, no distribution to clinical staff. v2.1 has then been in clinical use for five months and twelve days without any version notification reaching clinicians.","knownBy":["A9","A7"]},
-    {"id":"T8","date":"2023-05-08","event":"Two physicians report orally to the department head that recommendations for atypical presentations appear inconsistent; no written incident report and no formal investigation initiated.","knownBy":["A4","A3"]},
-    {"id":"T9","date":"2023-09-12 to 2023-10-05","event":"Patient with the underrepresented condition category, an adult inpatient on a general medical ward, is treated from 2023-09-12; recommendation issued without subgroup caveat; treatment administered and severe injury sustained 2023-09-19; event entered 2023-09-20 (within the 24-hour policy); committee review 2023-10-03; authority notified 2023-10-05.","knownBy":["A2","A1","A5","A6","A11"]}
+    {
+      "id": "T1",
+      "date": "2021-03",
+      "event": "Model v1.0 trained; composition of the training corpus documented in the model dossier, in which the patient's condition category is represented by very few samples.",
+      "knownBy": [
+        "A10"
+      ]
+    },
+    {
+      "id": "T2",
+      "date": "2021-11-15",
+      "event": "Regulatory clearance granted for the locked v1.0 model, indication limited to adult inpatients on general medical wards.",
+      "knownBy": [
+        "A11",
+        "A9",
+        "A8"
+      ]
+    },
+    {
+      "id": "T3",
+      "date": "2022-01-10",
+      "event": "Deployment contract signed; post-deployment performance verification not assigned to either party. Go-live follows on 2022-02-01.",
+      "knownBy": [
+        "A8",
+        "A9"
+      ]
+    },
+    {
+      "id": "T4",
+      "date": "2022-02-01",
+      "event": "System goes live on the wards; interface as configured: ranked options with a population-level score, no subgroup field, no warning banner for low-sample categories. Reporting policy and authority hierarchy in force.",
+      "knownBy": [
+        "A2",
+        "A5",
+        "A9"
+      ]
+    },
+    {
+      "id": "T5",
+      "date": "2022-09, deployed 2022-10-03",
+      "event": "Model retrained to v2.1 on the original corpus plus hospital-exported records; change assessment and validation performed internally by the supplier's ML team, assessment based on overall accuracy only; no new submission was required under the threshold rule and none was filed.",
+      "knownBy": [
+        "A10",
+        "A9"
+      ]
+    },
+    {
+      "id": "T6",
+      "date": "2023-02-10",
+      "event": "Internal monitoring shows model-physician agreement for rare-subtype cases below the protocol threshold; alert logged and closed by the ML team, not sent to the hospital.",
+      "knownBy": [
+        "A10"
+      ]
+    },
+    {
+      "id": "T7",
+      "date": "2023-03-15",
+      "event": "Release note announcing v2.1 and improved overall accuracy issued to the hospital's IT contact; no subgroup performance reported, no distribution to clinical staff. v2.1 has then been in clinical use for five months and twelve days without any version notification reaching clinicians.",
+      "knownBy": [
+        "A9",
+        "A7"
+      ]
+    },
+    {
+      "id": "T8",
+      "date": "2023-05-08",
+      "event": "Two physicians report orally to the department head that recommendations for atypical presentations appear inconsistent; no written incident report and no formal investigation initiated.",
+      "knownBy": [
+        "A4",
+        "A3"
+      ]
+    },
+    {
+      "id": "T9",
+      "date": "2023-09-12 to 2023-10-05",
+      "event": "Patient with the underrepresented condition category, an adult inpatient on a general medical ward, is treated from 2023-09-12; recommendation issued without subgroup caveat; treatment administered and severe injury sustained 2023-09-19; event entered 2023-09-20 (within the 24-hour policy); committee review 2023-10-03; authority notified 2023-10-05.",
+      "knownBy": [
+        "A2",
+        "A1",
+        "A5",
+        "A6",
+        "A11"
+      ]
+    }
   ],
   "actors": [
-    {"id":"A1","name":"Patient","kind":"Affected stakeholder","role":"Recipient of care; holds the rights at issue. Source of others obligations: duty of care and informed consent.","connections":"A1 -> A2 Treating physician: presents as adult inpatient with the condition (E18); A2 -> A1: administers the recommended treatment (E3); A5 Hospital -> A1: owes care in operating the system (E1).","knowledge":"Own condition and the treatment received; not the recommendation, its population-level score, or its reliability for this category.","control":"Insufficient","controlReason":"No decision right over the recommendation, the interface, or the treatment choice."},
-    {"id":"A2","name":"Treating physician","kind":"Person","role":"Attending clinician; final treatment authority and right of refusal. Source: professional duty of care and role responsibility.","connections":"A12 Model -> A2: displays ranked options and population-level score with no subgroup field (E1, E11); A12 -> A2: issues recommendation without subgroup caveat (E3, E6); A2 -> A12: adopts the recommendation (E3); A2 -> A1: administers treatment (E3); A3 -> A2: may review case on request (E16); A5 -> A2: deploys system and sets authority policy (E1, E16); A2 -> A6: adverse event reported (E20).","knowledge":"Recommendation and numeric score; absence of any subgroup field or warning banner on screen (E11); no subgroup reliability information (E6); not on the release-note distribution list (E13).","control":"Limited","controlReason":"Holds the refusal right (E5) but no access to subgroup performance, no role in acceptance testing, and no notice of the version change (E13)."},
-    {"id":"A3","name":"Department head","kind":"Person","role":"Clinical line supervisor of the department. Source: supervisory role responsibility.","connections":"A4 -> A3: oral reports of inconsistent recommendations on 2023-05-08 (E14); A3 -> A2: case review on request (E16); A3 -> A6: no escalation of the oral reports (E14).","knowledge":"Two oral reports of inconsistent recommendations for atypical presentations; no written record (E14).","control":"Limited","controlReason":"Supervisory review on request only; no authority over the model, the contract, or the reporting system."},
-    {"id":"A4","name":"Department clinicians (two reporting physicians)","kind":"Person","role":"Ward clinicians who observed atypical behaviour. Source: professional duty and internal reporting expectations.","connections":"A4 -> A3: oral report of inconsistent recommendations (E14); A4 -> A6: no formal investigation initiated (E14).","knowledge":"Their own cases and the perceived inconsistency for atypical presentations (E14); not the monitoring metrics held by A10 (E12).","control":"Limited","controlReason":"Can report, but hold no authority to suspend use or to demand subgroup data."},
-    {"id":"A5","name":"Hospital","kind":"Organization","role":"Deploying healthcare provider; operator of the record and reporting system. Source: duty of care, licence conditions, internal reporting policy.","connections":"A5 -> A9: contracts for system and updates (E17); A9 -> A5: delivers updates and release notes (E8, E13); A5 -> A2: deploys system, sets authority and reporting policy (E1, E15, E16); A5 -> A6: enters event and refers it for review (E20); A5 -> A11: notifies authority (E20); A5 -> A1: owes care (E1, E3).","knowledge":"System cleared (E2); v2.1 released (E13); received no validation report (E10), no monitoring alert (E12), no written incident report (E14).","control":"Limited","controlReason":"Holds the system and the reporting chain, but no access to training data, monitoring metrics, or the internal change assessment."},
-    {"id":"A6","name":"Hospital ethics / medical quality committee","kind":"Organization","role":"Internal oversight of system-level use and post-event review. Source: institutional governance mandate.","connections":"A8 -> A6: refers system-level use for review (E16); A5 -> A6: refers the adverse event (E20); A6 -> A11: contributes to the notification (E20); A6 -> A4: receives no formal investigation request (E14).","knowledge":"Event and circumstances from 2023-09-20; the post-event case review finding on the first-ranked option (E21); no earlier validation report, monitoring alert, or written incident report (E10, E12, E14).","control":"Limited","controlReason":"Reviews after the event and at system level; no authority over the supplier, the contract, or the model."},
-    {"id":"A7","name":"Hospital information-security / quality unit","kind":"Organization","role":"Pre-deployment acceptance testing; technical contact for releases. Source: contract allocation and internal quality function.","connections":"A9 -> A7: releases the v2.1 note on 2023-03-15 (E13); A7 -> A9: performs pre-deployment acceptance testing (E17); A7 -> A2: no forwarding of the release note to clinical staff recorded (E13); A7 -> A5: acts on the hospital's behalf (E17).","knowledge":"Release-note content, including the absence of subgroup data (E13); no validation report and no monitoring alert (E10, E12).","control":"Limited","controlReason":"Gatekeeper of deployment artefacts but not of model performance, and holds no clinical authority."},
-    {"id":"A8","name":"Hospital administration (contracting office)","kind":"Organization","role":"Holds the deployment contract and suspension authority. Source: contractual and executive authority.","connections":"A8 -> A9: signs and administers the contract (E17); A8 -> A6: refers system-level use (E16); A11 -> A8: grants clearance (E2, E7); A8 -> A5: acts on the hospital's behalf (E17).","knowledge":"Contract terms, including the absence of any post-deployment verification clause (E17); the clearance and its indication (E2, E7).","control":"Limited","controlReason":"Can contract and suspend, but holds no technical means to detect subgroup degradation and received no report."},
-    {"id":"A9","name":"System supplier","kind":"Organization","role":"Vendor of the decision-support system; supplies updates and documentation; applied for clearance.","connections":"A9 -> A5: supplies system, updates and the release note (E8, E13, E17); A9 -> A11: files the clearance application for v1.0 (E2, E7); A10 -> A9: reports validation results and closes the monitoring alert (E10, E12); A9 -> A12: ships v2.1 to production (E8); A11 -> A9: framework governing whether resubmission is required (E9-b).","knowledge":"Training-corpus composition (E4, E8); the change assessment basis (E19); the 2023-02-10 alert (E12); the content and distribution list of its own release note (E13).","control":"Sufficient","controlReason":"Owns the model, the training data, the change assessment and the monitoring channel, and decides who receives which document."},
-    {"id":"A10","name":"Supplier ML team","kind":"Organization","role":"Trains, validates and monitors the model. Source: assigned engineering function and professional duty.","connections":"A10 -> A12: retrains to v2.1 (E8); A12 -> A10: emits agreement metrics (E12); A10 -> A9: reports internal validation (E10); A10 -> A9: logs and closes the alert (E12); A10 -> A5: transmits no report (E10, E12).","knowledge":"Subgroup underrepresentation (E4, E8), the assessment basis used (E19), and the 2023-02-10 agreement drop (E12).","control":"Sufficient","controlReason":"Technical authority over data, validation and monitoring; no formal authority over clinical deployment or customer disclosure."},
-    {"id":"A11","name":"Regulatory authority","kind":"Organization","role":"Granted clearance for v1.0; receives adverse-event notifications; administers the change-assessment framework. Source: statutory market-authorisation mandate.","connections":"A11 -> A8: clearance dated 2021-11-15 with stated indication (E2, E7); A9 -> A11: clearance application (E2); A11 -> A9: change-assessment framework (E9-b); A5 -> A11: notification on 2023-10-05 (E20).","knowledge":"The v1.0 clearance file and its indication (E7); the change-assessment rules it administers (E22); no knowledge of v2.1 recorded, consistent with the adopted branch E9-b.","control":"Limited","controlReason":"Rules on submissions it receives, but holds no monitoring data and no inspection power recorded in these facts."},
-    {"id":"A12","name":"Model v2.1 decision-support system","kind":"Technical system","role":"The artefact that generates recommendations; performs no obligation and holds no authority.","connections":"A12 -> A2: displays ranked options with population-level score, no subgroup field, no warning banner (E11); A12 -> A2: issues the recommendation without subgroup caveat (E3, E6); A12 -> A2: ranks first an option the review record states was not clinically indicated (E21); A10 -> A12: retrains to v2.1 (E8); A12 -> A10: emits monitoring metrics (E12); A2 -> A12: adopts the recommendation (E3).","knowledge":"Not applicable: the system stores the recommendation and its score, not knowledge that can be attributed.","control":"Unassessed","controlReason":"A technical system holds no authority, so control is neither sufficient nor deficient; it is assessed only for the human actors in G2."}
+    {
+      "id": "A1",
+      "name": "Patient",
+      "kind": "Affected stakeholder",
+      "role": "Recipient of care; holds the rights at issue. Source of others obligations: duty of care and informed consent.",
+      "connections": "A1 -> A2 Treating physician: presents as adult inpatient with the condition (E18); A2 -> A1: administers the recommended treatment (E3); A5 Hospital -> A1: owes care in operating the system (E1).",
+      "knowledge": "Own condition and the treatment received; not the recommendation, its population-level score, or its reliability for this category.",
+      "control": "Insufficient",
+      "controlReason": "No decision right over the recommendation, the interface, or the treatment choice."
+    },
+    {
+      "id": "A2",
+      "name": "Treating physician",
+      "kind": "Person",
+      "role": "Attending clinician; final treatment authority and right of refusal. Source: professional duty of care and role responsibility.",
+      "connections": "A12 Model -> A2: displays ranked options and population-level score with no subgroup field (E1, E11); A12 -> A2: issues recommendation without subgroup caveat (E3, E6); A2 -> A12: adopts the recommendation (E3); A2 -> A1: administers treatment (E3); A3 -> A2: may review case on request (E16); A5 -> A2: deploys system and sets authority policy (E1, E16); A2 -> A6: adverse event reported (E20).",
+      "knowledge": "Recommendation and numeric score; absence of any subgroup field or warning banner on screen (E11); no subgroup reliability information (E6); not on the release-note distribution list (E13).",
+      "control": "Limited",
+      "controlReason": "Holds the refusal right (E5) but no access to subgroup performance, no role in acceptance testing, and no notice of the version change (E13)."
+    },
+    {
+      "id": "A3",
+      "name": "Department head",
+      "kind": "Person",
+      "role": "Clinical line supervisor of the department. Source: supervisory role responsibility.",
+      "connections": "A4 -> A3: oral reports of inconsistent recommendations on 2023-05-08 (E14); A3 -> A2: case review on request (E16); A3 -> A6: no escalation of the oral reports (E14).",
+      "knowledge": "Two oral reports of inconsistent recommendations for atypical presentations; no written record (E14).",
+      "control": "Limited",
+      "controlReason": "Supervisory review on request only; no authority over the model, the contract, or the reporting system."
+    },
+    {
+      "id": "A4",
+      "name": "Department clinicians (two reporting physicians)",
+      "kind": "Person",
+      "role": "Ward clinicians who observed atypical behaviour. Source: professional duty and internal reporting expectations.",
+      "connections": "A4 -> A3: oral report of inconsistent recommendations (E14); A4 -> A6: no formal investigation initiated (E14).",
+      "knowledge": "Their own cases and the perceived inconsistency for atypical presentations (E14); not the monitoring metrics held by A10 (E12).",
+      "control": "Limited",
+      "controlReason": "Can report, but hold no authority to suspend use or to demand subgroup data."
+    },
+    {
+      "id": "A5",
+      "name": "Hospital",
+      "kind": "Organization",
+      "role": "Deploying healthcare provider; operator of the record and reporting system. Source: duty of care, licence conditions, internal reporting policy.",
+      "connections": "A5 -> A9: contracts for system and updates (E17); A9 -> A5: delivers updates and release notes (E8, E13); A5 -> A2: deploys system, sets authority and reporting policy (E1, E15, E16); A5 -> A6: enters event and refers it for review (E20); A5 -> A11: notifies authority (E20); A5 -> A1: owes care (E1, E3).",
+      "knowledge": "System cleared (E2); v2.1 released (E13); received no validation report (E10), no monitoring alert (E12), no written incident report (E14).",
+      "control": "Limited",
+      "controlReason": "Holds the system and the reporting chain, but no access to training data, monitoring metrics, or the internal change assessment."
+    },
+    {
+      "id": "A6",
+      "name": "Hospital ethics / medical quality committee",
+      "kind": "Organization",
+      "role": "Internal oversight of system-level use and post-event review. Source: institutional governance mandate.",
+      "connections": "A8 -> A6: refers system-level use for review (E16); A5 -> A6: refers the adverse event (E20); A6 -> A11: contributes to the notification (E20); A6 -> A4: receives no formal investigation request (E14).",
+      "knowledge": "Event and circumstances from 2023-09-20; the post-event case review finding on the first-ranked option (E21); no earlier validation report, monitoring alert, or written incident report (E10, E12, E14).",
+      "control": "Limited",
+      "controlReason": "Reviews after the event and at system level; no authority over the supplier, the contract, or the model."
+    },
+    {
+      "id": "A7",
+      "name": "Hospital information-security / quality unit",
+      "kind": "Organization",
+      "role": "Pre-deployment acceptance testing; technical contact for releases. Source: contract allocation and internal quality function.",
+      "connections": "A9 -> A7: releases the v2.1 note on 2023-03-15 (E13); A7 -> A9: performs pre-deployment acceptance testing (E17); A7 -> A2: no forwarding of the release note to clinical staff recorded (E13); A7 -> A5: acts on the hospital's behalf (E17).",
+      "knowledge": "Release-note content, including the absence of subgroup data (E13); no validation report and no monitoring alert (E10, E12).",
+      "control": "Limited",
+      "controlReason": "Gatekeeper of deployment artefacts but not of model performance, and holds no clinical authority."
+    },
+    {
+      "id": "A8",
+      "name": "Hospital administration (contracting office)",
+      "kind": "Organization",
+      "role": "Holds the deployment contract and suspension authority. Source: contractual and executive authority.",
+      "connections": "A8 -> A9: signs and administers the contract (E17); A8 -> A6: refers system-level use (E16); A11 -> A8: grants clearance (E2, E7); A8 -> A5: acts on the hospital's behalf (E17).",
+      "knowledge": "Contract terms, including the absence of any post-deployment verification clause (E17); the clearance and its indication (E2, E7).",
+      "control": "Limited",
+      "controlReason": "Can contract and suspend, but holds no technical means to detect subgroup degradation and received no report."
+    },
+    {
+      "id": "A9",
+      "name": "System supplier",
+      "kind": "Organization",
+      "role": "Vendor of the decision-support system; supplies updates and documentation; applied for clearance.",
+      "connections": "A9 -> A5: supplies system, updates and the release note (E8, E13, E17); A9 -> A11: files the clearance application for v1.0 (E2, E7); A10 -> A9: reports validation results and closes the monitoring alert (E10, E12); A9 -> A12: ships v2.1 to production (E8); A11 -> A9: framework governing whether resubmission is required (E9-b).",
+      "knowledge": "Training-corpus composition (E4, E8); the change assessment basis (E19); the 2023-02-10 alert (E12); the content and distribution list of its own release note (E13).",
+      "control": "Sufficient",
+      "controlReason": "Owns the model, the training data, the change assessment and the monitoring channel, and decides who receives which document.",
+      "legal": "Contested"
+    },
+    {
+      "id": "A10",
+      "name": "Supplier ML team",
+      "kind": "Organization",
+      "role": "Trains, validates and monitors the model. Source: assigned engineering function and professional duty.",
+      "connections": "A10 -> A12: retrains to v2.1 (E8); A12 -> A10: emits agreement metrics (E12); A10 -> A9: reports internal validation (E10); A10 -> A9: logs and closes the alert (E12); A10 -> A5: transmits no report (E10, E12).",
+      "knowledge": "Subgroup underrepresentation (E4, E8), the assessment basis used (E19), and the 2023-02-10 agreement drop (E12).",
+      "control": "Sufficient",
+      "controlReason": "Technical authority over data, validation and monitoring; no formal authority over clinical deployment or customer disclosure."
+    },
+    {
+      "id": "A11",
+      "name": "Regulatory authority",
+      "kind": "Organization",
+      "role": "Granted clearance for v1.0; receives adverse-event notifications; administers the change-assessment framework. Source: statutory market-authorisation mandate.",
+      "connections": "A11 -> A8: clearance dated 2021-11-15 with stated indication (E2, E7); A9 -> A11: clearance application (E2); A11 -> A9: change-assessment framework (E9-b); A5 -> A11: notification on 2023-10-05 (E20).",
+      "knowledge": "The v1.0 clearance file and its indication (E7); the change-assessment rules it administers (E22); no knowledge of v2.1 recorded, consistent with the adopted branch E9-b.",
+      "control": "Limited",
+      "controlReason": "Rules on submissions it receives, but holds no monitoring data and no inspection power recorded in these facts."
+    },
+    {
+      "id": "A12",
+      "name": "Model v2.1 decision-support system",
+      "kind": "Technical system",
+      "role": "The artefact that generates recommendations; performs no obligation and holds no authority.",
+      "connections": "A12 -> A2: displays ranked options with population-level score, no subgroup field, no warning banner (E11); A12 -> A2: issues the recommendation without subgroup caveat (E3, E6); A12 -> A2: ranks first an option the review record states was not clinically indicated (E21); A10 -> A12: retrains to v2.1 (E8); A12 -> A10: emits monitoring metrics (E12); A2 -> A12: adopts the recommendation (E3).",
+      "knowledge": "Not applicable: the system stores the recommendation and its score, not knowledge that can be attributed.",
+      "control": "Unassessed",
+      "controlReason": "A technical system holds no authority, so control is neither sufficient nor deficient; it is assessed only for the human actors in G2."
+    }
   ],
   "links": [
-    {"from":"A1","to":"A2","action":"presents as adult inpatient with the condition","reason":"care episode falls inside the approved indication","factIds":["E18","E7"]},
-    {"from":"A2","to":"A1","action":"administers recommended treatment","reason":"adopted system recommendation","factIds":["E3"]},
-    {"from":"A5","to":"A1","action":"owes care while operating the system","reason":"deploying provider duty of care","factIds":["E1","E3"]},
-    {"from":"A12","to":"A2","action":"displays ranked options and population-level score with no subgroup field or warning banner","reason":"interface configuration at go-live","factIds":["E1","E11"]},
-    {"from":"A12","to":"A2","action":"issues recommendation without subgroup caveat","reason":"recommendation generated for the patient's underrepresented condition category","factIds":["E3","E6","E18"]},
-    {"from":"A2","to":"A12","action":"adopts the recommendation","reason":"holds authority to accept or reject","factIds":["E3","E5"]},
-    {"from":"A10","to":"A12","action":"retrains model to v2.1 on the original corpus plus hospital-exported records","reason":"scheduled model update","factIds":["E8"]},
-    {"from":"A12","to":"A10","action":"emits model-physician agreement metrics below protocol threshold","reason":"monitoring protocol","factIds":["E12"]},
-    {"from":"A10","to":"A9","action":"reports internal validation result for v2.1","reason":"internal validation of the retrained version","factIds":["E10"]},
-    {"from":"A10","to":"A9","action":"logs and closes the rare-subtype monitoring alert","reason":"alert handled inside the ML team","factIds":["E12"]},
-    {"from":"A10","to":"A5","action":"transmits no validation report and no monitoring alert","reason":"no transmission recorded","factIds":["E10","E12"]},
-    {"from":"A9","to":"A5","action":"issues release note for v2.1 to the IT contact","reason":"version notification to customer","factIds":["E13"]},
-    {"from":"A7","to":"A2","action":"forwards no release note to clinical staff","reason":"distribution limited to the IT contact","factIds":["E13"]},
-    {"from":"A7","to":"A9","action":"performs pre-deployment acceptance testing","reason":"contract allocation of acceptance testing","factIds":["E17"]},
-    {"from":"A7","to":"A5","action":"acts on the hospital's behalf on technical releases","reason":"internal quality function","factIds":["E17","E13"]},
-    {"from":"A8","to":"A9","action":"signs and administers the deployment contract","reason":"contractual authority","factIds":["E17"]},
-    {"from":"A8","to":"A5","action":"administers the contract on the hospital's behalf","reason":"executive authority","factIds":["E17","E16"]},
-    {"from":"A8","to":"A6","action":"refers system-level use of the system","reason":"governance mandate","factIds":["E16"]},
-    {"from":"A9","to":"A11","action":"files the clearance application for v1.0","reason":"market authorisation requirement","factIds":["E2","E7"]},
-    {"from":"A11","to":"A8","action":"grants clearance for v1.0 with the stated indication","reason":"statutory market authorisation","factIds":["E2","E7"]},
-    {"from":"A11","to":"A9","action":"administers the change-assessment framework for retrained versions","reason":"framework governing resubmission","factIds":["E9-b","E22"]},
-    {"from":"A4","to":"A3","action":"reports inconsistent recommendations for atypical presentations orally","reason":"observed atypical system behaviour","factIds":["E14"]},
-    {"from":"A3","to":"A6","action":"escalates neither report to the committee","reason":"no written report filed and no formal investigation initiated","factIds":["E14"]},
-    {"from":"A3","to":"A2","action":"may review the individual case on request","reason":"supervisory review authority","factIds":["E16"]},
-    {"from":"A5","to":"A2","action":"deploys the system and sets authority and reporting policy","reason":"institutional governance","factIds":["E1","E15","E16"]},
-    {"from":"A5","to":"A6","action":"enters the adverse event and refers it for committee review","reason":"internal reporting policy","factIds":["E20","E15"]},
-    {"from":"A6","to":"A11","action":"contributes to the adverse-event notification","reason":"post-event review","factIds":["E20"]},
-    {"from":"A5","to":"A11","action":"notifies the regulatory authority on 2023-10-05","reason":"statutory notification duty","factIds":["E20"]}
+    {
+      "from": "A1",
+      "to": "A2",
+      "action": "presents as adult inpatient with the condition",
+      "reason": "care episode falls inside the approved indication",
+      "factIds": [
+        "E18",
+        "E7"
+      ]
+    },
+    {
+      "from": "A2",
+      "to": "A1",
+      "action": "administers recommended treatment",
+      "reason": "adopted system recommendation",
+      "factIds": [
+        "E3"
+      ]
+    },
+    {
+      "from": "A5",
+      "to": "A1",
+      "action": "owes care while operating the system",
+      "reason": "deploying provider duty of care",
+      "factIds": [
+        "E1",
+        "E3"
+      ]
+    },
+    {
+      "from": "A12",
+      "to": "A2",
+      "action": "displays ranked options and population-level score with no subgroup field or warning banner",
+      "reason": "interface configuration at go-live",
+      "factIds": [
+        "E1",
+        "E11"
+      ]
+    },
+    {
+      "from": "A12",
+      "to": "A2",
+      "action": "issues recommendation without subgroup caveat",
+      "reason": "recommendation generated for the patient's underrepresented condition category",
+      "factIds": [
+        "E3",
+        "E6",
+        "E18"
+      ]
+    },
+    {
+      "from": "A2",
+      "to": "A12",
+      "action": "adopts the recommendation",
+      "reason": "holds authority to accept or reject",
+      "factIds": [
+        "E3",
+        "E5"
+      ]
+    },
+    {
+      "from": "A10",
+      "to": "A12",
+      "action": "retrains model to v2.1 on the original corpus plus hospital-exported records",
+      "reason": "scheduled model update",
+      "factIds": [
+        "E8"
+      ]
+    },
+    {
+      "from": "A12",
+      "to": "A10",
+      "action": "emits model-physician agreement metrics below protocol threshold",
+      "reason": "monitoring protocol",
+      "factIds": [
+        "E12"
+      ]
+    },
+    {
+      "from": "A10",
+      "to": "A9",
+      "action": "reports internal validation result for v2.1",
+      "reason": "internal validation of the retrained version",
+      "factIds": [
+        "E10"
+      ]
+    },
+    {
+      "from": "A10",
+      "to": "A9",
+      "action": "logs and closes the rare-subtype monitoring alert",
+      "reason": "alert handled inside the ML team",
+      "factIds": [
+        "E12"
+      ]
+    },
+    {
+      "from": "A10",
+      "to": "A5",
+      "action": "transmits no validation report and no monitoring alert",
+      "reason": "no transmission recorded",
+      "factIds": [
+        "E10",
+        "E12"
+      ]
+    },
+    {
+      "from": "A9",
+      "to": "A5",
+      "action": "issues release note for v2.1 to the IT contact",
+      "reason": "version notification to customer",
+      "factIds": [
+        "E13"
+      ]
+    },
+    {
+      "from": "A7",
+      "to": "A2",
+      "action": "forwards no release note to clinical staff",
+      "reason": "distribution limited to the IT contact",
+      "factIds": [
+        "E13"
+      ]
+    },
+    {
+      "from": "A7",
+      "to": "A9",
+      "action": "performs pre-deployment acceptance testing",
+      "reason": "contract allocation of acceptance testing",
+      "factIds": [
+        "E17"
+      ]
+    },
+    {
+      "from": "A7",
+      "to": "A5",
+      "action": "acts on the hospital's behalf on technical releases",
+      "reason": "internal quality function",
+      "factIds": [
+        "E17",
+        "E13"
+      ]
+    },
+    {
+      "from": "A8",
+      "to": "A9",
+      "action": "signs and administers the deployment contract",
+      "reason": "contractual authority",
+      "factIds": [
+        "E17"
+      ]
+    },
+    {
+      "from": "A8",
+      "to": "A5",
+      "action": "administers the contract on the hospital's behalf",
+      "reason": "executive authority",
+      "factIds": [
+        "E17",
+        "E16"
+      ]
+    },
+    {
+      "from": "A8",
+      "to": "A6",
+      "action": "refers system-level use of the system",
+      "reason": "governance mandate",
+      "factIds": [
+        "E16"
+      ]
+    },
+    {
+      "from": "A9",
+      "to": "A11",
+      "action": "files the clearance application for v1.0",
+      "reason": "market authorisation requirement",
+      "factIds": [
+        "E2",
+        "E7"
+      ]
+    },
+    {
+      "from": "A11",
+      "to": "A8",
+      "action": "grants clearance for v1.0 with the stated indication",
+      "reason": "statutory market authorisation",
+      "factIds": [
+        "E2",
+        "E7"
+      ]
+    },
+    {
+      "from": "A11",
+      "to": "A9",
+      "action": "administers the change-assessment framework for retrained versions",
+      "reason": "framework governing resubmission",
+      "factIds": [
+        "E9-b",
+        "E22"
+      ]
+    },
+    {
+      "from": "A4",
+      "to": "A3",
+      "action": "reports inconsistent recommendations for atypical presentations orally",
+      "reason": "observed atypical system behaviour",
+      "factIds": [
+        "E14"
+      ]
+    },
+    {
+      "from": "A3",
+      "to": "A6",
+      "action": "escalates neither report to the committee",
+      "reason": "no written report filed and no formal investigation initiated",
+      "factIds": [
+        "E14"
+      ]
+    },
+    {
+      "from": "A3",
+      "to": "A2",
+      "action": "may review the individual case on request",
+      "reason": "supervisory review authority",
+      "factIds": [
+        "E16"
+      ]
+    },
+    {
+      "from": "A5",
+      "to": "A2",
+      "action": "deploys the system and sets authority and reporting policy",
+      "reason": "institutional governance",
+      "factIds": [
+        "E1",
+        "E15",
+        "E16"
+      ]
+    },
+    {
+      "from": "A5",
+      "to": "A6",
+      "action": "enters the adverse event and refers it for committee review",
+      "reason": "internal reporting policy",
+      "factIds": [
+        "E20",
+        "E15"
+      ]
+    },
+    {
+      "from": "A6",
+      "to": "A11",
+      "action": "contributes to the adverse-event notification",
+      "reason": "post-event review",
+      "factIds": [
+        "E20"
+      ]
+    },
+    {
+      "from": "A5",
+      "to": "A11",
+      "action": "notifies the regulatory authority on 2023-10-05",
+      "reason": "statutory notification duty",
+      "factIds": [
+        "E20"
+      ]
+    },
+    {
+      "from": "A12",
+      "to": "A2",
+      "action": "ranks first an option the review record states was not clinically indicated",
+      "reason": "post-event case review finding (E21)",
+      "factIds": [
+        "E21"
+      ]
+    }
   ]
 }

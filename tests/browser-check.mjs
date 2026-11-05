@@ -19,16 +19,30 @@ const danglingFixture = path.join(
   "project-v2-dangling-time.json"
 );
 
-const pageErrors = [];
-const consoleErrors = [];
-const results = [];
+function createRunContext(label) {
+  return {
+    label,
+    pageErrors: [],
+    consoleErrors: [],
+    results: [],
+    record(name, ok, detail = "") {
+      const line = `${ok ? "PASS" : "FAIL"} ${name}${detail ? ": " + detail : ""}`;
+      console.log(line);
+      this.results.push({ name, ok, detail });
+      return ok;
+    },
+  };
+}
 
-function record(name, ok, detail = "") {
-  const line = `${ok ? "PASS" : "FAIL"} ${name}${detail ? ": " + detail : ""}`;
-  console.log(line);
-  results.push({ name, ok, detail });
-  if (!ok) return false;
-  return true;
+function attachPageDiagnostics(page, ctx) {
+  page.on("pageerror", (err) => {
+    ctx.pageErrors.push(String(err.message || err));
+  });
+  page.on("console", (msg) => {
+    if (msg.type() === "error") {
+      ctx.consoleErrors.push(msg.text());
+    }
+  });
 }
 
 async function visibleSectionCount(page) {
@@ -44,12 +58,14 @@ async function readDownload(download) {
   return text;
 }
 
-async function runChecks(page) {
+async function runChecks(page, ctx) {
   let ok = true;
+  const record = (name, pass, detail = "") =>
+    (ok = ctx.record(name, pass, detail) && ok);
 
   const c = await visibleSectionCount(page);
-  if (c !== 1) ok = record("A load one visible section", false, `saw ${c}`) && ok;
-  else ok = record("A load one visible section", true) && ok;
+  if (c !== 1) record("A load one visible section", false, `saw ${c}`);
+  else record("A load one visible section", true);
 
   for (let i = 0; i < 8; i++) {
     await page.locator(`#nav button[data-pagejump="${i}"]`).click();
@@ -319,24 +335,47 @@ async function runChecks(page) {
     ok = record("H export time and knownBy labels", false) && ok;
   } else ok = record("H export time and knownBy labels", true) && ok;
 
-  if (pageErrors.length) {
-    ok =
-      record(
-        "I zero page errors",
-        false,
-        pageErrors.slice(0, 3).join(" | ")
-      ) && ok;
-  } else ok = record("I zero page errors", true) && ok;
-  if (consoleErrors.length) {
-    ok =
-      record(
-        "I zero console errors",
-        false,
-        consoleErrors.slice(0, 3).join(" | ")
-      ) && ok;
-  } else ok = record("I zero console errors", true) && ok;
+  if (ctx.pageErrors.length) {
+    record(
+      "I zero page errors",
+      false,
+      ctx.pageErrors.slice(0, 3).join(" | ")
+    );
+  } else record("I zero page errors", true);
+  if (ctx.consoleErrors.length) {
+    record(
+      "I zero console errors",
+      false,
+      ctx.consoleErrors.slice(0, 3).join(" | ")
+    );
+  } else record("I zero console errors", true);
 
   return ok;
+}
+
+function printSummary(ctx) {
+  const failed = ctx.results.filter((r) => !r.ok).length;
+  const passed = ctx.results.filter((r) => r.ok).length;
+  console.log(
+    `SUMMARY (${ctx.label}): ${passed} passed, ${failed} failed (${ctx.results.length} checks)`
+  );
+  return failed === 0;
+}
+
+async function runTarget(browser, targetPath, label) {
+  const ctx = createRunContext(label);
+  const page = await browser.newPage();
+  page.on("dialog", (dialog) => dialog.accept());
+  attachPageDiagnostics(page, ctx);
+
+  const url = pathToFileURL(targetPath).href;
+  await page.goto(url);
+  await page.waitForTimeout(500);
+
+  const allOk = await runChecks(page, ctx);
+  await page.close();
+  printSummary(ctx);
+  return allOk;
 }
 
 async function main() {
@@ -346,32 +385,18 @@ async function main() {
     process.exit(1);
   }
 
+  const srcHtml = path.join(root, "src", "index.html");
+  if (!fs.existsSync(srcHtml)) {
+    console.error("FAIL src/index.html missing");
+    process.exit(1);
+  }
+
   const browser = await chromium.launch();
-  const page = await browser.newPage();
-
-  page.on("dialog", (dialog) => dialog.accept());
-  page.on("pageerror", (err) => {
-    pageErrors.push(String(err.message || err));
-  });
-  page.on("console", (msg) => {
-    if (msg.type() === "error") {
-      consoleErrors.push(msg.text());
-    }
-  });
-
-  const url = pathToFileURL(distHtml).href;
-  await page.goto(url);
-  await page.waitForTimeout(500);
-
-  const allOk = await runChecks(page);
+  const distOk = await runTarget(browser, distHtml, "dist");
+  const srcOk = await runTarget(browser, srcHtml, "src");
   await browser.close();
 
-  const failed = results.filter((r) => !r.ok).length;
-  const passed = results.filter((r) => r.ok).length;
-  console.log(
-    `SUMMARY: ${passed} passed, ${failed} failed (${results.length} checks)`
-  );
-  process.exit(allOk ? 0 : 1);
+  process.exit(distOk && srcOk ? 0 : 1);
 }
 
 main().catch((err) => {

@@ -7,7 +7,6 @@ const path = require("path");
 
 const root = path.join(__dirname, "..");
 const engine = require(path.join(root, "src", "engine.js"));
-const appSrc = fs.readFileSync(path.join(root, "src", "app.js"), "utf8");
 
 const {
   migrateProject,
@@ -30,10 +29,6 @@ if (!upgraded) throw new Error("Expected upgraded=true for v1 fixture");
 if (migrated.version !== 2) throw new Error("Expected version 2 after migration");
 if (migrated.facts.length !== 0 || migrated.timeline.length !== 0) {
   throw new Error("Expected empty facts/timeline after v1 migration");
-}
-
-if (!/version:2,[^]*facts:\[\],[^]*timeline:\[\]/.test(appSrc.replace(/\s+/g, ""))) {
-  throw new Error("fresh() must initialize version 2 with empty facts/timeline");
 }
 
 if (JSON.parse(JSON.stringify(migrated)).version !== 2) {

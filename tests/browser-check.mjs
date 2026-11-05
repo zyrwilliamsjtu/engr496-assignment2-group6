@@ -121,11 +121,11 @@ async function runChecks(page, ctx) {
   if (cards < 1) ok = record("C add stakeholder card", false, "no card") && ok;
   else ok = record("C add stakeholder card", true) && ok;
 
-  await page.locator('#nav button[data-pagejump="6"]').click();
+  await page.locator('#nav button[data-pagejump="7"]').click();
   const nodesBefore = await page.locator("[data-mapactor]").count();
   await page.locator('#nav button[data-pagejump="2"]').click();
   await page.locator("#addActor").click();
-  await page.locator('#nav button[data-pagejump="6"]').click();
+  await page.locator('#nav button[data-pagejump="7"]').click();
   const nodesAfter = await page.locator("[data-mapactor]").count();
   if (nodesAfter <= nodesBefore) {
     ok =
@@ -199,7 +199,7 @@ async function runChecks(page, ctx) {
     ok = record("F v1 re-save version 2", false, e.message) && ok;
   }
 
-  await page.locator('#nav button[data-pagejump="7"]').click();
+  await page.locator('#nav button[data-pagejump="8"]').click();
   const conclusion = page.locator("#conclusion");
   await conclusion.fill(
     "The hospital and the model vendor share causal roles because the update skipped validation and the supervisor lacked time to intervene."
@@ -265,7 +265,7 @@ async function runChecks(page, ctx) {
       ) && ok;
   } else ok = record("L model tab text isolation", true) && ok;
 
-  await page.locator('#nav button[data-pagejump="5"]').click();
+  await page.locator('#nav button[data-pagejump="6"]').click();
   await page.locator("#gapVerdict").selectOption("A gap may exist");
   await page.locator("#gapMechanism").selectOption("Duty has no named owner");
   await page.waitForTimeout(150);
@@ -301,7 +301,7 @@ async function runChecks(page, ctx) {
           `expected ${actorCount} got ${g6Cards}`
         ) && ok;
     } else ok = record("N group6 stakeholder cards", true) && ok;
-    await page.locator('#nav button[data-pagejump="6"]').click();
+    await page.locator('#nav button[data-pagejump="7"]').click();
     const g6Nodes = await page.locator("[data-mapactor]").count();
     if (g6Nodes !== actorCount) {
       ok =
@@ -465,8 +465,75 @@ async function runChecks(page, ctx) {
         ) && ok;
     } else ok = record("S group6 grouped relationship export", true) && ok;
 
+    const claims = g6.claims || [];
+    const claimVerdictCounts = {};
+    for (const c of claims) {
+      claimVerdictCounts[c.verdict] = (claimVerdictCounts[c.verdict] || 0) + 1;
+    }
+    const claimActors = new Set(claims.map((c) => c.actor)).size;
+    const claimSupported = claimVerdictCounts.Supported || 0;
+    const claimContested = claimVerdictCounts.Contested || 0;
+    const claimNotEst = claimVerdictCounts["Not established"] || 0;
+    const expectedClaimSummary = `${claims.length} claims recorded · ${claimSupported} supported · ${claimContested} contested · ${claimNotEst} not established · across ${claimActors} actors`;
+    const claimFramingExpected =
+      "A verdict records how well the claim is supported by the case facts. It is not a score of the actor's responsibility.";
+    const sampleClaim =
+      claims.find((c) => c.counter && String(c.counter).trim()) || claims[0];
+    const counterNeedle = sampleClaim?.counter
+      ? String(sampleClaim.counter).slice(0, 72)
+      : "";
+    const topVerdictEntry = Object.entries(claimVerdictCounts).sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
+    )[0];
+    const topVerdict = topVerdictEntry?.[0] || "";
+    const topVerdictCount = topVerdictEntry?.[1] || 0;
+    const tPeBefore = ctx.pageErrors.length;
+    await page.locator('#nav button[data-pagejump="5"]').click();
+    const claimSummaryText =
+      (await page.locator("#claimSummary").textContent())?.trim() || "";
+    const claimCards = await page.locator(".claim-card").count();
+    const framingText =
+      (await page.locator("#claimFraming").textContent())?.trim() || "";
+    const headingCausal = await page
+      .locator(".claim-group-heading")
+      .filter({ hasText: /^Causal —/ })
+      .count();
+    const headingHier = await page
+      .locator(".claim-group-heading")
+      .filter({ hasText: /^Hierarchy and organization —/ })
+      .count();
+    const headingFuture = await page
+      .locator(".claim-group-heading")
+      .filter({ hasText: /^Forward-looking —/ })
+      .count();
+    const counterVisible =
+      counterNeedle.length > 0 &&
+      (await page.locator("#claimsBody").innerText()).includes(counterNeedle);
+    await page.selectOption("#claimFilter", topVerdict);
+    await page.waitForTimeout(100);
+    const filteredClaimCards = await page.locator(".claim-card").count();
+    const tOk =
+      claims.length > 0 &&
+      claimSummaryText === expectedClaimSummary &&
+      claimCards === claims.length &&
+      headingCausal === 1 &&
+      headingHier === 1 &&
+      headingFuture === 1 &&
+      counterVisible &&
+      framingText === claimFramingExpected &&
+      filteredClaimCards === topVerdictCount &&
+      ctx.pageErrors.length === tPeBefore;
+    if (!tOk) {
+      ok =
+        record(
+          "T group6 claims view",
+          false,
+          `summary=${JSON.stringify(claimSummaryText)} cards=${claimCards}/${claims.length} filtered=${filteredClaimCards}/${topVerdictCount} headings=${headingCausal}/${headingHier}/${headingFuture}`
+        ) && ok;
+    } else ok = record("T group6 claims view", true) && ok;
+
     const peBefore = ctx.pageErrors.length;
-    await page.locator('#nav button[data-pagejump="7"]').click();
+    await page.locator('#nav button[data-pagejump="8"]').click();
     await page.locator("#reflectAnswer").click();
     await page.waitForTimeout(400);
     const reflectCards = await page.locator("#feedback article.card").count();

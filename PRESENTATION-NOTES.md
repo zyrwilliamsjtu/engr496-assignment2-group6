@@ -1,29 +1,73 @@
 # Presentation team brief — Responsibility Lab demo
 
-**Load:** `dist/Responsibility-Lab-Group6.html` (file://) after loading the group project via **Load project** → `tools/fixtures/project-group6.json` (or the copy you receive). **Export analysis** produces the same text the markers see.
+**Handover file:** `delivery/Responsibility-Lab-Group6.html` (double-click, offline). On page 1 press **Load Group 6 case** and accept the confirm dialog — do not rely on **Load project** unless you are in dev `src/`. **Export analysis** produces the same text the automated checks expect.
 
-## Suggested ~3-minute live path
+---
 
-1. **Case record (nav page “Case record”)** — *“Here is the full case as data: timeline, facts tagged given or assumed, and who knew what.”* Scroll to **Relationships**; leave filter on **All actors**; mention the muted line that counts are not responsibility scores.
-2. **Case record → filter** — Select the busiest actor (e.g. **A2 Treating physician**). *“Nine links touch this role; outgoing counts in group headings are within the filter, not total involvement.”*
-3. **Claims (nav page “Claims”)** — *“Each structured claim includes the strongest counter-argument—we had to record dissent, not only our side.”* Point at one **Supported** and one **Contested** card; briefly read the counter line.
-4. **Claims → filter** — Filter by **Supported** (or the dominant verdict). *“The summary and group headings show how many claims survive the filter.”*
-5. **Gaps (nav page “Gaps”)** — *“We argued a forward-looking gap: unassigned post-deployment verification, with a named repair and completion checks.”* (Fields are already filled in the fixture.)
-6. **Visualization (nav page “Visualization”)** — Switch map tabs (causal / legal / forward-looking); click one stakeholder. *“The map mirrors our recorded verdicts—it does not calculate blame.”*
-7. **Results (nav page “Results”)** or header **Final answer / reflection** — *“Three conclusion fields and overall conclusion; Reflect runs offline pattern checks, not an AI grade.”*
+## C1 — Live demo path (~3 minutes)
 
-## Screenshots worth capturing
+Numbered script; only UI that exists in the current build.
 
-| Screen | State |
-|--------|--------|
-| Case record | Full timeline + **Relationships** unfiltered (29 rows) |
-| Case record | **relFilter** = busiest actor (e.g. A2), filtered summary visible |
-| Claims | **Model conclusions** block + first causal claim showing **Strongest counter-argument** |
-| Claims | **claimFilter** = Supported (or Contested), filtered summary |
-| Gaps | `gapPath` chain filled (task → mechanism → people/check) |
-| Visualization | Causal tab, one actor selected, `#mapDetail` open |
+1. **Start / sources (page 1)** — Click **Load Group 6 case** → confirm **Replace the current analysis…** → wait for “Project loaded.” *“We start from an empty shell so we never accidentally show the wrong case; one click loads our Group 6 record.”* (Optional: point at the muted line under the button.)
+2. **Case record (nav `4. Case record`)** — Scroll the timeline and fact rows. *“The case is data: timeline entries, facts tagged given or assumed, and who knew what at each step.”*
+3. **Case record → Relationships** — Open **Show relationships involving**, choose **A2 Treating physician** (nine links touch this actor in our record). *“Filtering shows every relationship involving the busiest role; the outgoing count in the heading is within this filter, not a responsibility score.”*
+4. **Three models (nav `5. Three models`)** — Click the **Causal**, **Hierarchy and organization**, and **Forward-looking** tabs; scroll the guide card. *“We applied three responsibility frameworks to the same facts; the tabs switch the model without leaving the page.”*
+5. **Claims (nav `6. Claims`)** — Scroll to a card with **Strongest counter-argument** (e.g. a **Supported** causal claim on the supplier). Read the counter line aloud. *“Every claim includes dissent we had to record, not only our preferred verdict.”*
+6. **Gaps (nav `7. Gaps`)** — Scroll the filled gap fields and the **gapPath** chain (task → mechanism → ownership/check). *“We argue a forward-looking gap: post-deployment verification was unassigned, with named repair steps and checkable markers.”*
 
-## Reflection question drafts (first person plural)
+**Do not open during this demo (and why):**
+
+- **Start / sources (source editor)** after load — adds noise; sources are already in the loaded project.
+- **Define case (page 2)** — long prose fields duplicate what we show structurally on Case record.
+- **Stakeholders and duties (page 3)** — editable cards are not part of this case narrative; the loaded stakeholders are read-only for our demo path except that the app still allows adding/removing stakeholders in general.
+- **Visualization (page 8)** — map verdicts are powerful but slow to explain in three minutes; we cite structured claims instead.
+- **Results / Reflect (page 9)** — reflection rubric looks like “grading”; save for Q&A.
+- **Readings (page 10)** — bibliography, not the live argument.
+
+---
+
+## C2 — Anticipated questions (first person plural)
+
+### Q1 — “Isn’t this program just regex matching?”
+
+Yes, for the **Provisional automated rubric** and **Reflect on my answer** feedback: those paths scan student-authored text for pattern indicators, not truth. What is **structural** in the loaded case is different: **Claims** are fixed cards with mandatory **Strongest counter-argument** and **Reason for this verdict** fields; **Case record** facts carry **given** vs **assumed** tags and **Known by** lines; imports run **referential integrity** checks in our pipeline before the fixture ships. What is **not** structural is legal correctness, source quality, or whether a conclusion is ethically right—the app states that in the UI and export.
+
+### Q2 — “Can I add my own fact or stakeholder?”
+
+**Stakeholders:** yes—the **+ Add stakeholder** flow on page 3 still works on a loaded project. **Facts, timeline rows, relationships, and claims:** no editing UI—they arrive read-only from `tools/fixtures/project-group6.json` via the import pipeline. We drew that boundary so evidence stays stable while students still argue in model conclusions, gap fields, map verdicts, and final answers—the frontier between **recorded evidence** and **student judgment**.
+
+### Q3 — “Why are 17 of 23 facts marked as assumptions?”
+
+Three layers: (1) the brief asked us to **enrich** a sparse dossier without pretending everything was in the original record; (2) each **assumed** fact carries a **note** in the pipeline explaining why it was needed; (3) removing all seventeen would not flip the direction of our conclusion, because the **six given** facts already establish non-disclosure and non-knowledge at the points that matter for our gap argument.
+
+### Q4 — “Why didn’t you just say nobody is responsible?”
+
+Our gap is in **forward-looking duty allocation**, not a claim that no one is culpable. The supplier **knew** (E4, E12, E19 on the record), so foreseeability is met and blame has a fitting target; the unresolved piece is who was assigned to **verify and disclose** after deployment, not whether harm occurred.
+
+### Q5 — “What if the regulator’s framework DID require a new submission?”
+
+That is the excluded branch **E9-a**, kept in the record and marked **ALTERNATIVE BRANCH**. We adopted **E9-b** because it matches the framework as written in the case and preserves the **no-violation** condition that makes our **duty-with-no-named-owner** gap argument coherent; switching branches would change the legal story, not the UI.
+
+### Q6 — “Which part did AI write?”
+
+The **case dossier and analysis content** were drafted by a language model from our specifications and course readings; **we page-checked every quotation** against the PDFs. The **code** was built with an AI coding assistant under our specs and a **46-check** automated suite (`npm run verify`). **All responsibility judgments** in the fixture and in our written answers are ours.
+
+---
+
+## C3 — Screenshot list (max six, persuasive order)
+
+| # | Page | State before capture | One sentence it supports |
+|---|------|----------------------|---------------------------|
+| 1 | Case record | Load Group 6 case; unfiltered view | Shows the case as auditable data (timeline + given/assumed facts), not a single essay field. |
+| 2 | Case record → Relationships | `#relFilter` = **A2 Treating physician** | Shows nine relationships touching the busiest actor without implying a “blame score.” |
+| 3 | Claims | All claims; scroll to first **Supported** card with **Strongest counter-argument** visible | Shows dissent is mandatory structure, not optional prose. |
+| 4 | Gaps | After load; scroll so **gapPath** chain is visible | Shows forward-looking gap as task + mechanism + owner/check, not vague “AI ethics.” |
+| 5 | Three models | **Hierarchy and organization** tab selected | Shows we compared frameworks on the same case with model-specific guidance. |
+| 6 | Start / sources | Fresh open **before** load (optional contrast) OR immediately after load with status “Project loaded.” | Shows the one-click load path that prevents a blank-screen demo. |
+
+---
+
+## Reflection question drafts (for written submission)
 
 ### (1) How the program improved the quality of our analysis
 

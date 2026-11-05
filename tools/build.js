@@ -98,8 +98,27 @@ fs.writeFileSync(outPath, html, "utf8");
 fs.mkdirSync(path.dirname(deliveryPath), { recursive: true });
 fs.writeFileSync(deliveryPath, html, "utf8");
 
-const size = fs.statSync(outPath).size;
-const sha256 = crypto.createHash("sha256").update(html).digest("hex");
+const distBytes = fs.readFileSync(outPath);
+const deliveryBytes = fs.readFileSync(deliveryPath);
+const distSha256 = crypto.createHash("sha256").update(distBytes).digest("hex");
+const deliverySha256 = crypto
+  .createHash("sha256")
+  .update(deliveryBytes)
+  .digest("hex");
+if (distSha256 !== deliverySha256 || !distBytes.equals(deliveryBytes)) {
+  console.error(
+    "FAIL build: dist and delivery outputs differ after write.\n" +
+      "  dist sha256:     " +
+      distSha256 +
+      "\n" +
+      "  delivery sha256: " +
+      deliverySha256
+  );
+  process.exit(1);
+}
+
+const size = distBytes.length;
+const sha256 = distSha256;
 console.log("Wrote " + outPath);
 console.log("Wrote " + deliveryPath);
 console.log("Output size before: " + sizeBefore + " bytes");

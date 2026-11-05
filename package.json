@@ -4,7 +4,7 @@
   "description": "Offline teaching app for analyzing responsibility in AI/robot cases — split from the instructor prototype for ENGR4960J.",
   "main": "index.js",
   "scripts": {
-    "verify": "node tools/import-dossier.js && node tools/import-analysis.js && node tools/verify-verbatim.js && node tools/verify-round1.js && node tools/verify-engine.js && node tools/verify-delivery.js && node tests/browser-check.mjs"
+    "verify": "node tools/verify-delivery.js && node tools/import-dossier.js && node tools/import-analysis.js && node tools/verify-verbatim.js && node tools/verify-round1.js && node tools/verify-engine.js && node tests/browser-check.mjs"
   },
   "repository": {
     "type": "git",

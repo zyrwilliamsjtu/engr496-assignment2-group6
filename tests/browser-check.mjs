@@ -198,6 +198,45 @@ async function runChecks(page) {
       ) && ok;
   } else ok = record("G stale cleared after re-reflect", true) && ok;
 
+  await page.locator('#nav button[data-pagejump="3"]').click();
+  await page.locator('#tabs button[data-model="causal"]').click();
+  const causalText = "CAUSAL-TAB-ISOLATION-TEST-ALPHA";
+  const hierText = "HIERARCHY-TAB-ISOLATION-TEST-BETA";
+  await page.locator("#modelConclusion").fill(causalText);
+  await page.locator('#tabs button[data-model="hierarchical"]').click();
+  const hierEmpty = await page.locator("#modelConclusion").inputValue();
+  await page.locator("#modelConclusion").fill(hierText);
+  await page.locator('#tabs button[data-model="causal"]').click();
+  const causalBack = await page.locator("#modelConclusion").inputValue();
+  const lOk = hierEmpty === "" && causalBack === causalText;
+  if (!lOk) {
+    ok =
+      record(
+        "L model tab text isolation",
+        false,
+        `hier="${hierEmpty}" causal="${causalBack}"`
+      ) && ok;
+  } else ok = record("L model tab text isolation", true) && ok;
+
+  await page.locator('#nav button[data-pagejump="4"]').click();
+  await page.locator("#gapVerdict").selectOption("A gap may exist");
+  await page.locator("#gapMechanism").selectOption("Duty has no named owner");
+  await page.waitForTimeout(150);
+  const gapPath1 = (await page.locator("#gapPath").innerText()).trim();
+  await page.locator("#gapVerdict").selectOption("No gap established");
+  await page.waitForTimeout(150);
+  const gapPath2 = (await page.locator("#gapPath").innerText()).trim();
+  const mOk =
+    gapPath1.includes("Duty has no named owner") && gapPath2.length > 0;
+  if (!mOk) {
+    ok =
+      record(
+        "M gap page linkage",
+        false,
+        `mechanism path="${gapPath1.slice(0, 60)}" afterNoGap="${gapPath2.slice(0, 60)}"`
+      ) && ok;
+  } else ok = record("M gap page linkage", true) && ok;
+
   const ef = await page.evaluate(() => emptyFact());
   const efOk =
     ef.id === "" &&

@@ -303,6 +303,14 @@ function deadWeightReport(dossier, claims = []) {
   return { orphanActors, orphanFacts };
 }
 
+function formatDeadWeightFactIds(ids) {
+  return ids.map((id) =>
+    id === "E9-a"
+      ? "E9-a (alternative branch (intentionally unused))"
+      : id
+  );
+}
+
 module.exports = {
   FACT_ID_RE,
   EXPECTED_AFTER_PATCH,
@@ -314,4 +322,5 @@ module.exports = {
   readActorAndSourceEnums,
   collectReferentialViolations,
   deadWeightReport,
+  formatDeadWeightFactIds,
 };

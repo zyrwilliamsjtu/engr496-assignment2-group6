@@ -385,6 +385,51 @@ async function runChecks(page, ctx) {
         ) && ok;
     } else ok = record("Q group6 case record page", true) && ok;
 
+    const linkCount = g6.links.length;
+    const relInvolved = new Set();
+    for (const l of g6.links) {
+      relInvolved.add(l.from);
+      relInvolved.add(l.to);
+    }
+    const relActorCounts = {};
+    for (const l of g6.links) {
+      relActorCounts[l.from] = (relActorCounts[l.from] || 0) + 1;
+      relActorCounts[l.to] = (relActorCounts[l.to] || 0) + 1;
+    }
+    const busiestEntry = Object.entries(relActorCounts).sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0])
+    )[0];
+    const busiestId = busiestEntry[0];
+    const busiestCount = busiestEntry[1];
+    const rPeBefore = ctx.pageErrors.length;
+    await page.locator('#nav button[data-pagejump="3"]').click();
+    const allRelRows = await page.locator(".record-rel-row").count();
+    const allSummary =
+      (await page.locator("#relSummary").textContent())?.trim() || "";
+    const expectedAllSummary = `${linkCount} relationships recorded across ${relInvolved.size} actors`;
+    await page.selectOption("#relFilter", busiestId);
+    await page.waitForTimeout(100);
+    const filteredRows = await page.locator(".record-rel-row").count();
+    const filteredSummary =
+      (await page.locator("#relSummary").textContent())?.trim() || "";
+    const busiestName =
+      g6.actors.find((a) => a.id === busiestId)?.name || "Unnamed stakeholder";
+    const expectedFilteredSummary = `${busiestCount} relationships involving ${busiestId} ${busiestName}`;
+    const rOk =
+      allRelRows === linkCount &&
+      allSummary === expectedAllSummary &&
+      filteredRows === busiestCount &&
+      filteredSummary === expectedFilteredSummary &&
+      ctx.pageErrors.length === rPeBefore;
+    if (!rOk) {
+      ok =
+        record(
+          "R group6 relationship view",
+          false,
+          `allRows=${allRelRows}/${linkCount} allSummary=${JSON.stringify(allSummary)} filtered=${filteredRows}/${busiestCount} filtSummary=${JSON.stringify(filteredSummary)}`
+        ) && ok;
+    } else ok = record("R group6 relationship view", true) && ok;
+
     const peBefore = ctx.pageErrors.length;
     await page.locator('#nav button[data-pagejump="7"]').click();
     await page.locator("#reflectAnswer").click();

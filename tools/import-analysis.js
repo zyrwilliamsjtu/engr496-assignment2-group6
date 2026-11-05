@@ -9,6 +9,7 @@ const {
   loadJson,
   P4_LEGAL_REASON_APPEND,
   deadWeightReport,
+  formatDeadWeightFactIds,
 } = require("./dossier-lib.js");
 
 const root = path.join(__dirname, "..");
@@ -241,7 +242,7 @@ function main() {
   );
   console.log(
     "Dead-weight facts (no link or claim refs):",
-    dead.orphanFacts
+    formatDeadWeightFactIds(dead.orphanFacts)
   );
 
   const a9 = merged.actors.find((a) => a.id === "A9");

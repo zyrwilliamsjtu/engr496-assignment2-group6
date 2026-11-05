@@ -13,6 +13,7 @@ const {
   readActorAndSourceEnums,
   collectReferentialViolations,
   deadWeightReport,
+  formatDeadWeightFactIds,
 } = require("./dossier-lib.js");
 
 const root = path.join(__dirname, "..");
@@ -103,7 +104,10 @@ function runOnce() {
   });
   const dead = deadWeightReport(dossier);
   console.log("Dead-weight orphan actors (no fact knownBy, no link):", dead.orphanActors);
-  console.log("Dead-weight facts (no link factIds):", dead.orphanFacts);
+  console.log(
+    "Dead-weight facts (no link factIds):",
+    formatDeadWeightFactIds(dead.orphanFacts)
+  );
 
   const round = JSON.parse(fs.readFileSync(outPath, "utf8"));
   if (JSON.stringify(round) !== JSON.stringify(state)) {

@@ -430,6 +430,36 @@ async function runChecks(page, ctx) {
         ) && ok;
     } else ok = record("R group6 relationship view", true) && ok;
 
+    const expectedGroupedSummary = `${linkCount} relationships recorded across ${relInvolved.size} actors`;
+    const busiestOutgoing = g6.links.filter((l) => l.from === busiestId).length;
+    const busiestHeadingNeedle = `${busiestId} ${busiestName} — ${busiestOutgoing} outgoing`;
+    const sampleFactId =
+      g6.links.find((l) => l.factIds?.length)?.factIds[0] || "";
+    const [sExportDl] = await Promise.all([
+      page.waitForEvent("download"),
+      page.locator("#export").click(),
+    ]);
+    const sExportText = await readDownload(sExportDl);
+    const sGroupedStart = sExportText.indexOf("RELATIONSHIPS BY ACTOR");
+    const sGroupedBlock =
+      sGroupedStart >= 0
+        ? sExportText.slice(sGroupedStart, sGroupedStart + 12000)
+        : "";
+    const sOk =
+      sGroupedBlock.includes(expectedGroupedSummary) &&
+      sGroupedBlock.includes(busiestHeadingNeedle) &&
+      sampleFactId &&
+      sGroupedBlock.includes(`factIds: ${sampleFactId}`) &&
+      ctx.pageErrors.length === rPeBefore;
+    if (!sOk) {
+      ok =
+        record(
+          "S group6 grouped relationship export",
+          false,
+          `summary=${sGroupedBlock.includes(expectedGroupedSummary)} heading=${sGroupedBlock.includes(busiestHeadingNeedle)} fact=${sampleFactId && sGroupedBlock.includes(`factIds: ${sampleFactId}`)}`
+        ) && ok;
+    } else ok = record("S group6 grouped relationship export", true) && ok;
+
     const peBefore = ctx.pageErrors.length;
     await page.locator('#nav button[data-pagejump="7"]').click();
     await page.locator("#reflectAnswer").click();

@@ -116,7 +116,22 @@ function buildSyntheticState() {
         nextVerdict: "Supported",
       }),
     ],
-    links: [],
+    links: [
+      {
+        from: "actor-002",
+        to: "actor-004",
+        action: "reports deployment monitoring concerns to",
+        reason: "operator safety chain during public-road tests",
+        factIds: ["E1"],
+      },
+      {
+        from: "actor-002",
+        to: "actor-004",
+        action: "depends on validation sign-off from",
+        reason: "deployment gate before fleet updates",
+        factIds: ["E2"],
+      },
+    ],
     facts: [
       {
         id: "E1",
@@ -242,6 +257,45 @@ function snapshot(state) {
   };
 }
 
+function assertSyntheticGroupedRelationships(reportText, state) {
+  const start = reportText.indexOf("RELATIONSHIPS BY ACTOR");
+  if (start < 0) {
+    console.log("FAIL grouped relationships: RELATIONSHIPS BY ACTOR section missing");
+    return false;
+  }
+  const rest = reportText.slice(start);
+  const end = rest.indexOf("\n\nCLAIMS");
+  const section = end >= 0 ? rest.slice(0, end) : rest;
+  if (!/ — \d+ outgoing/.test(section)) {
+    console.log("FAIL grouped relationships: no group heading with outgoing count");
+    return false;
+  }
+  const link = (state.links || [])[0];
+  if (!link) {
+    console.log("FAIL grouped relationships: synthetic state has no links");
+    return false;
+  }
+  const fromName = state.actors.find((a) => a.id === link.from)?.name;
+  const toName = state.actors.find((a) => a.id === link.to)?.name;
+  const factId = (link.factIds || [])[0];
+  const rowOk =
+    fromName &&
+    toName &&
+    factId &&
+    section.includes(fromName) &&
+    section.includes(toName) &&
+    section.includes(factId);
+  if (!rowOk) {
+    console.log(
+      "FAIL grouped relationships: row must name both actors and a fact id",
+      { fromName, toName, factId, excerpt: section.slice(0, 500) }
+    );
+    return false;
+  }
+  console.log("PASS synthetic grouped relationships export");
+  return true;
+}
+
 function compareGolden(actual, expected) {
   let ok = true;
   if (actual.evaluateAnalysis.total !== expected.evaluateAnalysis.total) {
@@ -296,6 +350,9 @@ function main() {
   const actual = snapshot(state);
 
   if (writeMode) {
+    if (!assertSyntheticGroupedRelationships(actual.report, state)) {
+      process.exit(1);
+    }
     fs.writeFileSync(goldenPath, JSON.stringify(actual, null, 2) + "\n", "utf8");
     console.log(`Wrote ${goldenPath}`);
     return;
@@ -308,7 +365,11 @@ function main() {
   }
 
   const expected = JSON.parse(fs.readFileSync(goldenPath, "utf8"));
-  if (compareGolden(actual, expected)) {
+  let engineOk = compareGolden(actual, expected);
+  if (!assertSyntheticGroupedRelationships(actual.report, state)) {
+    engineOk = false;
+  }
+  if (engineOk) {
     console.log("verify-engine: golden baseline matched");
   } else {
     process.exit(1);

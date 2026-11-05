@@ -171,7 +171,7 @@
       "controlReason": "Owns the model, the training data, the change assessment and the monitoring channel, and decides who receives which document.",
       "legal": "Contested",
       "legalReason": "The supplier held knowledge (E4, E12, E19), the monitoring channel and the distribution list, and the shipped interface withheld subgroup reliability (E11). S2's liability notion, the obligation to compensate for harm done, points to this party; the page for that definition is not verifiable from the text layer. Contested rather than Supported: knowledge, control and the disclosure channel sit with this party, but classifying a learned model under a defective-product rule is itself the contested step (see answer4, Layer 3).",
-      "payment": "Supported: the party with the strongest claim to a compensation obligation, subject to contract terms and product-liability rules.",
+      "payment": "Contested: the party with the strongest claim to a compensation obligation, subject to contract terms and product-liability rules.",
       "next": "Forward duty to report subgroup performance per version to a named clinical lead; marker is a report with documented receipt; authority held is sufficient (E12, E13).",
       "causeVerdict": "Supported",
       "nextVerdict": "Supported"

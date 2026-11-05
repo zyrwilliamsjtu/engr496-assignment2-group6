@@ -353,6 +353,28 @@ async function runChecks(page, ctx) {
           ) && ok;
       } else ok = record("O group6 claims and legal answer export", true) && ok;
     }
+    const peBefore = ctx.pageErrors.length;
+    await page.locator('#nav button[data-pagejump="6"]').click();
+    await page.locator("#reflectAnswer").click();
+    await page.waitForTimeout(400);
+    const reflectCards = await page.locator("#feedback article.card").count();
+    if (reflectCards < 1) {
+      ok =
+        record(
+          "P group6 reflect feedback cards",
+          false,
+          `cards=${reflectCards}`
+        ) && ok;
+    } else ok = record("P group6 reflect feedback cards", true) && ok;
+    const peAfter = ctx.pageErrors.length;
+    if (peAfter > peBefore) {
+      ok =
+        record(
+          "P group6 reflect zero page errors",
+          false,
+          ctx.pageErrors.slice(peBefore, peBefore + 2).join(" | ")
+        ) && ok;
+    } else ok = record("P group6 reflect zero page errors", true) && ok;
   } else {
     ok =
       record(

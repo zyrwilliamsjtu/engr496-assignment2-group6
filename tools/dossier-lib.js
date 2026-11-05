@@ -326,7 +326,7 @@ function collectReferentialViolations(dossier, enums) {
   return v;
 }
 
-function deadWeightReport(dossier) {
+function deadWeightReport(dossier, claims = []) {
   const inFactKnownBy = new Set();
   for (const f of dossier.facts) {
     for (const id of f.knownBy || []) inFactKnownBy.add(id);
@@ -339,6 +339,9 @@ function deadWeightReport(dossier) {
   const factInLinks = new Set();
   for (const l of dossier.links) {
     for (const fid of l.factIds || []) factInLinks.add(fid);
+  }
+  for (const c of claims) {
+    for (const fid of c.facts || []) factInLinks.add(fid);
   }
   const orphanActors = dossier.actors
     .map((a) => a.id)

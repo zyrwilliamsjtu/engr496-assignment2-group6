@@ -5,7 +5,11 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { loadJson, P4_LEGAL_REASON_APPEND } = require("./dossier-lib.js");
+const {
+  loadJson,
+  P4_LEGAL_REASON_APPEND,
+  deadWeightReport,
+} = require("./dossier-lib.js");
 
 const root = path.join(__dirname, "..");
 const projectPath =
@@ -90,6 +94,9 @@ function applyP4Claims(claims) {
   const a9 = claims.actorAssessments.find((x) => x.actor === "A9");
   if (!a9) throw new Error("P4: A9 missing from actorAssessments");
   a9.legal = "Contested";
+  if (typeof a9.payment === "string" && a9.payment.startsWith("Supported:")) {
+    a9.payment = "Contested:" + a9.payment.slice("Supported:".length);
+  }
   if (!a9.legalReason.includes(P4_LEGAL_REASON_APPEND)) {
     a9.legalReason = (a9.legalReason || "").trim();
     if (a9.legalReason) a9.legalReason += " ";
@@ -224,6 +231,37 @@ function main() {
       .digest("hex")
   );
   console.log("claims count:", merged.claims.length);
+  const dead = deadWeightReport(
+    {
+      facts: merged.facts,
+      actors: merged.actors,
+      links: merged.links,
+    },
+    merged.claims
+  );
+  console.log(
+    "Dead-weight facts (no link or claim refs):",
+    dead.orphanFacts
+  );
+
+  const a9 = merged.actors.find((a) => a.id === "A9");
+  if (!a9) {
+    console.error("A9 assertion failed: actor A9 missing after merge");
+    process.exit(1);
+  }
+  if (a9.legal !== "Contested") {
+    console.error(
+      `A9 assertion failed: legal must be "Contested", got ${JSON.stringify(a9.legal)}`
+    );
+    process.exit(1);
+  }
+  if (!String(a9.payment || "").startsWith("Contested")) {
+    console.error(
+      `A9 assertion failed: payment must start with "Contested", got ${JSON.stringify(a9.payment?.slice(0, 40))}…`
+    );
+    process.exit(1);
+  }
+  console.log("A9 post-merge assertion: PASS");
 }
 
 main();

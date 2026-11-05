@@ -16,20 +16,24 @@ function escapeScript(js) {
 
 let html = fs.readFileSync(path.join(srcDir, "index.html"), "utf8");
 const css = fs.readFileSync(path.join(srcDir, "style.css"), "utf8");
-const js = fs.readFileSync(path.join(srcDir, "app.js"), "utf8");
+const engineJs = fs.readFileSync(path.join(srcDir, "engine.js"), "utf8");
+const appJs = fs.readFileSync(path.join(srcDir, "app.js"), "utf8");
 
 const cssInline = escapeStyle(css);
-const jsInline = escapeScript(js);
+const jsInline = escapeScript(engineJs + "\n" + appJs);
 
 const linkRe =
   /<link\s+rel="stylesheet"\s+href="style\.css"\s*\/?>/i;
-const scriptRe = /<script\s+src="app\.js"\s*><\/script>/i;
+const engineScriptRe = /<script\s+src="engine\.js"\s*><\/script>\s*/i;
+const appScriptRe = /<script\s+src="app\.js"\s*><\/script>/i;
 
 if (!linkRe.test(html)) throw new Error("style.css link not found in index.html");
-if (!scriptRe.test(html)) throw new Error("app.js script tag not found in index.html");
+if (!engineScriptRe.test(html)) throw new Error("engine.js script tag not found in index.html");
+if (!appScriptRe.test(html)) throw new Error("app.js script tag not found in index.html");
 
 html = html.replace(linkRe, "<style>" + cssInline + "</style>");
-html = html.replace(scriptRe, "<script>" + jsInline + "</script>");
+html = html.replace(engineScriptRe, "");
+html = html.replace(appScriptRe, "<script>" + jsInline + "</script>");
 
 const stamp = new Date().toISOString();
 let hash = "";
@@ -62,5 +66,5 @@ fs.writeFileSync(outPath, html, "utf8");
 const size = fs.statSync(outPath).size;
 console.log("Wrote " + outPath);
 console.log("Output size: " + size + " bytes");
-console.log("Inlined blocks: 2 (style.css, app.js)");
+console.log("Inlined blocks: 3 (style.css, engine.js, app.js)");
 console.log("Build stamp: " + buildContent);

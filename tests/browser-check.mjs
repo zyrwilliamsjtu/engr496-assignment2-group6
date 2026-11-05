@@ -93,11 +93,16 @@ async function runChecks(page, ctx) {
   if (c !== 1) record("A load one visible section", false, `saw ${c}`);
   else record("A load one visible section", true);
 
-  for (let i = 0; i < 8; i++) {
+  const pageCount = await page.locator("#nav button[data-pagejump]").count();
+  const navLabels = await page.locator("#nav button[data-pagejump]").allTextContents();
+  if (navLabels.length !== pageCount) {
+    record("B nav button count", false, `saw ${navLabels.length}`);
+  } else record("B nav button count", true);
+  for (let i = 0; i < pageCount; i++) {
     await page.locator(`#nav button[data-pagejump="${i}"]`).click();
     const count = await visibleSectionCount(page);
     const pos = (await page.locator("#pagePosition").textContent())?.trim() || "";
-    const expected = `Page ${i + 1} of 8`;
+    const expected = `Page ${i + 1} of ${pageCount}`;
     if (count !== 1 || !pos.startsWith(expected)) {
       ok =
         record(
@@ -116,11 +121,11 @@ async function runChecks(page, ctx) {
   if (cards < 1) ok = record("C add stakeholder card", false, "no card") && ok;
   else ok = record("C add stakeholder card", true) && ok;
 
-  await page.locator('#nav button[data-pagejump="5"]').click();
+  await page.locator('#nav button[data-pagejump="6"]').click();
   const nodesBefore = await page.locator("[data-mapactor]").count();
   await page.locator('#nav button[data-pagejump="2"]').click();
   await page.locator("#addActor").click();
-  await page.locator('#nav button[data-pagejump="5"]').click();
+  await page.locator('#nav button[data-pagejump="6"]').click();
   const nodesAfter = await page.locator("[data-mapactor]").count();
   if (nodesAfter <= nodesBefore) {
     ok =
@@ -194,7 +199,7 @@ async function runChecks(page, ctx) {
     ok = record("F v1 re-save version 2", false, e.message) && ok;
   }
 
-  await page.locator('#nav button[data-pagejump="6"]').click();
+  await page.locator('#nav button[data-pagejump="7"]').click();
   const conclusion = page.locator("#conclusion");
   await conclusion.fill(
     "The hospital and the model vendor share causal roles because the update skipped validation and the supervisor lacked time to intervene."
@@ -240,7 +245,7 @@ async function runChecks(page, ctx) {
       ) && ok;
   } else ok = record("G stale cleared after re-reflect", true) && ok;
 
-  await page.locator('#nav button[data-pagejump="3"]').click();
+  await page.locator('#nav button[data-pagejump="4"]').click();
   await page.locator('#tabs button[data-model="causal"]').click();
   const causalText = "CAUSAL-TAB-ISOLATION-TEST-ALPHA";
   const hierText = "HIERARCHY-TAB-ISOLATION-TEST-BETA";
@@ -260,7 +265,7 @@ async function runChecks(page, ctx) {
       ) && ok;
   } else ok = record("L model tab text isolation", true) && ok;
 
-  await page.locator('#nav button[data-pagejump="4"]').click();
+  await page.locator('#nav button[data-pagejump="5"]').click();
   await page.locator("#gapVerdict").selectOption("A gap may exist");
   await page.locator("#gapMechanism").selectOption("Duty has no named owner");
   await page.waitForTimeout(150);
@@ -296,7 +301,7 @@ async function runChecks(page, ctx) {
           `expected ${actorCount} got ${g6Cards}`
         ) && ok;
     } else ok = record("N group6 stakeholder cards", true) && ok;
-    await page.locator('#nav button[data-pagejump="5"]').click();
+    await page.locator('#nav button[data-pagejump="6"]').click();
     const g6Nodes = await page.locator("[data-mapactor]").count();
     if (g6Nodes !== actorCount) {
       ok =
@@ -353,8 +358,35 @@ async function runChecks(page, ctx) {
           ) && ok;
       } else ok = record("O group6 claims and legal answer export", true) && ok;
     }
+    const nf = g6.facts.length;
+    const ng = g6.facts.filter((f) => f.kind === "given").length;
+    const na = g6.facts.filter((f) => f.kind === "assumed").length;
+    const nt = g6.timeline.length;
+    const expectedSummary = `${nf} facts recorded · ${ng} given · ${na} assumed · ${nt} timeline entries`;
+    const qPeBefore = ctx.pageErrors.length;
+    await page.locator('#nav button[data-pagejump="3"]').click();
+    const summaryText =
+      (await page.locator("#recordSummary").textContent())?.trim() || "";
+    const factRows = await page.locator(".record-fact-row").count();
+    const assumedBadgeCount = await page.locator(
+      '.record-fact-row span.pill:has-text("assumed")'
+    ).count();
+    const qOk =
+      summaryText === expectedSummary &&
+      factRows === nf &&
+      assumedBadgeCount === na &&
+      ctx.pageErrors.length === qPeBefore;
+    if (!qOk) {
+      ok =
+        record(
+          "Q group6 case record page",
+          false,
+          `summary="${summaryText}" rows=${factRows} assumedBadges=${assumedBadgeCount}`
+        ) && ok;
+    } else ok = record("Q group6 case record page", true) && ok;
+
     const peBefore = ctx.pageErrors.length;
-    await page.locator('#nav button[data-pagejump="6"]').click();
+    await page.locator('#nav button[data-pagejump="7"]').click();
     await page.locator("#reflectAnswer").click();
     await page.waitForTimeout(400);
     const reflectCards = await page.locator("#feedback article.card").count();

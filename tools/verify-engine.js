@@ -131,6 +131,13 @@ function buildSyntheticState() {
         reason: "deployment gate before fleet updates",
         factIds: ["E2"],
       },
+      {
+        from: "actor-004",
+        to: "actor-002",
+        action: "assigns on-road monitoring duty to",
+        reason: "supervisory hierarchy in the operator organization",
+        factIds: ["E5"],
+      },
     ],
     facts: [
       {
@@ -266,8 +273,12 @@ function assertSyntheticGroupedRelationships(reportText, state) {
   const rest = reportText.slice(start);
   const end = rest.indexOf("\n\nCLAIMS");
   const section = end >= 0 ? rest.slice(0, end) : rest;
-  if (!/ — \d+ outgoing/.test(section)) {
-    console.log("FAIL grouped relationships: no group heading with outgoing count");
+  const headingMatches = section.match(/ — \d+ outgoing/g) || [];
+  if (headingMatches.length < 2) {
+    console.log(
+      "FAIL grouped relationships: expected two group headings, got",
+      headingMatches.length
+    );
     return false;
   }
   const link = (state.links || [])[0];
@@ -289,6 +300,22 @@ function assertSyntheticGroupedRelationships(reportText, state) {
     console.log(
       "FAIL grouped relationships: row must name both actors and a fact id",
       { fromName, toName, factId, excerpt: section.slice(0, 500) }
+    );
+    return false;
+  }
+  const target002Name = state.actors.find((a) => a.id === "actor-002")?.name;
+  const targetRowOk = section
+    .split("\n")
+    .some(
+      (line) =>
+        target002Name &&
+        line.includes("→") &&
+        line.trim().endsWith(target002Name)
+    );
+  if (!targetRowOk) {
+    console.log(
+      "FAIL grouped relationships: no row shows actor-002 as link target (right of arrow)",
+      { target002Name, excerpt: section.slice(0, 600) }
     );
     return false;
   }

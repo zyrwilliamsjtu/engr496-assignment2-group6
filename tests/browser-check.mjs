@@ -407,6 +407,10 @@ async function runChecks(page, ctx) {
     const allSummary =
       (await page.locator("#relSummary").textContent())?.trim() || "";
     const expectedAllSummary = `${linkCount} relationships recorded across ${relInvolved.size} actors`;
+    const relFramingExpected =
+      "Line counts show how many recorded relationships touch an actor. They are not a measure of responsibility.";
+    const relFramingText =
+      (await page.locator("#relFraming").textContent())?.trim() || "";
     await page.selectOption("#relFilter", busiestId);
     await page.waitForTimeout(100);
     const filteredRows = await page.locator(".record-rel-row").count();
@@ -418,6 +422,7 @@ async function runChecks(page, ctx) {
     const rOk =
       allRelRows === linkCount &&
       allSummary === expectedAllSummary &&
+      relFramingText === relFramingExpected &&
       filteredRows === busiestCount &&
       filteredSummary === expectedFilteredSummary &&
       ctx.pageErrors.length === rPeBefore;
@@ -426,7 +431,7 @@ async function runChecks(page, ctx) {
         record(
           "R group6 relationship view",
           false,
-          `allRows=${allRelRows}/${linkCount} allSummary=${JSON.stringify(allSummary)} filtered=${filteredRows}/${busiestCount} filtSummary=${JSON.stringify(filteredSummary)}`
+          `allRows=${allRelRows}/${linkCount} allSummary=${JSON.stringify(allSummary)} framing=${JSON.stringify(relFramingText)} filtered=${filteredRows}/${busiestCount} filtSummary=${JSON.stringify(filteredSummary)}`
         ) && ok;
     } else ok = record("R group6 relationship view", true) && ok;
 

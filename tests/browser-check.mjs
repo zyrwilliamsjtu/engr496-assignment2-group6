@@ -18,6 +18,32 @@ const danglingFixture = path.join(
   "fixtures",
   "project-v2-dangling-time.json"
 );
+const group6Fixture = path.join(
+  root,
+  "tools",
+  "fixtures",
+  "project-group6.json"
+);
+
+function factSortKey(id) {
+  const m = /^E(\d+)(?:-([a-z]+))?$/.exec(id);
+  if (!m) return [0, id];
+  return [Number(m[1]), m[2] || ""];
+}
+
+function highestFactId(facts) {
+  return [...facts].sort((a, b) => {
+    const ka = factSortKey(a.id);
+    const kb = factSortKey(b.id);
+    return ka[0] - kb[0] || String(ka[1]).localeCompare(String(kb[1]));
+  }).slice(-1)[0]?.id;
+}
+
+function highestTimelineId(timeline) {
+  return [...timeline]
+    .sort((a, b) => Number(/^T(\d+)$/.exec(a.id)?.[1] || 0) - Number(/^T(\d+)$/.exec(b.id)?.[1] || 0))
+    .slice(-1)[0]?.id;
+}
 
 function createRunContext(label) {
   return {
@@ -252,6 +278,72 @@ async function runChecks(page, ctx) {
         `mechanism path="${gapPath1.slice(0, 60)}" afterNoGap="${gapPath2.slice(0, 60)}"`
       ) && ok;
   } else ok = record("M gap page linkage", true) && ok;
+
+  if (fs.existsSync(group6Fixture)) {
+    const g6 = JSON.parse(fs.readFileSync(group6Fixture, "utf8"));
+    const actorCount = g6.actors.length;
+    const topFact = highestFactId(g6.facts);
+    const topTime = highestTimelineId(g6.timeline);
+    await page.locator("#load").setInputFiles(group6Fixture);
+    await page.waitForTimeout(400);
+    await page.locator('#nav button[data-pagejump="2"]').click();
+    const g6Cards = await page.locator("#actorlist article.card").count();
+    if (g6Cards !== actorCount) {
+      ok =
+        record(
+          "N group6 stakeholder cards",
+          false,
+          `expected ${actorCount} got ${g6Cards}`
+        ) && ok;
+    } else ok = record("N group6 stakeholder cards", true) && ok;
+    await page.locator('#nav button[data-pagejump="5"]').click();
+    const g6Nodes = await page.locator("[data-mapactor]").count();
+    if (g6Nodes !== actorCount) {
+      ok =
+        record(
+          "N group6 SVG actor nodes",
+          false,
+          `expected ${actorCount} got ${g6Nodes}`
+        ) && ok;
+    } else ok = record("N group6 SVG actor nodes", true) && ok;
+    const [g6Export] = await Promise.all([
+      page.waitForEvent("download"),
+      page.locator("#export").click(),
+    ]);
+    const g6Text = await readDownload(g6Export);
+    const factLine = g6Text
+      .split("\n")
+      .find((l) => l.startsWith(topFact + " "));
+    if (!factLine) {
+      ok =
+        record(
+          "N group6 export top fact line",
+          false,
+          `missing line for ${topFact}`
+        ) && ok;
+    } else ok = record("N group6 export top fact line", true) && ok;
+    const timeLine = g6Text
+      .split("\n")
+      .find((l) => l.startsWith(topTime + " "));
+    if (!timeLine) {
+      ok =
+        record(
+          "N group6 export top timeline line",
+          false,
+          `missing line for ${topTime}`
+        ) && ok;
+    } else ok = record("N group6 export top timeline line", true) && ok;
+    if (!g6Text.includes("S10:")) {
+      ok = record("N group6 export S10 source", false) && ok;
+    } else ok = record("N group6 export S10 source", true) && ok;
+  } else {
+    ok =
+      record(
+        "N group6 fixture load",
+        false,
+        "project-group6.json missing"
+      ) && ok;
+  }
 
   const ef = await page.evaluate(() => emptyFact());
   const efOk =

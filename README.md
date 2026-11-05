@@ -29,6 +29,18 @@ node tools/build.js
 
 Produces `dist/Responsibility-Lab-Group6.html`.
 
+The shipped `dist/` file is self-contained: no npm packages, no network calls, and no references to `node_modules`.
+
+## Verify (dev-only)
+
+After `npm install` (installs Playwright for local testing only):
+
+```bash
+npm run verify
+```
+
+This runs `tests/browser-check.mjs`: rebuilds `dist/`, opens the built HTML in headless Chromium via `file://`, and exercises navigation, save/load, reflect/stale feedback, and export. Failures exit non-zero. This tooling is **not** included in the deliverable HTML.
+
 ## Division of work
 
 - **app.js** — tech lead

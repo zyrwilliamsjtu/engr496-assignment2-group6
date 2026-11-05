@@ -1,0 +1,24 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "Offline teaching app for analyzing responsibility in AI/robot cases — split from the instructor prototype for ENGR4960J.",
+  "main": "index.js",
+  "scripts": {
+    "verify": "node tests/browser-check.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyrwilliamsjtu/engr496-assignment2-group6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/zyrwilliamsjtu/engr496-assignment2-group6/issues"
+  },
+  "homepage": "https://github.com/zyrwilliamsjtu/engr496-assignment2-group6#readme",
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  }
+}

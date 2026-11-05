@@ -6,7 +6,7 @@ All visual design lives in **`src/style.css`**; every decision about colour, typ
 
 ## 2. What must not break, and why
 
-- **`id`, `class`, and `data-*` attributes** — These are the event system’s and the automated test suite’s only handle on the DOM (~47 checks). Renaming any of them breaks behaviour silently and fails CI. If markup needs to change, ask us to commit it.
+- **`id`, `class`, and `data-*` attributes** — These are the event system’s and the automated test suite’s only handle on the DOM (48 checks). Renaming any of them breaks behaviour silently and fails `npm run verify`. If markup needs to change, ask us to commit it.
 
 - **`src/app.js`, `src/engine.js`, and markup/text in `src/index.html`** — Not yours to edit. Visible copy and case content are authored, verified, and frozen.
 
@@ -18,7 +18,7 @@ All visual design lives in **`src/style.css`**; every decision about colour, typ
 
 - **Accessibility that already works** — Keep visible focus outlines, keyboard-focusable SVG actor nodes (`role="button"`, Enter/Space), `aria-live` regions (`#status`, `#feedback`, `#mapDetail`), and sensible DOM tab order on the visible page.
 
-- **Printing** — On screen, only one `<section>` is visible; `@media print` rules expose all sections. After layout changes, use **Ctrl+P**: every page must appear; sections should not split in unusable ways.
+- **Printing** — On screen, only one `<section>` is visible; `@media print` rules expose all sections. Print already hides the header, nav, buttons and status line — keep that behaviour. After layout changes, use **Ctrl+P**: every page must appear; sections should not split in unusable ways.
 
 - **1280×720 projection** — That is the presentation resolution; legibility will be judged at that size only.
 
@@ -51,6 +51,7 @@ At the end of **`src/style.css`**, the block headed **`MINIMUM READABILITY FLOOR
 ## 6. How to check your work
 
 - **`npm run verify`** — Must stay fully green (real browser on built file and dev entry point; catches runtime and selector breaks).
+- If a check fails only because a hook was renamed, that is a contract break, not a test problem: ask us to fix the markup reference rather than editing the tests.
 - **`src/index.html` via file://** — No console errors.
 - **Ctrl+P** — All pages visible in print preview.
 
@@ -58,4 +59,3 @@ At the end of **`src/style.css`**, the block headed **`MINIMUM READABILITY FLOOR
 
 - [ ] Replace `statusColor()` hex literals with CSS variables you control?
 - [ ] Any new DOM hooks for layout you cannot achieve with existing structure?
-- [ ] Print: hide header buttons in print media, or leave as-is?

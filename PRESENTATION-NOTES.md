@@ -9,6 +9,9 @@
 Numbered script; only UI that exists in the current build.
 
 1. **Start / sources (page 1)** — Click **Load Group 6 case** → confirm **Replace the current analysis…** → wait for “Project loaded.” *“We start from an empty shell so we never accidentally show the wrong case; one click loads our Group 6 record.”* (Optional: point at the muted line under the button.)
+
+   If you accidentally edit anything during the demo, press **Load Group 6 case** again and confirm. It restores the record from the embedded copy, and it can be repeated as often as needed.
+
 2. **Case record (nav `4. Case record`)** — Scroll the timeline and fact rows. *“The case is data: timeline entries, facts tagged given or assumed, and who knew what at each step.”*
 3. **Case record → Relationships** — Open **Show relationships involving**, choose **A2 Treating physician** (nine links touch this actor in our record). *“Filtering shows every relationship involving the busiest role; the outgoing count in the heading is within this filter, not a responsibility score.”*
 4. **Three models (nav `5. Three models`)** — Click the **Causal**, **Hierarchy and organization**, and **Forward-looking** tabs; scroll the guide card. *“We applied three responsibility frameworks to the same facts; the tabs switch the model without leaving the page.”*
@@ -18,7 +21,7 @@ Numbered script; only UI that exists in the current build.
 **Do not open during this demo (and why):**
 
 - **Define case (page 2)** — long prose fields duplicate what we show structurally on Case record.
-- **Stakeholders and duties (page 3)** — editable cards are not part of this case narrative; the loaded stakeholders are read-only for our demo path except that the app still allows adding/removing stakeholders in general.
+- **Stakeholders and duties (page 3)** — the cards are editable; a stray keystroke would change the loaded record live.
 - **Visualization (page 8)** — keep it for Q&A: it shows per-actor verdicts in the three responsibility modes, which answers “how did you compare the frameworks?”
 - **Results / Reflect (page 9)** — reflection rubric looks like “grading”; save for Q&A.
 - **Readings (page 10)** — bibliography, not the live argument.
@@ -49,7 +52,7 @@ That is the excluded branch **E9-a**, kept in the record and marked **ALTERNATIV
 
 ### Q6 — “Which part did AI write?”
 
-The case dossier and analysis content were drafted by a language model working from our specifications and the course readings. Every quotation was checked against the supplied PDFs; one could not be located in the text layer and we dropped it rather than use it. The code was built with an AI coding assistant under our specifications and a 47-check automated suite (`npm run verify`). All responsibility judgments are ours.
+The case dossier and analysis content were drafted by a language model working from our specifications and the course readings. Every quotation was checked against the supplied PDFs; one could not be located in the text layer and we dropped it rather than use it. The code was built with an AI coding assistant under our specifications and a 48-check automated suite (`npm run verify`). All responsibility judgments are ours.
 
 ### Q7 — “What about the map?”
 

@@ -12,6 +12,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const distHtml = path.join(root, "dist", "Responsibility-Lab-Group6.html");
 const v1Fixture = path.join(root, "tools", "fixtures", "project-v1-real.json");
+const danglingFixture = path.join(
+  root,
+  "tools",
+  "fixtures",
+  "project-v2-dangling-time.json"
+);
 
 const pageErrors = [];
 const consoleErrors = [];
@@ -192,13 +198,61 @@ async function runChecks(page) {
       ) && ok;
   } else ok = record("G stale cleared after re-reflect", true) && ok;
 
+  const ef = await page.evaluate(() => emptyFact());
+  const efOk =
+    ef.id === "" &&
+    ef.text === "" &&
+    ef.kind === "assumed" &&
+    ef.timeId === "" &&
+    Array.isArray(ef.knownBy) &&
+    ef.knownBy.length === 0 &&
+    Array.isArray(ef.sourceIds) &&
+    ef.note === "";
+  if (!efOk) {
+    ok = record("J emptyFact defaults", false, JSON.stringify(ef)) && ok;
+  } else ok = record("J emptyFact defaults", true) && ok;
+
+  await page.locator("#load").setInputFiles(danglingFixture);
+  await page.waitForTimeout(300);
+  const statusDangle = (await page.locator("#status").textContent())?.trim() || "";
+  if (/Could not load project/i.test(statusDangle)) {
+    ok =
+      record("K dangling timeId loads", false, statusDangle) && ok;
+  } else ok = record("K dangling timeId loads", true) && ok;
+
+  const [dangleExport] = await Promise.all([
+    page.waitForEvent("download"),
+    page.locator("#export").click(),
+  ]);
+  const dangleText = await readDownload(dangleExport);
+  const missingLine = dangleText
+    .split("\n")
+    .find((l) => l.includes("[time: MISSING T7]"));
+  if (!missingLine) {
+    ok = record("K dangling export MISSING tag", false) && ok;
+  } else {
+    ok = record("K dangling export MISSING tag", true) && ok;
+    console.log("Dangling FACTS line:", missingLine);
+  }
+
   await page.evaluate(() => {
-    state.facts.push({
-      id: "E1",
-      text: "Supervisor had under three seconds to react.",
-      kind: "assumed",
-      sourceIds: [],
-    });
+    const a = emptyActor();
+    a.name = "Doctor";
+    state.actors = [a];
+    state.timeline = [
+      { id: "T2", date: "Day 1", event: "Deploy", knownBy: [] },
+    ];
+    state.facts = [
+      {
+        id: "E3",
+        text: "Brake override was disabled.",
+        kind: "assumed",
+        timeId: "T2",
+        knownBy: [a.id],
+        sourceIds: [],
+        note: "",
+      },
+    ];
   });
 
   const [exportDl] = await Promise.all([
@@ -209,9 +263,22 @@ async function runChecks(page) {
   if (!exportText.includes("FACTS") || !exportText.includes("TIMELINE")) {
     ok = record("H export section headers", false) && ok;
   } else ok = record("H export section headers", true) && ok;
-  if (!/^E\d+ \[(given|assumed)\]/m.test(exportText)) {
-    ok = record("H export fact kind line", false) && ok;
-  } else ok = record("H export fact kind line", true) && ok;
+  const formatLine = exportText
+    .split("\n")
+    .find((l) => /^E3 \[(given|assumed)\]/.test(l));
+  if (!formatLine) {
+    ok = record("H export fact format line", false) && ok;
+  } else {
+    ok = record("H export fact format line", true) && ok;
+    console.log("Formatted FACTS line:", formatLine);
+  }
+  if (
+    !formatLine ||
+    !formatLine.includes("(T2)") ||
+    !formatLine.includes("known by: Doctor")
+  ) {
+    ok = record("H export time and knownBy labels", false) && ok;
+  } else ok = record("H export time and knownBy labels", true) && ok;
 
   if (pageErrors.length) {
     ok =

@@ -127,7 +127,10 @@ vm.runInContext(
           id: "E3",
           text: "Supervisor had under three seconds to react.",
           kind: "assumed",
+          timeId: "",
+          knownBy: [],
           sourceIds: [],
+          note: "",
         },
       ],
     }) +
@@ -137,7 +140,7 @@ vm.runInContext(
 const factLine = api
   .report()
   .split("\n")
-  .find((l) => /^E3 \[assumed\]/.test(l));
+  .find((l) => /^E3 \[assumed\] \(no time link\)/.test(l));
 console.log("Sample FACTS export line:", factLine || "(missing)");
 if (!factLine || !factLine.includes("[assumed]")) {
   throw new Error("FACTS line must include [assumed] kind label");
@@ -148,6 +151,9 @@ const sampleFact = api.emptyFact();
 console.log("emptyFact().kind default:", sampleFact.kind);
 if (sampleFact.kind !== "assumed") {
   throw new Error("emptyFact().kind must default to assumed");
+}
+if (sampleFact.id !== "" || sampleFact.timeId !== "" || sampleFact.note !== "") {
+  throw new Error("emptyFact() must use empty defaults for id/timeId/note");
 }
 
 console.log("verify-round1: all checks passed");

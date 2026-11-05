@@ -220,9 +220,10 @@ function main() {
   }
 
   const json = JSON.stringify(merged, null, 2) + "\n";
-  fs.writeFileSync(projectPath, json, "utf8");
+  const prev = fs.existsSync(projectPath) ? fs.readFileSync(projectPath, "utf8") : "";
+  if (prev !== json) fs.writeFileSync(projectPath, json, "utf8");
   const hash = crypto.createHash("sha256").update(json).digest("hex");
-  console.log("Wrote", projectPath);
+  console.log(prev === json ? "Unchanged" : "Wrote", projectPath);
   console.log("sha256 (project):", hash);
   console.log(
     "claims sha256:",

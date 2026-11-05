@@ -91,9 +91,10 @@ function runOnce() {
   const state = mergeDossier(buildBaseState(), dossier);
   const json = JSON.stringify(state, null, 2) + "\n";
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, json, "utf8");
+  const prev = fs.existsSync(outPath) ? fs.readFileSync(outPath, "utf8") : "";
+  if (prev !== json) fs.writeFileSync(outPath, json, "utf8");
   const hash = crypto.createHash("sha256").update(json).digest("hex");
-  console.log("Wrote", outPath);
+  console.log(prev === json ? "Unchanged" : "Wrote", outPath);
   console.log("sha256:", hash);
   console.log("Counts imported:", {
     sources: state.sources.length,

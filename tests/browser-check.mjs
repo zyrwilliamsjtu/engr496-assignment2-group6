@@ -436,6 +436,26 @@ async function runChecks(page, ctx) {
         ) && ok;
     } else ok = record("Q group6 case record page", true) && ok;
 
+    const floorStyle = await page.evaluate(() => {
+      const row = document.querySelector(".record-fact-row");
+      if (!row) return { ok: false, reason: "no .record-fact-row" };
+      const height = row.getBoundingClientRect().height;
+      const borderTop = getComputedStyle(row).borderTopWidth;
+      return {
+        ok: height > 0 && borderTop !== "0px",
+        height,
+        borderTop,
+      };
+    });
+    if (!floorStyle.ok) {
+      ok =
+        record(
+          "V record readability floor",
+          false,
+          JSON.stringify(floorStyle)
+        ) && ok;
+    } else ok = record("V record readability floor", true) && ok;
+
     const linkCount = g6.links.length;
     const relInvolved = new Set();
     for (const l of g6.links) {

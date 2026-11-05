@@ -58,24 +58,27 @@ html = html.replace(
   builtinScript + "<script>" + jsInline + "</script>"
 );
 
-const stamp = new Date().toISOString();
-let hash = "";
+let buildContent = "unknown";
 try {
-  hash = execSync("git rev-parse --short HEAD", {
+  let hash = execSync("git rev-parse --short HEAD", {
     cwd: root,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "ignore"],
   }).trim();
-  const porcelain = execSync("git status --porcelain", {
-    cwd: root,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "ignore"],
-  }).trim();
-  if (porcelain) hash += "-dirty";
+  let dirty = false;
+  try {
+    execSync(
+      "git diff --quiet HEAD -- src/ tools/build.js tools/fixtures/project-group6.json",
+      { cwd: root, stdio: ["ignore", "pipe", "ignore"] }
+    );
+  } catch {
+    dirty = true;
+  }
+  if (dirty) hash += "-dirty";
+  buildContent = hash;
 } catch (_) {
-  hash = "";
+  buildContent = "unknown";
 }
-const buildContent = hash ? stamp + " " + hash : stamp;
 const buildMeta = '<meta name="build" content="' + buildContent + '">';
 if (/<meta\s+name="build"/i.test(html)) {
   html = html.replace(/<meta\s+name="build"[^>]*>/i, buildMeta);

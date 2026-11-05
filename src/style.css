@@ -8,3 +8,16 @@ section[hidden]{display:none}nav button[aria-current=page]{background:var(--ink)
 .rubric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rubric-result{padding:18px;border:1px solid var(--line);border-radius:12px}.rubric-result h3{font-size:16px}.score-badge{font-size:13px;background:#edf2df;padding:3px 8px;border-radius:20px}.network-controls{margin:8px 0}.source-entry input{min-width:0}.gap-chain{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.gap-chain article{border:1px solid var(--line);padding:14px;border-radius:10px;overflow-wrap:anywhere}.results-grid{grid-template-columns:1fr}#stakeholderDetail p{overflow-wrap:anywhere}@media(max-width:650px){.rubric-grid,.gap-chain{grid-template-columns:1fr}}@media print{.rubric-result{break-inside:avoid}}
 
 .reflection-callout{margin:24px 0 16px;padding:22px;border:2px solid #8ba461;border-radius:12px;background:#f4f8eb}.reflection-callout button{font-size:18px;padding:12px 20px}.feedback-observation{font-size:14px;border-left:3px solid #c5d4ac;padding-left:12px}.feedback-evidence{font-size:13px;color:var(--muted);white-space:pre-wrap}.feedback-actions{display:flex;gap:10px;margin-top:12px}
+
+/* ==== MINIMUM READABILITY FLOOR — replaced by frontend design ==== */
+.record-timeline{margin-bottom:1.25rem}
+.record-timeline+.record-timeline,.record-timeline+h3{margin-top:1.5rem}
+.record-fact-row,.record-rel-row{margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--line);line-height:1.55}
+.record-fact-row p,.record-rel-row p{margin:.45rem 0}
+.record-rel-chip,.claim-chip{display:inline-block;font-size:12px;padding:2px 8px;margin:2px 4px 2px 0;border:1px solid var(--line);border-radius:6px;color:inherit;background:transparent}
+.claims-model-conclusions{margin-bottom:1.25rem}
+.claims-model-block{margin:.75rem 0 1rem}
+.claims-model-block h4{font-size:15px;font-weight:600;margin:0 0 .5rem}
+.claim-group-heading{font-size:16px;font-weight:600;margin:1.5rem 0 .75rem;line-height:1.35}
+.claim-card{border:1px solid var(--line);padding:1rem 1.1rem;margin:.75rem 0;line-height:1.55}
+.claim-card .pill{font-weight:600;border:1px solid var(--line)}

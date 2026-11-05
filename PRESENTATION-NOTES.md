@@ -20,7 +20,7 @@ Numbered script; only UI that exists in the current build.
 - **Start / sources (source editor)** after load — adds noise; sources are already in the loaded project.
 - **Define case (page 2)** — long prose fields duplicate what we show structurally on Case record.
 - **Stakeholders and duties (page 3)** — editable cards are not part of this case narrative; the loaded stakeholders are read-only for our demo path except that the app still allows adding/removing stakeholders in general.
-- **Visualization (page 8)** — map verdicts are powerful but slow to explain in three minutes; we cite structured claims instead.
+- **Visualization (page 8)** — keep it for Q&A: it shows per-actor verdicts in the three responsibility modes, which answers “how did you compare the frameworks?”
 - **Results / Reflect (page 9)** — reflection rubric looks like “grading”; save for Q&A.
 - **Readings (page 10)** — bibliography, not the live argument.
 
@@ -42,15 +42,19 @@ Three layers: (1) the brief asked us to **enrich** a sparse dossier without pret
 
 ### Q4 — “Why didn’t you just say nobody is responsible?”
 
-Our gap is in **forward-looking duty allocation**, not a claim that no one is culpable. The supplier **knew** (E4, E12, E19 on the record), so foreseeability is met and blame has a fitting target; the unresolved piece is who was assigned to **verify and disclose** after deployment, not whether harm occurred.
+Our gap is in **forward-looking duty allocation**, not a claim that no one is culpable. On our record, the supplier is listed as knowing (E4, E12, E19), so foreseeability is met and blame has a fitting target; the unresolved piece is who was assigned to **verify and disclose** after deployment, not whether harm occurred.
 
 ### Q5 — “What if the regulator’s framework DID require a new submission?”
 
-That is the excluded branch **E9-a**, kept in the record and marked **ALTERNATIVE BRANCH**. We adopted **E9-b** because it matches the framework as written in the case and preserves the **no-violation** condition that makes our **duty-with-no-named-owner** gap argument coherent; switching branches would change the legal story, not the UI.
+That is the excluded branch **E9-a**, kept in the record and marked **ALTERNATIVE BRANCH**. Both branches are our own assumptions; the brief does not specify the approval framework. We adopted **E9-b** because it makes the question harder: we wanted to test whether a responsibility gap survives when every party complied with the rules. Under **E9-a** the case reduces to “someone skipped a filing”, and the finding we care about disappears.
 
 ### Q6 — “Which part did AI write?”
 
 The **case dossier and analysis content** were drafted by a language model from our specifications and course readings; **we page-checked every quotation** against the PDFs. The **code** was built with an AI coding assistant under our specs and a **46-check** automated suite (`npm run verify`). **All responsibility judgments** in the fixture and in our written answers are ours.
+
+### Q7 — “What about the map?”
+
+The **Visualization** page records our per-actor verdicts across causal, legal and forward-looking responsibility. We keep it out of the three-minute path because reading a 12-actor map takes longer than the time we have, but it is the page to open if you want to see how the three models differ for one actor.
 
 ---
 
@@ -63,7 +67,7 @@ The **case dossier and analysis content** were drafted by a language model from 
 | 3 | Claims | All claims; scroll to first **Supported** card with **Strongest counter-argument** visible | Shows dissent is mandatory structure, not optional prose. |
 | 4 | Gaps | After load; scroll so **gapPath** chain is visible | Shows forward-looking gap as task + mechanism + owner/check, not vague “AI ethics.” |
 | 5 | Three models | **Hierarchy and organization** tab selected | Shows we compared frameworks on the same case with model-specific guidance. |
-| 6 | Start / sources | Fresh open **before** load (optional contrast) OR immediately after load with status “Project loaded.” | Shows the one-click load path that prevents a blank-screen demo. |
+| 6 | Start / sources | After **Load Group 6 case**; status shows “Project loaded.” | Shows the one-click load path that prevents a blank-screen demo. |
 
 ---
 

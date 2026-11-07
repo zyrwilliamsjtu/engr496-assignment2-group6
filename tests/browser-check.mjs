@@ -474,12 +474,18 @@ async function runChecks(page, ctx) {
     const busiestCount = busiestEntry[1];
     const rPeBefore = ctx.pageErrors.length;
     await page.locator('#nav button[data-pagejump="3"]').click();
+    const firstTime = await page.locator('.record-timeline:visible').count();
+    await page.locator('[data-time-item="T3"]').click();
+    record("Q timeline reader shows the selected event",
+      firstTime === 1 && await page.locator('[data-time-key="T3"]').isVisible() &&
+      await page.locator('.record-timeline:visible').count() === 1);
+    await page.locator('[data-record-view="relationships"]').click();
     const allRelRows = await page.locator(".record-rel-row").count();
     const allSummary =
       (await page.locator("#relSummary").textContent())?.trim() || "";
     const expectedAllSummary = `${linkCount} relationships recorded across ${relInvolved.size} actors`;
     const relFramingExpected =
-      "Line counts show how many recorded relationships touch an actor. They are not a measure of responsibility.";
+      "Relationship counts do not measure responsibility.";
     const relFramingText =
       (await page.locator("#relFraming").textContent())?.trim() || "";
     await page.selectOption("#relFilter", busiestId);
@@ -547,7 +553,7 @@ async function runChecks(page, ctx) {
     const claimNotEst = claimVerdictCounts["Not established"] || 0;
     const expectedClaimSummary = `${claims.length} claims recorded · ${claimSupported} supported · ${claimContested} contested · ${claimNotEst} not established · across ${claimActors} actors`;
     const claimFramingExpected =
-      "A verdict records how well the claim is supported by the case facts. It is not a score of the actor's responsibility.";
+      "Verdicts show evidence strength, not blame.";
     const sampleClaim =
       claims.find((c) => c.counter && String(c.counter).trim()) || claims[0];
     const counterNeedle = sampleClaim?.counter
@@ -766,6 +772,113 @@ function printSummary(ctx) {
   return failed === 0;
 }
 
+async function runLanguageChecks(page, ctx) {
+  await page.reload();
+  if (ctx.label === "dist") {
+    await page.locator("#loadGroup6Case").click();
+  } else {
+    await page.locator("#load").setInputFiles(group6Fixture);
+  }
+  await page.getByRole("status").filter({ hasText: /^Project loaded\.$/ }).waitFor();
+  const original = await page.evaluate(() => JSON.stringify(state));
+  const toggle = page.locator("#languageToggle");
+
+  await page.locator('#nav button[data-pagejump="5"]').click();
+  await page.locator("#claimFilter").selectOption("Contested");
+  const claimCount = await page.locator(".claim-card").count();
+  await toggle.click();
+  ctx.record("ZH switch preserves page and verdict filter",
+    await page.locator('html[lang="zh-CN"]').count() === 1 &&
+    await page.locator("#claims").isVisible() &&
+    await page.locator("#claimFilter").inputValue() === "Contested" &&
+    await page.locator(".claim-card").count() === claimCount &&
+    await page.getByText("最强反方论点：", { exact: true }).first().isVisible());
+
+  await page.locator('#nav button[data-pagejump="3"]').click();
+  await page.locator('[data-time-item=""]').click();
+  ctx.record("ZH case facts are translated with evidence IDs intact",
+    await page.getByText("给定", { exact: true }).first().isVisible() &&
+    await page.getByText("E17", { exact: true }).first().isVisible() &&
+    (await page.locator("#recordBody").innerText()).includes("部署后性能验证"));
+
+  await page.locator('#nav button[data-pagejump="5"]').click();
+  await page.locator("#claimFilter").selectOption("");
+  await page.locator('[data-claim-item="C6"]').click();
+  const evidence = page.locator('[data-claim-key="C6"] button[data-evidence-id="E17"]');
+  await evidence.click();
+  const drawer = page.locator('#evidenceDrawer');
+  const localizedFact = await drawer.isVisible() &&
+    (await drawer.innerText()).includes('部署后性能验证');
+  await page.keyboard.press('Escape');
+  ctx.record("Evidence drawer preserves the claim and returns keyboard focus",
+    localizedFact && !(await drawer.isVisible()) &&
+    await page.locator('#claims').isVisible() && await evidence.evaluate(el => document.activeElement === el));
+  await evidence.click();
+  await page.locator('#openEvidenceTimeline').click();
+  const contract = page.locator('[data-fact-key="E17"]');
+  ctx.record("Evidence opens its precise timeline record",
+    await contract.isVisible() && await contract.evaluate(el => document.activeElement === el) &&
+    await page.locator('[data-time-item="T3"]').getAttribute('aria-pressed') === 'true' &&
+    await page.locator('.record-timeline:visible').count() === 1);
+
+  await page.locator('#nav button[data-pagejump="5"]').click();
+  const cards = page.locator('#claimsBody .claim-card');
+  const totalClaims = await cards.count();
+  const openCards = page.locator('#claimsBody .claim-card[open]:visible');
+  const claimHeading = page.locator('[data-claim-key="C6"] summary');
+  const collapseAll = page.locator('[data-claim-bulk="collapse"]');
+  const expandAll = page.locator('[data-claim-bulk="expand"]');
+  await collapseAll.click();
+  const collapsed = await page.locator('#claimsBody .claim-card:visible').count() === totalClaims &&
+    await openCards.count() === 0 && await claimHeading.getByText('展开', { exact: true }).isVisible();
+  await claimHeading.press('Enter');
+  const openedOne = await openCards.count() === 1 && await evidence.isVisible() &&
+    await claimHeading.getByText('收起', { exact: true }).isVisible();
+  await claimHeading.evaluate(heading => {
+    heading.click();
+    document.getElementById('languageToggle').click();
+  });
+  ctx.record("Claims can be collapsed together and opened individually with the keyboard",
+    collapsed && openedOne && await openCards.count() === 0);
+
+  await page.locator('#claimFilter').selectOption('Contested');
+  await expandAll.click();
+  const expandedFiltered = await openCards.count() === claimCount;
+  await page.locator('#claimFilter').selectOption('');
+  await toggle.click();
+  const preserved = await openCards.count() === claimCount;
+  await expandAll.click();
+  ctx.record("Bulk expansion respects the filter and survives language changes",
+    expandedFiltered && preserved && await openCards.count() === totalClaims);
+
+  const [saved] = await Promise.all([
+    page.waitForEvent("download"),
+    page.locator("#save").click(),
+  ]);
+  ctx.record("ZH display leaves saved project data unchanged",
+    JSON.stringify(JSON.parse(await readDownload(saved))) === original);
+
+  await page.locator('#nav button[data-pagejump="8"]').click();
+  const conclusion = page.locator("#conclusion");
+  const localized = await conclusion.inputValue();
+  const edit = "我新增的反思：先核对 E17，再明确验证负责人。";
+  await conclusion.fill(edit);
+  await toggle.click();
+  const [exported] = await Promise.all([
+    page.waitForEvent("download"),
+    page.locator("#export").click(),
+  ]);
+  const report = await readDownload(exported);
+  ctx.record("ZH user edits survive English switch and analysis export",
+    /[\u3400-\u9fff]/.test(localized) &&
+    await page.locator('html[lang="en"]').count() === 1 &&
+    await page.locator("#reflect").isVisible() &&
+    await conclusion.inputValue() === edit &&
+    report.includes(edit) && report.includes("CLAIMS"));
+  ctx.record("ZH switch and export produce no browser errors",
+    ctx.pageErrors.length === 0 && ctx.consoleErrors.length === 0);
+}
+
 async function runTarget(browser, targetPath, label) {
   const ctx = createRunContext(label);
   const page = await browser.newPage();
@@ -777,9 +890,10 @@ async function runTarget(browser, targetPath, label) {
   await page.waitForTimeout(500);
 
   const allOk = await runChecks(page, ctx);
+  await runLanguageChecks(page, ctx);
   await page.close();
-  printSummary(ctx);
-  return allOk;
+  const summaryOk = printSummary(ctx);
+  return allOk && summaryOk;
 }
 
 async function main() {

@@ -28,8 +28,11 @@ function escapeScript(js) {
 }
 
 let html = fs.readFileSync(path.join(srcDir, "index.html"), "utf8");
+const newline = html.includes("\r\n") ? "\r\n" : "\n";
 const css = fs.readFileSync(path.join(srcDir, "style.css"), "utf8");
 const engineJs = fs.readFileSync(path.join(srcDir, "engine.js"), "utf8");
+const caseChineseJs = fs.readFileSync(path.join(srcDir, "group6-zh.js"), "utf8");
+const i18nJs = fs.readFileSync(path.join(srcDir, "i18n.js"), "utf8");
 const appJs = fs.readFileSync(path.join(srcDir, "app.js"), "utf8");
 
 const fixtureRaw = fs.readFileSync(fixturePath, "utf8");
@@ -40,22 +43,30 @@ const builtinScript =
   ";</script>\n";
 
 const cssInline = escapeStyle(css);
-const jsInline = escapeScript(engineJs + "\n" + appJs);
+const jsInline = escapeScript([engineJs, caseChineseJs, i18nJs, appJs].join("\n"));
 
 const linkRe =
   /<link\s+rel="stylesheet"\s+href="style\.css"\s*\/?>/i;
 const engineScriptRe = /<script\s+src="engine\.js"\s*><\/script>\s*/i;
+const caseChineseScriptRe = /<script\s+src="group6-zh\.js"\s*><\/script>\s*/i;
+const i18nScriptRe = /<script\s+src="i18n\.js"\s*><\/script>\s*/i;
 const appScriptRe = /<script\s+src="app\.js"\s*><\/script>/i;
 
 if (!linkRe.test(html)) throw new Error("style.css link not found in index.html");
 if (!engineScriptRe.test(html)) throw new Error("engine.js script tag not found in index.html");
 if (!appScriptRe.test(html)) throw new Error("app.js script tag not found in index.html");
 
-html = html.replace(linkRe, "<style>" + cssInline + "</style>");
+if (!caseChineseScriptRe.test(html) || !i18nScriptRe.test(html)) {
+  throw new Error("Localization script tags not found in index.html");
+}
+
+html = html.replace(linkRe, () => "<style>" + cssInline + "</style>");
 html = html.replace(engineScriptRe, "");
+html = html.replace(caseChineseScriptRe, "");
+html = html.replace(i18nScriptRe, "");
 html = html.replace(
   appScriptRe,
-  builtinScript + "<script>" + jsInline + "</script>"
+  () => builtinScript + "<script>" + jsInline + "</script>"
 );
 
 let buildContent = "unknown";
@@ -87,6 +98,8 @@ if (/<meta\s+name="build"/i.test(html)) {
 }
 
 const sizeBefore = fs.existsSync(outPath) ? fs.statSync(outPath).size : 0;
+// Keep the generated file consistent with Git checkouts on Windows and Unix.
+html = html.replace(/\r?\n/g, newline);
 if (Buffer.byteLength(html, "utf8") > MAX_DIST_BYTES) {
   console.error(
     "FAIL build: output would exceed 400 KB (" +
@@ -155,5 +168,5 @@ if (bundleChanged) {
 console.log("Output size before: " + sizeBefore + " bytes");
 console.log("Output size after: " + size + " bytes");
 console.log("sha256: " + sha256);
-console.log("Inlined blocks: 3 (style.css, engine.js, app.js) + BUILTIN_CASE");
+console.log("Inlined styles, engine, localization, app, and BUILTIN_CASE");
 console.log("Build stamp: " + buildContent);

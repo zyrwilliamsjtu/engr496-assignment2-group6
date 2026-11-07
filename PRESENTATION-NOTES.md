@@ -8,14 +8,14 @@
 
 Numbered script; only UI that exists in the current build.
 
-1. **Start / sources (page 1)** — Click **Load Group 6 case** → confirm **Replace the current analysis…** → wait for “Project loaded.” *“We start from an empty shell so we never accidentally show the wrong case; one click loads our Group 6 record.”* (Optional: point at the muted line under the button.)
+1. **Start / sources (page 1)** — Click **Load Group 6 case** → confirm **Replace the current analysis…** → wait for “Project loaded.” *“We start from an empty shell so we never accidentally show the wrong case; one click loads our Group 6 record.”*
 
    If you accidentally edit anything during the demo, press **Load Group 6 case** again and confirm. It restores the record from the embedded copy, and it can be repeated as often as needed.
 
-2. **Case record (nav `4. Case record`)** — Scroll the timeline and fact rows. *“The case is data: timeline entries, facts tagged given or assumed, and who knew what at each step.”*
-3. **Case record → Relationships** — Open **Show relationships involving**, choose **A2 Treating physician** (nine links touch this actor in our record). *“Filtering shows every relationship involving the busiest role; the outgoing count in the heading is within this filter, not a responsibility score.”*
+2. **Case record (nav `4. Case record`)** — Select **T3** on the timeline to show the deployment contract and E17. *“The case is data: timeline entries, facts tagged given or assumed, and who knew what at each step.”*
+3. **Case record → Relationships** — Choose **Relationships**, then select **A2 Treating physician** (nine links touch this actor in our record). *“Filtering shows every relationship involving the busiest role; the outgoing count in the heading is within this filter, not a responsibility score.”*
 4. **Three models (nav `5. Three models`)** — Click the **Causal**, **Hierarchy and organization**, and **Forward-looking** tabs; scroll the guide card. *“We applied three responsibility frameworks to the same facts; the tabs switch the model without leaving the page.”*
-5. **Claims (nav `6. Claims`)** — Scroll to a card with **Strongest counter-argument** (e.g. a **Supported** causal claim on the supplier). Read the counter line aloud. *“Every claim includes dissent we had to record, not only our preferred verdict.”*
+5. **Claims (nav `6. Claims`)** — Select **C1** in the index. Read its **Strongest counter-argument** aloud and open **E19** to show the underlying evidence. Close the evidence drawer to continue. *“Every claim includes dissent we had to record, not only our preferred verdict.”*
 6. **Gaps (nav `7. Gaps`)** — Scroll the filled gap fields and the **gapPath** chain (task → mechanism → ownership/check). *“We argue a forward-looking gap: post-deployment verification was unassigned, with named repair steps and checkable markers.”*
 
 **Do not open during this demo (and why):**
@@ -68,9 +68,9 @@ Page 1 lists all ten readings with topic tags and page ranges; the exported anal
 
 | # | Page | State before capture | One sentence it supports |
 |---|------|----------------------|---------------------------|
-| 1 | Case record | Load Group 6 case; unfiltered view | Shows the case as auditable data (timeline + given/assumed facts), not a single essay field. |
+| 1 | Case record | Load Group 6 case; select T3 | Shows the deployment contract assumption and the corresponding timeline event. |
 | 2 | Case record → Relationships | `#relFilter` = **A2 Treating physician** | Shows nine relationships touching the busiest actor without implying a “blame score.” |
-| 3 | Claims | All claims; scroll to first **Supported** card with **Strongest counter-argument** visible | Shows dissent is mandatory structure, not optional prose. |
+| 3 | Claims | Select C1; keep **Strongest counter-argument** visible | Shows how the claim records dissent and why the verdict still holds. |
 | 4 | Gaps | After load; scroll so **gapPath** chain is visible | Shows forward-looking gap as task + mechanism + owner/check, not vague “AI ethics.” |
 | 5 | Three models | **Hierarchy and organization** tab selected | Shows we compared frameworks on the same case with model-specific guidance. |
 | 6 | Start / sources | After **Load Group 6 case**; status shows “Project loaded.” | Shows the one-click load path that prevents a blank-screen demo. |
